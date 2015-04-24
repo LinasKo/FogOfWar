@@ -27,7 +27,7 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 		map = new Map();
-		renderer = new MapRenderer(map.getMap());
+		renderer = new MapRenderer(map);
 	}
 
 	@Override

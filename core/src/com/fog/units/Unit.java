@@ -22,7 +22,7 @@ public class Unit {
 	 * @param position
 	 * @param direction
 	 */
-	Unit(int baseHealth, int damage, int speed, Vector2 position, float direction) {
+	public Unit(int baseHealth, int damage, int speed, Vector2 position, float direction) {
 		this.setBaseHealth(baseHealth);
 		this.setDamage(damage);
 		this.setSpeed(speed);
@@ -30,6 +30,7 @@ public class Unit {
 		this.position = position;
 		this.direction = direction;
 		health = baseHealth;
+		moving = false;
 	}
 
 	public static int getDamage() {
