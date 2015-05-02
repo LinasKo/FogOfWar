@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="VariousObjects" tilewidth="32" tileheight="32">
+  <tile id="0">
+   <image width="32" height="32" source="../Tiled Tilesets/denzi-blog-dump/Modified Tiles/CastleBlue.png"/>
+  </tile>
+  <tile id="1">
+   <image width="32" height="32" source="../Tiled Tilesets/denzi-blog-dump/Modified Tiles/CastleRed.png"/>
+  </tile>
+  <tile id="2">
+   <image width="32" height="32" source="../Tiled Tilesets/denzi-blog-dump/Modified Tiles/Tree1.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="4" name="GrassTileset1" tilewidth="32" tileheight="32">
+  <image source="../Tiled Tilesets/Various Grass Tiles/32/GrassTileset1.png" width="128" height="32"/>
+ </tileset>
+ <layer name="Background" width="25" height="50">
+  <data encoding="base64" compression="zlib">
+   eJyF1kmu5DAMA1AvHOf+N+6/qAKIV5R7ETiDZGsgqZy11vlc++96/66H9cT1Yrs/1+R/Puvm3ff+Yc/v8xu+Pue7HX7PcJ+2xuA+eVaeuYd3WZ/0a+dmznvNOWUtjDlrm7lmTtp998scrZP9mOI44Z+4aHjI/Tf7n/Ubg3G/3DeMbb7letgj3082rW75TZuGl8zr8O77nL6JkxN21k5sZfzWcuJn67f8bjjQRu6J4z2sjdOekzkYvzphPLmHOmC9sm5pow6IHXmtvbqQ+ciLs35zlNcZl/aN99nj3C/rZj3kxbNm/DycLR71FRPv6vk2Lb7Ve6/fek18z3gzp8YdudJWNTh5bC3VzaZvYrbpYsO6mFeLpz7oZ82n+TJhOHOWKxn7xOs8V1yoEVkDY3MGG4t1a5gxHvvf9NAZO2mVe930Z5r509xUy9vcaVy+4Snr0bjl7HU+6WcOk25u/K3Rbc7ZazXdM3c554ZJ+9awra7eMNT+FdTBaR40zE+csxfWuemEGGy8bbh0FvhsD+RZy0Wbdk7OPvuTPg3L9naqqz1s9mJKLqrxba7Ii8Tj/+ak+tR4MumVtW563rAt79Sjht0WZ9OPpg9iYdJmue6sUnPa/0t+E1Pm/vKuYe1hD3FhL8WtmJy0Rn3PnjZtaf9Db9mnaaa+1sOatlkoLjOvaW55dstVnRLL+u7hPDVaDRJfTQ/kesObvTZP8a3GN6y3/t9iVwPEmhzMNfk7zQJz1f42F24z073VH3t91m9NXVt/nLGZu3rd5lI+/wOowxqY
+  </data>
+ </layer>
+ <layer name="Foreground" width="25" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt10EKACAIRFGr+9+5bYSBRkUM/4HgysGdmgFxbdFH1WTWWKfdnj9nKFHbBwAAAMhSu4lf/kY//XdlM8vrgYgObVEAWA==
+  </data>
+ </layer>
+</map>
