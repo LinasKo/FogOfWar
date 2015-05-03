@@ -2,24 +2,43 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="VariousObjects" tilewidth="32" tileheight="32">
   <tile id="0">
+   <properties>
+    <property name="ObjectType" value="PlayerOneBuilding"/>
+   </properties>
    <image width="32" height="32" source="CastleBlue.png"/>
   </tile>
   <tile id="1">
+   <properties>
+    <property name="ObjectType" value="PlayerTwoBuilding"/>
+   </properties>
    <image width="32" height="32" source="CastleRed.png"/>
   </tile>
   <tile id="2">
+   <properties>
+    <property name="ObjectType" value="Wood"/>
+   </properties>
    <image width="32" height="32" source="Tree1.png"/>
   </tile>
-  <tile id="3">
-   <image width="32" height="32" source="WhiteFog.png"/>
-  </tile>
  </tileset>
- <tileset firstgid="5" name="Grass" tilewidth="32" tileheight="32">
+ <tileset firstgid="4" name="Grass" tilewidth="32" tileheight="32">
   <image source="GrassTileset1.png" width="128" height="32"/>
+ </tileset>
+ <tileset firstgid="8" name="MergedTiles" tilewidth="32" tileheight="32">
+  <image source="MergedTiles.png" width="64" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="Foggy" value="false"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Foggy" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Background" width="25" height="50">
   <data encoding="base64" compression="zlib">
-   eJyV1kuOwzAMA9Bs/Ln/iaeLBiDe0Aa6CNq4tiSTItX9PM/4PPPzrO/n+75jfX3X37Vcz9/29/ti34yYmS/379iTMTOHMVfsec8P1q3vzWkd64dz7s3aM/94+r0mZzNX5lyX3IP4K35/c2TM5CExzPM71jPW5jN/G5zzrPvyfqe+a7U0rN0n//KauHiPPLPJY+xZYuV387a+yHslf01z6mawlvWK43z+Y36r1V5InFqO8XTsV+RfvBs7cRYPey7ve+rpQb7Gc+vrjNU01HhvPtBwa3FOce2XE36Ng6wjsconsWj9fNJdq9fe0Qt3iSVmasXzeol3adg7s1w3Z/N955he2vpP7TQ9OFvVpHy3GGrnpLfTXRsX6rpxK+9tljhfm+Ybb82r5UX9O5/lXT9XI1nrLDFTR/aRfpFeddNa8+zTbG36VBtiKxbOt0k+MdBfF7HUs3wuzouR8ezHprWsq2HjvPOOxrP/rc35PDnXPK7py/nbdNi4bT5jD9uPizzGc06r7TZLmkabX+Uec9pH7rN/T3XffMhz4nvC5PRYj3Ov9YU9ZF3Nj9SL+/RjPXCSw7ljb93+HyWH8p9nxd1Ycq2XN49SJw1b44vNyWvUVOZoceyfxXObn83nV1mXw8Qh309+6oxsPmHeUfa2GG1WZH+0ek//HZrf6gH6qh5j33qP5o/WrK6z5vw99504bzOgzaqbP8htm2/Z640DvUDNN+z1v9O8cb93zR7wrO9ynHuSA/ugzTe9RN3K3W3WiVVby7jJa+O81dN83D74A/wsH/U=
+   eJyV1kuOwzAMA9As/Ln/jaeLBiDe0Aa6CNq4tiSTItX9PM/4PPPzrO/n+75jfX3X37Vcz9/29/ti34yYmS/379iTMTOHMVfsec8P1q3vzWkd64dz7s3aM/94+r0mZzNX5lyX3IP4K35/c2TM5CExzPM71jPW5jN/G5zzrPvyfqe+a7U0rN0n//KauHiPPLPJY+xZYuV387a+yHslf01z6mawlvWK43z+Y36r1V5InFqO8XTsV+RfvBs7cRYPey7ve+rpQb7Gc+vrjNU01HhvPtBwa3FOce2XE36Ng6wjsconsWj9fNJdq9fe0Qt3iSVmasXzeol3adg7s1w3Z/N955he2vpP7TQ9OFvVpHy3GGrnpLfTXRsX6rpxK+9tljhfm+Ybb82r5UX9O5/lXT9XI1nrLDFTR/aRfpFeddNa8+zTbG36VBtiKxbOt0k+MdBfF7HUs3wuzouR8ezHprWsq2HjvPOOxrP/rc35PDnXPK7py/nbdNi4bT5jD9uPizzGc06r7TZLmkabX+Uec9pH7rN/T3XffMhz4nvC5PRYj3Ov9YU9ZF3Nj9SL+/RjPXCSw7ljb93+HyWH8p9nxd1Ycq2XN49SJw1b44vNyWvUVOZoceyfxXObn83nV1mXw8Qh309+6oxsPmHeUfa2GG1WZH+0ek//HZrf6gH6qh5j33qP5o/WrK6z5vw99504bzOgzaqbP8htm2/Z640DvUDNN+z1v9O8cb93zR7wrO9ynHuSA/ugzTe9RN3K3W3WiVVby7jJa+O81dN83D74A0CfGxM=
   </data>
  </layer>
  <layer name="Foreground" width="25" height="50">
@@ -29,12 +48,12 @@
  </layer>
  <layer name="FogForRed" width="25" height="50">
   <data encoding="base64" compression="zlib">
-   eJztwzENAAAMBKEb3r/mqugGCaumqqqqqr4+AekTiQ==
+   eJztw7ENAAAIwKCO+v/DXuEGCVOtqqqqqvr6AJhPK/I=
   </data>
  </layer>
  <layer name="FogForBlue" width="25" height="50">
   <data encoding="base64" compression="zlib">
-   eJztwzENAAAMBKEb3r/mqugGCaumqqqqqr4+AekTiQ==
+   eJztwzENAAAMBKFb37/hqugGCaumqqqqqr4+q9cr8w==
   </data>
  </layer>
 </map>

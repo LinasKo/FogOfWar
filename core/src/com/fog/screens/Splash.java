@@ -50,7 +50,7 @@ public class Splash implements Screen {
 		spriteBatch.end();
 		
 		if (tweenManager.getRunningTweensCount() == 0) {
-			game.setScreen(new GameScreen(FogOfWar.MAP_LOCATION));
+			game.setScreen(new GameScreen(FogOfWar.PATH_TO_MAP, 1, 2, 2, 3));
 		}
 			
 	}
