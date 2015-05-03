@@ -10,7 +10,7 @@ public class FogOfWar extends Game {
 	
 	@Override
 	public void create() {
-		//setScreen(new Splash(this)); TODO: uncomment after testing.
+		//setScreen(new Splash(this));  // TODO: uncomment after testing.
 		// Setting of game screen can be found in the Splash class.
 		
 		setScreen(new GameScreen(FogOfWar.PATH_TO_MAP, 1, 2, 2, 3));

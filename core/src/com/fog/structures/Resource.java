@@ -9,10 +9,13 @@ public class Resource {
 	private TiledMapTile tile;
 	private Structure type;
 	private int amount;
+	private int x, y;
 	
-	public Resource(TiledMapTile tile, Structure type, int amount) {
+	public Resource(TiledMapTile tile, int x, int y, Structure type, int amount) {
 		this.tile = tile;
 		this.type = type;
 		this.amount = amount;
+		this.x = x;
+		this.y = y;
 	}
 }

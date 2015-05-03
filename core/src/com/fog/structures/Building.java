@@ -7,11 +7,28 @@ public class Building {
 	private Structure type;
 	private int player;
 	private int health;
+	private int x, y;
+	private float sight_range;
 	
-	public Building(TiledMapTile tile, Structure type, int player, int health) {
+	public Building(TiledMapTile tile, int x, int y, Structure type, int player, int health, float sight_range) {
 		this.tile = tile;
 		this.type = type;
 		this.player = player;
 		this.health = health;
+		
+		this.x = x;
+		this.y = y;
+		this.sight_range = sight_range;
+	}
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public float getSight_range() {
+		return sight_range;
 	}
 }

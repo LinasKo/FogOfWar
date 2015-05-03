@@ -29,6 +29,8 @@ public class GameScreen implements Screen {
 	private HashMap<String, Resource> resources;
 	private HashMap<String, Building> buildings;
 
+	// TODO: expand entries to arrays, instead of particular objects
+
 	// fogLayerT is the layer of the fog, where the top left tile is
 	// transparent.
 	// fogLayerO is the layer of the fog, where the top left tile is opaque.
@@ -36,7 +38,7 @@ public class GameScreen implements Screen {
 	public GameScreen(String pathToMap, int player, int fog_layer, int fogLayerT, int fogLayerO) {
 		// load the map
 		map = new TmxMapLoader().load(pathToMap);
-		renderer = new OrthogonalTiledMapRenderer(map, UNIT_SCALE);
+		
 
 		// sort out player specifications
 		PLAYER = player;
@@ -54,13 +56,13 @@ public class GameScreen implements Screen {
 					String property = (String) tile.getProperties().get("ObjectType");
 					switch (property) {
 					case ("Wood"):
-						resources.put(property, new Resource(tile, Structure.WOOD, Resource.BASE_WOOD));
+						resources.put(property, new Resource(tile, x, y, Structure.WOOD, Resource.BASE_WOOD));
 						break;
 					case ("PlayerOneBuilding"):
-						buildings.put("PlayerOneBuilding", new Building(tile, Structure.BUILDING, 1, 100));
+						buildings.put("PlayerOneBuilding", new Building(tile, x, y, Structure.BUILDING, 1, 100, 6f));
 						break;
 					case ("PlayerTwoBuilding"):
-						buildings.put("PlayerTwoBuilding", new Building(tile, Structure.BUILDING, 2, 100));
+						buildings.put("PlayerTwoBuilding", new Building(tile, x, y, Structure.BUILDING, 2, 100, 6f));
 						break;
 					}
 				}
@@ -70,11 +72,20 @@ public class GameScreen implements Screen {
 		// initialize the fog manipulator
 		FogManipulator fogManipulator = new FogManipulator(
 				((TiledMapTileLayer) map.getLayers().get(fogLayerT)).getCell(0, 0), ((TiledMapTileLayer) map
-						.getLayers().get(fogLayerO)).getCell(0, 0));
+						.getLayers().get(fogLayerO)).getCell(0, 0),
+				((TiledMapTileLayer) map.getLayers().get(0)).getWidth(),
+				((TiledMapTileLayer) map.getLayers().get(0)).getHeight());		
 		
-		// create the camera, showing 60x40 units of the world
+		Building castle1 = buildings.get("PlayerOneBuilding");
+		Building castle2 = buildings.get("PlayerTwoBuilding");
+		fogManipulator.revealCircle((TiledMapTileLayer) map.getLayers().get(2), castle1.getX(),
+				castle1.getY(), castle1.getSight_range());
+		fogManipulator.revealCircle((TiledMapTileLayer) map.getLayers().get(3), castle2.getX(),
+				castle2.getY(), castle2.getSight_range());
+
+		// create the camera, showing 30x20 units of the world
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 60, 40);
+		camera.setToOrtho(false, 25, 50);
 		camera.update();
 
 		// Tips for better performance:
@@ -85,12 +96,15 @@ public class GameScreen implements Screen {
 		 * ways to do it in the editor or automatically. Do not go overboard
 		 * with the number of layers.
 		 */
+		
+		renderer = new OrthogonalTiledMapRenderer(map, UNIT_SCALE);
 	}
 
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		renderer = new OrthogonalTiledMapRenderer(map, UNIT_SCALE);
 		renderer.setView(camera);
 		renderer.render(new int[] { 0, 1, 2});
 	}

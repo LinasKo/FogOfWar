@@ -48,7 +48,7 @@
  </layer>
  <layer name="FogForRed" width="25" height="50">
   <data encoding="base64" compression="zlib">
-   eJztw7ENAAAIwKCO+v/DXuEGCVOtqqqqqvr6AJhPK/I=
+   eJztzaEBAAAIA6BF9//DfmGRQKZJCgAAAACPzcGxq3Mr8g==
   </data>
  </layer>
  <layer name="FogForBlue" width="25" height="50">
