@@ -1,7 +1,6 @@
 package com.fog.screens;
 
 import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
@@ -51,7 +50,7 @@ public class Splash implements Screen {
 		spriteBatch.end();
 		
 		if (tweenManager.getRunningTweensCount() == 0) {
-			game.setScreen(new GameScreen());
+			game.setScreen(new GameScreen(FogOfWar.MAP_LOCATION));
 		}
 			
 	}
