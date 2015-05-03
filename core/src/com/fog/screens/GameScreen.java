@@ -38,7 +38,7 @@ public class GameScreen implements Screen {
 	public GameScreen(String pathToMap, int player, int fog_layer, int fogLayerT, int fogLayerO) {
 		// load the map
 		map = new TmxMapLoader().load(pathToMap);
-		
+		renderer = new OrthogonalTiledMapRenderer(map, UNIT_SCALE);
 
 		// sort out player specifications
 		PLAYER = player;
@@ -97,14 +97,13 @@ public class GameScreen implements Screen {
 		 * with the number of layers.
 		 */
 		
-		renderer = new OrthogonalTiledMapRenderer(map, UNIT_SCALE);
+		
 	}
 
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		renderer = new OrthogonalTiledMapRenderer(map, UNIT_SCALE);
 		renderer.setView(camera);
 		renderer.render(new int[] { 0, 1, 2});
 	}
