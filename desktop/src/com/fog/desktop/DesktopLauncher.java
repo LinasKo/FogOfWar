@@ -6,6 +6,7 @@ import com.fog.FogOfWar;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
+		// Desktop app initialization
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new FogOfWar(), config);
 	}

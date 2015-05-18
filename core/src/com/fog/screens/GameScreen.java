@@ -19,20 +19,28 @@ import com.fog.structures.Building;
 import com.fog.structures.Resource;
 import com.fog.structures.Structure;
 
-public class GameScreen implements Screen, InputProcessor {
+/**
+ * GameScreen, shown to a particular player
+ * 
+ * @author Linasko
+ */
+public class GameScreen implements Screen {
 
-	private static float UNIT_SCALE = 1 / 32f; // used by camera
-	private static int PLAYER;
-	private static int PLAYER_FOG_LAYER;
+	private static float UNIT_SCALE = 1 / 32f; // Scale. Used by camera. TODO -
+												// find out what this is.
+	private static int PLAYER; // Player number.
+	private static int PLAYER_FOG_LAYER; // Number of the layer with fog for
+											// this player.
 
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
 
-	private HashMap<String, Resource> resources;
-	private HashMap<String, Building> buildings;
+	private HashMap<String, Resource> resources; // All natural resources on the
+													// map.
+	private HashMap<String, Building> buildings; // All buildings on the map.
 
-	// TODO: expand entries to arrays, instead of particular objects
+	// TODO: expand entries in hash map to arrays, instead of particular objects
 
 	// fogLayerT is the layer of the fog, where the top left tile is
 	// transparent.
@@ -77,21 +85,23 @@ public class GameScreen implements Screen, InputProcessor {
 				((TiledMapTileLayer) map.getLayers().get(fogLayerT)).getCell(0, 0), ((TiledMapTileLayer) map
 						.getLayers().get(fogLayerO)).getCell(0, 0),
 				((TiledMapTileLayer) map.getLayers().get(0)).getWidth(),
-				((TiledMapTileLayer) map.getLayers().get(0)).getHeight());		
-		
+				((TiledMapTileLayer) map.getLayers().get(0)).getHeight());
+
+		// reveal castles. TODO this is wrong as there is only one status array
+		// in FogManipulator, but 2 fog layers.
 		Building castle1 = buildings.get("PlayerOneBuilding");
 		Building castle2 = buildings.get("PlayerTwoBuilding");
-		fogManipulator.revealCircle((TiledMapTileLayer) map.getLayers().get(2), castle1.getX(),
-				castle1.getY(), castle1.getSight_range());
-		fogManipulator.revealCircle((TiledMapTileLayer) map.getLayers().get(3), castle2.getX(),
-				castle2.getY(), castle2.getSight_range());
+		fogManipulator.revealCircle((TiledMapTileLayer) map.getLayers().get(2), castle1.getX(), castle1.getY(),
+				castle1.getSight_range());
+		fogManipulator.revealCircle((TiledMapTileLayer) map.getLayers().get(3), castle2.getX(), castle2.getY(),
+				castle2.getSight_range());
 
 		// create the camera, showing 30x20 units of the world
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 25, 50);
 		camera.update();
 
-		// Tips for better performance:
+		// Tips for better performance: (taken from the internet)
 		/*
 		 * Only use tiles from a single tile set in a layer. This will reduce
 		 * texture binding. Mark tiles that do not need blending as opaque. At
@@ -99,96 +109,41 @@ public class GameScreen implements Screen, InputProcessor {
 		 * ways to do it in the editor or automatically. Do not go overboard
 		 * with the number of layers.
 		 */
-		
-		Gdx.input.setInputProcessor(this);
 	}
 
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		// Set view to where the camera is currently facing.
 		renderer.setView(camera);
-		renderer.render(new int[] { 0, 1, 2});
+		// Render the specified layers.
+		renderer.render(new int[] { 0, 1, 2 });
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void dispose() {
 		renderer.dispose();
 		map.dispose();
-	}
-
-	@Override
-	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if (button == Buttons.LEFT) {
-			// TODO: implement fog of war cleansing
-		}
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }
