@@ -3,12 +3,10 @@ package com.fog.screens;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -18,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.fog.structures.Building;
 import com.fog.structures.Resource;
 import com.fog.structures.Structure;
+import com.fog.tools.FogManipulator;
 
 /**
  * GameScreen, shown to a particular player
@@ -31,6 +30,7 @@ public class GameScreen implements Screen {
 	private static int PLAYER; // Player number.
 	private static int PLAYER_FOG_LAYER; // Number of the layer with fog for
 											// this player.
+	public static int NUMBER_OF_PLAYERS = 2; // number of players.
 
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
@@ -46,14 +46,14 @@ public class GameScreen implements Screen {
 	// transparent.
 	// fogLayerO is the layer of the fog, where the top left tile is opaque.
 	// both of these are needed for the initialization of FogManipulator.
-	public GameScreen(String pathToMap, int player, int fog_layer, int fogLayerT, int fogLayerO) {
+	public GameScreen(String pathToMap, int player, int player_fog_layer, int fogLayerT, int fogLayerO) {
 		// load the map
 		map = new TmxMapLoader().load(pathToMap);
 		renderer = new OrthogonalTiledMapRenderer(map, UNIT_SCALE);
 
 		// sort out player specifications
 		PLAYER = player;
-		PLAYER_FOG_LAYER = fog_layer;
+		PLAYER_FOG_LAYER = player_fog_layer;
 
 		// find resources and structures
 		resources = new HashMap<>();
@@ -70,38 +70,37 @@ public class GameScreen implements Screen {
 						resources.put(property, new Resource(tile, x, y, Structure.WOOD, Resource.BASE_WOOD));
 						break;
 					case ("PlayerOneBuilding"):
-						buildings.put("PlayerOneBuilding", new Building(tile, x, y, Structure.BUILDING, 1, 100, 6f));
+						buildings.put("PlayerOneBuilding", new Building(tile, x, y, Structure.BUILDING, 0, 100, 6f));
 						break;
 					case ("PlayerTwoBuilding"):
-						buildings.put("PlayerTwoBuilding", new Building(tile, x, y, Structure.BUILDING, 2, 100, 6f));
+						buildings.put("PlayerTwoBuilding", new Building(tile, x, y, Structure.BUILDING, 1, 100, 6f));
 						break;
 					}
 				}
 			}
 		}
 
-		// initialize the fog manipulator
-		FogManipulator fogManipulator = new FogManipulator(
-				((TiledMapTileLayer) map.getLayers().get(fogLayerT)).getCell(0, 0), ((TiledMapTileLayer) map
-						.getLayers().get(fogLayerO)).getCell(0, 0),
-				((TiledMapTileLayer) map.getLayers().get(0)).getWidth(),
-				((TiledMapTileLayer) map.getLayers().get(0)).getHeight());
+		// Initialize the fog manipulator. Assuming that there are 2 non-fog
+		// layers and they are in the beginning.
+		MapLayers foggy = new MapLayers();
+		for (int i = 2; i < map.getLayers().getCount(); i++) {
+			foggy.add(map.getLayers().get(i));
+		}
+		FogManipulator.initialize(((TiledMapTileLayer) map.getLayers().get(fogLayerT)).getCell(0, 0),
+				((TiledMapTileLayer) map.getLayers().get(fogLayerO)).getCell(0, 0), NUMBER_OF_PLAYERS, foggy);
 
-		// reveal castles. TODO this is wrong as there is only one status array
-		// in FogManipulator, but 2 fog layers.
+		// Reveal castles.
 		Building castle1 = buildings.get("PlayerOneBuilding");
 		Building castle2 = buildings.get("PlayerTwoBuilding");
-		fogManipulator.revealCircle((TiledMapTileLayer) map.getLayers().get(2), castle1.getX(), castle1.getY(),
-				castle1.getSight_range());
-		fogManipulator.revealCircle((TiledMapTileLayer) map.getLayers().get(3), castle2.getX(), castle2.getY(),
-				castle2.getSight_range());
+		FogManipulator.revealCircle(0, castle1.getX(), castle1.getY(), castle1.getSight_range());
+		FogManipulator.revealCircle(1, castle2.getX(), castle2.getY(), castle2.getSight_range());
 
 		// create the camera, showing 30x20 units of the world
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 25, 50);
 		camera.update();
 
-		// Tips for better performance: (taken from the internet)
+		// Tips for better performance: (taken from the Internet)
 		/*
 		 * Only use tiles from a single tile set in a layer. This will reduce
 		 * texture binding. Mark tiles that do not need blending as opaque. At
