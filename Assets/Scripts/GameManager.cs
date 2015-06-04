@@ -3,17 +3,23 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-	public MeshRenderer redFogRenderer;
-	public MeshRenderer blueFogRenderer;
+	public MapManager mapManager;
+	public FogManager fogManager;
 
 	// Use this for initialization
-	void Start () {
-		redFogRenderer.enabled = false;
-		blueFogRenderer.enabled = false;
+	void Awake () {
+		mapManager = GetComponent<MapManager> ();
+		fogManager = GetComponent<FogManager> ();
+		InitGame ();
+	}
+
+	void InitGame() {
+		mapManager.MapSetup();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+	
 }
