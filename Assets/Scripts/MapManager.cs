@@ -7,19 +7,17 @@ public class MapManager : MonoBehaviour
 	public int columns;
 	public int rows;
 	public GameObject redCastle;
-	public int redCastleX;
-	public int redCastleY;
 	public GameObject blueCastle;
-	public int blueCastleX;
-	public int blueCastleY;
 	public GameObject tree;
 	public int treeCount;
 	public GameObject[] grass;
 
     private Transform mapHolder;
 
-	public void MapSetup ()
+	public void MapSetup (int redCastleX, int redCastleY, int blueCastleX, int blueCastleY)
 	{   
+
+
 		mapHolder = new GameObject ("Map").transform;
 	
 		for (int x = 0; x < columns; x++) {
