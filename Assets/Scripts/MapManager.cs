@@ -18,8 +18,6 @@ public class MapManager : MonoBehaviour
 
     private Transform mapHolder;
 
-
-
 	public void MapSetup ()
 	{   
 		mapHolder = new GameObject ("Map").transform;
@@ -41,18 +39,21 @@ public class MapManager : MonoBehaviour
 		GameObject instance_CastleBlue = Instantiate (blueCastle, new Vector3 (blueCastleX, blueCastleY, 0F), Quaternion.identity) as GameObject; 
 		instance_CastleBlue.transform.SetParent (mapHolder);
 
-		// Initialize trees
+		// Initialize trees. Will work poorly for object-dense map.
 		List<Vector2> taken = new List<Vector2>{
 					new Vector2 (redCastleX, redCastleY),
 					new Vector2 (blueCastleX, blueCastleY)
 				};
+        // For each tree:
 		for (int i = 0; i < treeCount; i++) {
+            // Generate random positions until you find one that is not blocked.
 			bool blocked;
 			do {
 				blocked = false;
 				int treeX = Random.Range (0, columns);
 				int treeY = Random.Range (0, rows);
 				Vector2 treePos = new Vector2 (treeX, treeY);
+                // Pick a random position and see if it's not taken.
 				foreach (Vector2 something in taken) {
 					if (something.Equals (treePos)) {
 						blocked = true;
@@ -60,6 +61,7 @@ public class MapManager : MonoBehaviour
 					}
 						
 				}
+                // Initialize tree at an empty position.
 				if (!blocked) {
 					GameObject treeInstance = Instantiate (tree, new Vector3 (treeX, treeY, 0F), Quaternion.identity) as GameObject;
 					taken.Add (treePos);
