@@ -1,35 +1,40 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
 public class MapManager : MonoBehaviour
 {
-	public int columns = 60;
-	public int rows = 100;
+	public int columns;
+	public int rows;
 	public GameObject redCastle;
-	public int redCastleX = 3;
-	public int redCastleY = 3;
+	public int redCastleX;
+	public int redCastleY;
 	public GameObject blueCastle;
-	public int blueCastleX = 57;
-	public int blueCastleY = 97;
+	public int blueCastleX;
+	public int blueCastleY;
 	public GameObject tree;
-	public int treeCount = 25;
+	public int treeCount;
 	public GameObject[] grass;
-	private Transform mapHolder;
+
+    private Transform mapHolder;
+
+
 
 	public void MapSetup ()
-	{
+	{   
 		mapHolder = new GameObject ("Map").transform;
-
+	
 		for (int x = 0; x < columns; x++) {
 			for (int y = 0; y < rows; y++) {
+                
 				// Initialize grass
 				GameObject toInstantiate = grass [Random.Range (0, grass.Length)];
 				GameObject instance = Instantiate (toInstantiate, new Vector3 (x, y, 0F), Quaternion.identity) as GameObject; 
 				instance.transform.SetParent (mapHolder);
-			}
+            }
 		}
+
+
 		// Initialize castles
 		GameObject instance_CastleRed = Instantiate (redCastle, new Vector3 (redCastleX, redCastleY, 0F), Quaternion.identity) as GameObject; 
 		instance_CastleRed.transform.SetParent (mapHolder);
