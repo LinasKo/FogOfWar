@@ -16,8 +16,6 @@ public class MapManager : MonoBehaviour
 
 	public void MapSetup (int redCastleX, int redCastleY, int blueCastleX, int blueCastleY)
 	{   
-
-
 		mapHolder = new GameObject ("Map").transform;
 	
 		for (int x = 0; x < columns; x++) {

@@ -15,22 +15,29 @@ public class UnitManager : MonoBehaviour
     private int blueCastleX;
     private int blueCastleY;
 
+    private bool initialized = false;
+
     // Use this for initialization
     public void Initialize(int redCastleX, int redCastleY, int blueCastleX, int blueCastleY)
     {
-
+        redUnits = new Hashtable();
+        blueUnits = new Hashtable();
         foreach (UnitType type in System.Enum.GetValues(typeof(UnitType)))
         {
             redUnits.Add(type, new ArrayList());
             blueUnits.Add(type, new ArrayList());
         }
+        initialized = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateUnits(Player.RED);
-        UpdateUnits(Player.BLUE);
+        if (initialized)
+        {
+            UpdateUnits(Player.RED);
+            UpdateUnits(Player.BLUE);
+        }
     }
 
     // Spawn a unit for a particular player, near a castle

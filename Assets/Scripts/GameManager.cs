@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
     private float startTime;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
         mapManager = GetComponent<MapManager> ();
 		fogManager = GetComponent<FogManager> ();
         unitManager = GetComponent<UnitManager>();
@@ -31,8 +31,9 @@ public class GameManager : MonoBehaviour {
         // Initialize the UnitManager
         unitManager.Initialize(redCastleX, redCastleY, blueCastleX, blueCastleY);
 
-        // TODO: Initialize the fog of war
-	}
+        // Initialize the fog of war
+        fogManager.InitializeFog(mapManager.columns, mapManager.rows);
+    }
 	
 	// Update is called once per frame
 	void Update () {
