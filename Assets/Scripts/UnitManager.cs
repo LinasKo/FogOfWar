@@ -4,8 +4,14 @@ using System.Collections;
 public class UnitManager : MonoBehaviour
 {
 
+    public GameObject RedSoldier;
+    public GameObject BlueSoldier;
+
     public float minSpawnDistance;
     public float maxSpawnDistance;
+
+    private GameObject redCastle;
+    private GameObject blueCastle;
 
     private Hashtable redUnits;
     private Hashtable blueUnits;
@@ -15,6 +21,9 @@ public class UnitManager : MonoBehaviour
     // Use this for initialization
     public void Initialize()
     {
+        redCastle = GameObject.Find("RedCastle");
+        blueCastle = GameObject.Find("BlueCastle");
+
         redUnits = new Hashtable();
         blueUnits = new Hashtable();
         foreach (UnitType type in System.Enum.GetValues(typeof(UnitType)))
@@ -36,10 +45,8 @@ public class UnitManager : MonoBehaviour
     }
 
     // Spawn a unit for a particular player, near a castle
-    Unit Spawn(UnitType unit, Player color)
+    public GameObject Spawn(UnitType unit, Player color)
     {
-        return null;
-        /*
         // Randomly calcualte the spawn distance.
         // TODO: ensure that spawn point is inside the map.
         float spawnDistance = Random.Range(minSpawnDistance, maxSpawnDistance);
@@ -47,54 +54,46 @@ public class UnitManager : MonoBehaviour
         // Randomly calcualte a spawn angle.
         float spawnAngle = Random.Range(0, Mathf.PI);
 
-        // Get the castle coordinates for a player. TODO: involve more players.
-        int castleX = color == Player.RED ? redCastleX : blueCastleX;
-        int castleY = color == Player.BLUE ? redCastleY : blueCastleY;
+        // Get the castle coordinates for a player. Also get unit types.
+        Vector3 castlePos = new Vector3(0, 0, 0);
+        GameObject soldier = null;
+        switch (color)
+        {
+            case Player.RED:
+                castlePos = redCastle.transform.position;
+                soldier = RedSoldier;
+                break;
+            case Player.BLUE:
+                castlePos = blueCastle.transform.position;
+                soldier = BlueSoldier;
+                break;
+        }
 
         // Calcualte a point near a castle.
-        float spawnX = castleX + spawnDistance * Mathf.Cos(spawnAngle);
-        float spawnY = castleY + spawnDistance * Mathf.Sin(spawnAngle);
+        Vector3 spawn = castlePos + new Vector3(spawnDistance * Mathf.Cos(spawnAngle), 0.5F, spawnDistance * Mathf.Sin(spawnAngle));
 
         // Spawn a unit
+
+
         switch (unit)
         {
             case (UnitType.GATHERER):
                 return null; // new Gatherer for given player, at (spawnX, spawnY)
                 break;
             case (UnitType.SOLDIER):
-                return null; // new Solder for given player, at (spawnX, spawnY)
+                GameObject spawned = Instantiate(soldier, spawn, Quaternion.identity) as GameObject;
+                ((ArrayList)redUnits[UnitType.SOLDIER]).Add(spawned);
+                return spawned;
                 break;
             default:
                 return null;
                 break;
         }
-        */
+
     }
 
     void UpdateUnits(Player playerColor)
     {
-        // Update Red units
-        if (playerColor.Equals(Player.RED))
-        {
-            foreach (UnitType type in System.Enum.GetValues(typeof(UnitType)))
-            {
-                foreach (Unit unit in (ArrayList)redUnits[type])
-                {
-                    unit.voidUpdateInstance();
-                }
-            }
-        }
-
-        // Update Blue units
-        else if (playerColor.Equals(Player.BLUE))
-        {
-            foreach (UnitType type in System.Enum.GetValues(typeof(UnitType)))
-            {
-                foreach (Unit unit in (ArrayList)redUnits[type])
-                {
-                    unit.voidUpdateInstance();
-                }
-            }
-        }
+        
     }
 }

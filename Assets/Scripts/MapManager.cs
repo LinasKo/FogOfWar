@@ -15,7 +15,7 @@ public class MapManager : MonoBehaviour
             // Generate random positions until you find one that is not blocked.
             float treeX = Random.Range(-25, 25);
             float treeZ = Random.Range(-25, 25);
-            GameObject treeInstance = Instantiate(tree, new Vector3(treeX, 0F, treeZ), Quaternion.identity) as GameObject;
+            Instantiate(tree, new Vector3(treeX, 0F, treeZ), Quaternion.identity);
         }
     }
 }

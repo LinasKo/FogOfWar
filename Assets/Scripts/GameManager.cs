@@ -33,6 +33,12 @@ public class GameManager : MonoBehaviour
 
         // Initialize the UnitManager
         unitManager.Initialize();
+        unitManager.Spawn(UnitType.SOLDIER, Player.RED);
+        unitManager.Spawn(UnitType.SOLDIER, Player.RED);
+        unitManager.Spawn(UnitType.SOLDIER, Player.RED);
+        unitManager.Spawn(UnitType.SOLDIER, Player.RED);
+        unitManager.Spawn(UnitType.SOLDIER, Player.RED);
+        unitManager.Spawn(UnitType.SOLDIER, Player.RED);
     }
 
     // Update is called once per frame
