@@ -20,13 +20,11 @@ public class FogManager : MonoBehaviour {
         redCastle = GameObject.Find("RedCastle");
         blueCastle = GameObject.Find("BlueCastle");
 
-        CreateFogCircle(redCastle.transform.position, 2.0F);
-        CreateFogCircle(blueCastle.transform.position, 2.0F);
-
-        Debug.Log("sefsef");
+        ClearFogCircle(redCastle.transform.position, 2.0F);
+        ClearFogCircle(blueCastle.transform.position, 2.0F);
     }
 
-    public void CreateFogCircle(Vector3 position, float rangeMultiplier = 1.0F)
+    public void ClearFogCircle(Vector3 position, float rangeMultiplier = 1.0F)
     {
         Beacon beacon = new Beacon(fog, BeaconType.Static, position, beaconStrength, beaconRange * rangeMultiplier);
         fog.AddBeacon(beacon);

@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
                         // TODO
                         break;
                     case FogControlState.CLEARING:
-                        fogManager.CreateFogCircle(cursorWorldPos);
+                        fogManager.ClearFogCircle(cursorWorldPos);
                     break;
                 }
             }
