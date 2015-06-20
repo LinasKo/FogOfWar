@@ -126,6 +126,7 @@
     <Compile Include="Assets\RAIN\Editor\ScriptTemplates\DecisionTemplate_CS.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Fog of War\CloudShader.shader" />
     <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
     <None Include="Assets\RAIN\Editor\Shaders\AspectRingShader.shader" />
     <None Include="Assets\RAIN\Editor\Shaders\AspectSphereShader.shader" />
@@ -135,6 +136,7 @@
     <None Include="Assets\RAIN\Editor\Shaders\VisualSensorRingShader.shader" />
     <None Include="Assets\RAIN\Editor\Shaders\WaypointShader.shader" />
     <None Include="Assets\RAIN\ReleaseNotes.txt" />
+    <None Include="Assets\Read Me.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
