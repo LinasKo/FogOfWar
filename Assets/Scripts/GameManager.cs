@@ -5,6 +5,8 @@ public enum Player { RED, BLUE };
 
 public class GameManager : MonoBehaviour
 {
+    public float cameraSpeed = 12.0F;
+
     private MapManager mapManager;
     private UnitManager unitManager;
 
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        camera.transform.Translate(new Vector3(-Input.GetAxis("Horizontal") * cameraSpeed * Time.deltaTime, Input.GetAxis("Vertical") * cameraSpeed * Time.deltaTime, 0F));
     }
 
     void SpawnSoldiers()
