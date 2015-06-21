@@ -132,7 +132,7 @@ public class FogOfWar : MonoBehaviour
      * summarizes all the static beacons plus all the dynamic beacons.
      */
 
-    private class Viewport : IDisposable
+    internal class Viewport : IDisposable
     {
         public Rect Area = new Rect(0,0,0,0);
         public Texture2D Map = null;
@@ -472,6 +472,10 @@ public class FogOfWar : MonoBehaviour
          */
 
         mat.SetVector("AdjustViewpoint", new Vector4((worldCenter.x - skyImpact.x), 0, (worldCenter.z - skyImpact.z), 0));
+    }
+
+    internal Viewport GetViewport() {
+        return _currentSummaryViewport;
     }
 }
 

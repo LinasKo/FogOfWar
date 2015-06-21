@@ -29,4 +29,11 @@ public class FogManager : MonoBehaviour {
         Beacon beacon = new Beacon(fog, BeaconType.Static, position, beaconStrength, beaconRange * rangeMultiplier);
         fog.AddBeacon(beacon);
     }
+
+    public bool IsFoggy(Vector3 point)
+    {
+        Texture2D map = fog.GetViewport().Map;
+        Color pixel = map.GetPixelBilinear((point.x + 25.0F) * 0.02F* 1.1F, (point.z + 25.0F) * 0.02F * 1.1F);
+        return pixel.a >= 0.5;
+    }
 }

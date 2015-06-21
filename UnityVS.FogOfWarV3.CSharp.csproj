@@ -72,6 +72,8 @@
     <Compile Include="Assets\Scripts\FogManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MapManager.cs" />
+    <Compile Include="Assets\Scripts\PlayerInit.cs" />
+    <Compile Include="Assets\Scripts\Resources.cs" />
     <Compile Include="Assets\Scripts\Soldier.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\UnitManager.cs" />

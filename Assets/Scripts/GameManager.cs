@@ -80,10 +80,10 @@ public class GameManager : MonoBehaviour
         // Capture the moment the button was pressed down
         if (Input.GetMouseButtonDown(0))
         {
+            Vector3 mousePosition = MousePosition();
             // TODO if foggy:
             // TODO fogCtrlState = FogControlState.CREATING;
-            // TODO if not foggy
-            if (MousePosition() != Vector3.down)
+            if (MousePosition() != Vector3.down && !fogManager.IsFoggy(mousePosition))
             {
                 fogCtrlState = FogControlState.CLEARING;
             }

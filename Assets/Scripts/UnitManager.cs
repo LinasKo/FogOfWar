@@ -19,11 +19,8 @@ public class UnitManager : MonoBehaviour
     private GameObject redCastle;
     private GameObject blueCastle;
 
-    private Hashtable redUnitSoldier;
-    private Hashtable blueUnitSoldier;
-
-    private Hashtable redUnitGatherer;
-    private Hashtable blueUnitGatherer;
+    private Hashtable redUnits;
+    private Hashtable blueUnits;
 
     private bool initialized = false;
 
@@ -33,15 +30,15 @@ public class UnitManager : MonoBehaviour
         redCastle = GameObject.Find(redBase);
         blueCastle = GameObject.Find(blueBase);
 
-        redUnitSoldier = new Hashtable();
-        blueUnitSoldier = new Hashtable();
+        redUnits = new Hashtable();
+        blueUnits = new Hashtable();
 
         
 
         foreach (UnitType type in System.Enum.GetValues(typeof(UnitType)))
         {
-            redUnitSoldier.Add(type, new ArrayList());
-            blueUnitSoldier.Add(type, new ArrayList());
+            redUnits.Add(type, new ArrayList());
+            blueUnits.Add(type, new ArrayList());
         }
         initialized = true;
     }
