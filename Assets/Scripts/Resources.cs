@@ -17,7 +17,7 @@ public class Resources : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //feferferfe
     }
 
     public Resources(int startingWood, int startingMeet)
