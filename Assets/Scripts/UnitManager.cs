@@ -4,8 +4,14 @@ using System.Collections;
 public class UnitManager : MonoBehaviour
 {
 
+    public string redBase = "RedCastle";
+    public string blueBase = "BlueCastle";
+
     public GameObject RedSoldier;
     public GameObject BlueSoldier;
+
+    public GameObject RedGatherer;
+    public GameObject BlueGatherer;
 
     public float minSpawnDistance;
     public float maxSpawnDistance;
@@ -13,23 +19,29 @@ public class UnitManager : MonoBehaviour
     private GameObject redCastle;
     private GameObject blueCastle;
 
-    private Hashtable redUnits;
-    private Hashtable blueUnits;
+    private Hashtable redUnitSoldier;
+    private Hashtable blueUnitSoldier;
+
+    private Hashtable redUnitGatherer;
+    private Hashtable blueUnitGatherer;
 
     private bool initialized = false;
 
     // Use this for initialization
     public void Initialize()
     {
-        redCastle = GameObject.Find("RedCastle");
-        blueCastle = GameObject.Find("BlueCastle");
+        redCastle = GameObject.Find(redBase);
+        blueCastle = GameObject.Find(blueBase);
 
-        redUnits = new Hashtable();
-        blueUnits = new Hashtable();
+        redUnitSoldier = new Hashtable();
+        blueUnitSoldier = new Hashtable();
+
+        
+
         foreach (UnitType type in System.Enum.GetValues(typeof(UnitType)))
         {
-            redUnits.Add(type, new ArrayList());
-            blueUnits.Add(type, new ArrayList());
+            redUnitSoldier.Add(type, new ArrayList());
+            blueUnitSoldier.Add(type, new ArrayList());
         }
         initialized = true;
     }
