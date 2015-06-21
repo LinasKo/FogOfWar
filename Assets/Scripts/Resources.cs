@@ -3,14 +3,26 @@ using System.Collections;
 
 public class Resources : MonoBehaviour
 {
+    public int maxWood;
+    public int maxMeet;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    private int wood;
+    private int meet;
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public Resources(int startingWood, int startingMeet)
+    {
+        wood = startingWood;
+        meet = startingMeet;
+    }
 }
