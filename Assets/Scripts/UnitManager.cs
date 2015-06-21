@@ -33,7 +33,8 @@ public class UnitManager : MonoBehaviour
         redUnits = new Hashtable();
         blueUnits = new Hashtable();
 
-        
+        redUnits = new Hashtable();
+        blueUnits = new Hashtable();
 
         foreach (UnitType type in System.Enum.GetValues(typeof(UnitType)))
         {
@@ -76,6 +77,14 @@ public class UnitManager : MonoBehaviour
                 castlePos = blueCastle.transform.position;
                 soldier = BlueSoldier;
                 break;
+            case Player.RED_GATHERER:
+                castlePos = redCastle.transform.position;
+                soldier = RedGatherer;
+                break;
+            case Player.BLUE_GATHERER:
+                castlePos = blueCastle.transform.position;
+                soldier = BlueGatherer;
+                break;
         }
 
         // Calcualte a point near a castle.
@@ -87,22 +96,21 @@ public class UnitManager : MonoBehaviour
         switch (unit)
         {
             case (UnitType.GATHERER):
-                return null; // new Gatherer for given player, at (spawnX, spawnY)
-                break;
+                GameObject spawnedGath = Instantiate(soldier, spawn, Quaternion.identity) as GameObject;
+                ((ArrayList)redUnits[UnitType.SOLDIER]).Add(spawnedGath);
+                return spawnedGath;
             case (UnitType.SOLDIER):
                 GameObject spawned = Instantiate(soldier, spawn, Quaternion.identity) as GameObject;
                 ((ArrayList)redUnits[UnitType.SOLDIER]).Add(spawned);
                 return spawned;
-                break;
             default:
                 return null;
-                break;
         }
 
     }
 
     void UpdateUnits(Player playerColor)
     {
-        
+
     }
 }
