@@ -114,4 +114,19 @@ public class GameManager : MonoBehaviour
         unitManager.Spawn(UnitType.SOLDIER, Player.RED);
         unitManager.Spawn(UnitType.SOLDIER, Player.BLUE);
     }
+
+    public ArrayList ObjectsInCircle(Vector3 coordinates, float radius, string tag = null)
+    {
+        coordinates.y = 0;
+        Collider[] colliders = Physics.OverlapSphere(coordinates, radius);
+        ArrayList objects = new ArrayList();
+        foreach (Collider col in colliders) {
+            GameObject gameObject = col.gameObject;
+            if (tag == null || gameObject.tag == tag)
+            {
+                objects.Add(gameObject);
+            }
+        }
+        return objects;
+    }
 }
