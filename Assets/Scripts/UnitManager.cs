@@ -77,14 +77,6 @@ public class UnitManager : MonoBehaviour
                 castlePos = blueCastle.transform.position;
                 soldier = BlueSoldier;
                 break;
-            case Player.RED_GATHERER:
-                castlePos = redCastle.transform.position;
-                soldier = RedGatherer;
-                break;
-            case Player.BLUE_GATHERER:
-                castlePos = blueCastle.transform.position;
-                soldier = BlueGatherer;
-                break;
         }
 
         // Calcualte a point near a castle.

@@ -39,7 +39,7 @@ public class FogOfWar : MonoBehaviour
      * absent, and 1 means they completely obscure anything underneath.
      */
 
-    [Range (0, 1)]
+    [Range(0, 1)]
     public float CloudStrength = 1.0f;
 
 
@@ -65,7 +65,8 @@ public class FogOfWar : MonoBehaviour
 
     public void Invalidate(BeaconType type)
     {
-        if (type == BeaconType.Static) {
+        if (type == BeaconType.Static)
+        {
             _recalcStaticViewport = true;
         }
         _recalcSummaryViewport = true;
@@ -134,18 +135,21 @@ public class FogOfWar : MonoBehaviour
 
     internal class Viewport : IDisposable
     {
-        public Rect Area = new Rect(0,0,0,0);
+        public Rect Area = new Rect(0, 0, 0, 0);
         public Texture2D Map = null;
         public bool IsEmpty = true;
 
 
-        void Expand (Vector3 position, float range)
+        void Expand(Vector3 position, float range)
         {
             // Expand a *little* more than we really need to, so the edges stay clean
             range *= 1.1f;
-            if (IsEmpty) {
+            if (IsEmpty)
+            {
                 Area = new Rect(position.x - range, position.z - range, range * 2, range * 2);
-            } else {
+            }
+            else
+            {
                 Area.xMin = Math.Min(Area.xMin, position.x - range);
                 Area.yMin = Math.Min(Area.yMin, position.z - range);
                 Area.xMax = Math.Max(Area.xMax, position.x + range);
@@ -161,29 +165,38 @@ public class FogOfWar : MonoBehaviour
 
         public void Dispose()
         {
-            if (Map != null) {
+            if (Map != null)
+            {
                 Texture2D.Destroy(Map);
                 Map = null;
                 IsEmpty = true;
             }
         }
 
-        public void DrawMap (List<Beacon> list, Viewport baseViewport, bool isRequired, float cloudStrength)
+
+        public void DrawMap(List<Beacon> list, Viewport baseViewport, bool isRequired, float cloudStrength)
         {
-            foreach (Beacon beacon in list) {
+            foreach (Beacon beacon in list)
+            {
                 Expand(beacon.Position, beacon.Range);
             }
-            if (IsEmpty && !isRequired) {
+            if (IsEmpty && !isRequired)
+            {
                 return;
             }
 
-            if (baseViewport != null && baseViewport.IsEmpty) {
+            if (baseViewport != null && baseViewport.IsEmpty)
+            {
                 baseViewport = null;
             }
-            if (baseViewport != null) {
-                if (IsEmpty) {
+            if (baseViewport != null)
+            {
+                if (IsEmpty)
+                {
                     Area = baseViewport.Area;
-                } else {
+                }
+                else
+                {
                     Area.xMin = Math.Min(Area.xMin, baseViewport.Area.xMin);
                     Area.yMin = Math.Min(Area.yMin, baseViewport.Area.yMin);
                     Area.xMax = Math.Max(Area.xMax, baseViewport.Area.xMax);
@@ -191,40 +204,50 @@ public class FogOfWar : MonoBehaviour
                 }
             }
 
-            Color[] colors = new Color[ FogOfWar.Precision * FogOfWar.Precision ];
+            Color[] colors = new Color[FogOfWar.Precision * FogOfWar.Precision];
 
             float baseAlpha = cloudStrength;
 
             int index = 0;
-            for (int yy = 0; yy < FogOfWar.Precision; ++yy) {
-                for (int xx = 0; xx < FogOfWar.Precision; ++xx,++index) {
+            for (int yy = 0; yy < FogOfWar.Precision; ++yy)
+            {
+                for (int xx = 0; xx < FogOfWar.Precision; ++xx, ++index)
+                {
                     float wx = Area.xMin + xx * Area.width / FogOfWar.Precision;
                     float wz = Area.yMin + yy * Area.height / FogOfWar.Precision;
 
                     float opaqued = 0;
                     float revealed = 0;
-                    if (baseViewport != null) {
+                    if (baseViewport != null)
+                    {
                         float ux = (wx - baseViewport.Area.xMin) / (baseViewport.Area.width);
                         float vy = (wz - baseViewport.Area.yMin) / (baseViewport.Area.height);
-                        if (ux >= 0 && ux <= 1 && vy >= 0 && vy <= 1) {
+                        if (ux >= 0 && ux <= 1 && vy >= 0 && vy <= 1)
+                        {
                             Color baseColor = baseViewport.Map.GetPixelBilinear(ux, vy);
                             opaqued = baseColor.r;
                             revealed = baseColor.g;
                         }
                     }
 
-                    foreach (Beacon beacon in list) {
+                    foreach (Beacon beacon in list)
+                    {
                         float dx = Math.Abs(beacon.Position.x - wx);
                         float dz = Math.Abs(beacon.Position.z - wz);
-                        if (dx < beacon.Range && dz < beacon.Range) {
-                            float dist = Mathf.Sqrt(dx*dx + dz*dz);
-                            if (dist < beacon.Range) {
+                        if (dx < beacon.Range && dz < beacon.Range)
+                        {
+                            float dist = Mathf.Sqrt(dx * dx + dz * dz);
+                            if (dist < beacon.Range)
+                            {
                                 float away = dist / beacon.Range;
                                 float power = beacon.Strength * (1 - away * away);
-                                if (power > 0) {
+                                if (power > 0)
+                                {
                                     revealed = Mathf.Max(revealed, power);
-                                } else {
-                                    opaqued = Mathf.Max(opaqued, 0-power);
+                                }
+                                else
+                                {
+                                    opaqued = Mathf.Max(opaqued, 0 - power);
                                 }
                             }
                         }
@@ -235,10 +258,13 @@ public class FogOfWar : MonoBehaviour
                     colors[index].b = 0;
 
                     float visible = revealed - opaqued;
-                    if (visible > 0) {   // visible
+                    if (visible > 0)
+                    {   // visible
                         colors[index].a = Mathf.Lerp(baseAlpha, 0, visible);
-                    } else {
-                        colors[index].a = Mathf.Lerp(baseAlpha, 1, 0-visible);
+                    }
+                    else
+                    {
+                        colors[index].a = Mathf.Lerp(baseAlpha, 1, 0 - visible);
                     }
                 }
             }
@@ -272,10 +298,13 @@ public class FogOfWar : MonoBehaviour
      * for that object name to figure out which FogOfWar to affect.
      */
 
-    public static FogOfWar FindExisting {
-        get {
+    public static FogOfWar FindExisting
+    {
+        get
+        {
             GameObject obj = GameObject.Find("FogOfWar");
-            if (obj != null && obj.activeInHierarchy) {
+            if (obj != null && obj.activeInHierarchy)
+            {
                 return obj.GetComponent<FogOfWar>();
             }
             return null;
@@ -288,27 +317,33 @@ public class FogOfWar : MonoBehaviour
      * or update beacons within it.
      */
 
-    public void AddBeacon (Beacon beacon)
+    public void AddBeacon(Beacon beacon)
     {
-        if (beacon.Type == BeaconType.Static) {
+        if (beacon.Type == BeaconType.Static)
+        {
             StaticBeacons.Add(beacon);
-        } else {
+        }
+        else
+        {
             DynamicBeacons.Add(beacon);
         }
         Invalidate(beacon.Type);
     }
 
-    public void RemoveBeacon (Beacon beacon)
+    public void RemoveBeacon(Beacon beacon)
     {
-        if (beacon.Type == BeaconType.Static) {
+        if (beacon.Type == BeaconType.Static)
+        {
             StaticBeacons.Remove(beacon);
-        } else {
+        }
+        else
+        {
             DynamicBeacons.Remove(beacon);
         }
         Invalidate(beacon.Type);
     }
 
-    public void UpdateBeacon (Beacon beacon)
+    public void UpdateBeacon(Beacon beacon)
     {
         Invalidate(beacon.Type);
     }
@@ -322,7 +357,8 @@ public class FogOfWar : MonoBehaviour
 
     void Update()
     {
-        if (!gameObject.activeInHierarchy) {
+        if (!gameObject.activeInHierarchy)
+        {
             return;
         }
         Material mat = GetComponent<MeshRenderer>().material;
@@ -351,7 +387,8 @@ public class FogOfWar : MonoBehaviour
          * will react to the new conditions.
          */
 
-        if (CloudStrength != _oldCloudStrength) {
+        if (CloudStrength != _oldCloudStrength)
+        {
             _recalcStaticViewport = true;
             _recalcSummaryViewport = true;
             _oldCloudStrength = CloudStrength;
@@ -364,8 +401,10 @@ public class FogOfWar : MonoBehaviour
          * dynamic beacon changed.
          */
 
-        if (_recalcStaticViewport || _recalcSummaryViewport) {
-            if (_oldSummaryViewport != null) {
+        if (_recalcStaticViewport || _recalcSummaryViewport)
+        {
+            if (_oldSummaryViewport != null)
+            {
                 _oldSummaryViewport.Dispose();
             }
             _oldSummaryViewport = _currentSummaryViewport;
@@ -377,16 +416,20 @@ public class FogOfWar : MonoBehaviour
          * have to rebuild the static viewport.
          */
 
-        if (_recalcStaticViewport) {
-            if (_currentStaticViewport != null) {
+        if (_recalcStaticViewport)
+        {
+            if (_currentStaticViewport != null)
+            {
                 _currentStaticViewport.Dispose();
             }
             _currentStaticViewport = new Viewport();
             _currentStaticViewport.DrawMap(StaticBeacons, null, false, CloudStrength);
         }
 
-        if (_recalcSummaryViewport) {
-            if (_currentSummaryViewport != null) {
+        if (_recalcSummaryViewport)
+        {
+            if (_currentSummaryViewport != null)
+            {
                 _currentSummaryViewport.Dispose();
             }
             _currentSummaryViewport = new Viewport();
@@ -398,19 +441,26 @@ public class FogOfWar : MonoBehaviour
          * updating the viewports.  Whew.
          */
 
-        if (_recalcStaticViewport || _recalcSummaryViewport) {
-            if (_currentStaticViewport.IsEmpty && _currentSummaryViewport.IsEmpty) {
+        if (_recalcStaticViewport || _recalcSummaryViewport)
+        {
+            if (_currentStaticViewport.IsEmpty && _currentSummaryViewport.IsEmpty)
+            {
                 mat.SetVector("CurrentViewport", new Vector4(0, 0, 0, 0));
                 mat.SetTexture("CurrentTexture", null);
-            } else {
+            }
+            else
+            {
                 mat.SetVector("CurrentViewport", _currentSummaryViewport.ToVector4());
                 mat.SetTexture("CurrentBeaconMap", _currentSummaryViewport.Map);
 
-                if (_oldSummaryViewport == null) {
+                if (_oldSummaryViewport == null)
+                {
                     _transitionStartTime = 0;
                     mat.SetVector("PreviousViewport", new Vector4(0, 0, 0, 0));
                     mat.SetTexture("PreviousBeaconMap", null);
-                } else {
+                }
+                else
+                {
                     _transitionStartTime = Time.time;
                     mat.SetVector("PreviousViewport", _oldSummaryViewport.ToVector4());
                     mat.SetTexture("PreviousBeaconMap", _oldSummaryViewport.Map);
@@ -427,13 +477,17 @@ public class FogOfWar : MonoBehaviour
          */
 
         float deltaTime = Time.time - _transitionStartTime;
-        if (deltaTime > ChangeTime) {
+        if (deltaTime > ChangeTime)
+        {
             _transitionStartTime = 0;
         }
-        if (_transitionStartTime == 0) {
+        if (_transitionStartTime == 0)
+        {
             mat.SetTexture("PreviousBeaconMap", null);
             mat.SetFloat("PreviousPercent", 0);
-        } else {
+        }
+        else
+        {
             mat.SetTexture("PreviousBeaconMap", _oldSummaryViewport.Map);
             mat.SetFloat("PreviousPercent", (ChangeTime - deltaTime) / ChangeTime);
         }
@@ -451,8 +505,8 @@ public class FogOfWar : MonoBehaviour
 
         float groundPlaneY = 0; // Pick your own value here
 
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3 (Screen.width/2, Screen.height/2));
-        Plane ground = new Plane(new Vector3(0,1,0), new Vector3(0,groundPlaneY,0));
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        Plane ground = new Plane(new Vector3(0, 1, 0), new Vector3(0, groundPlaneY, 0));
 
         float rayDistance = 0;
         ground.Raycast(ray, out rayDistance);
@@ -463,18 +517,20 @@ public class FogOfWar : MonoBehaviour
          * presently intersects our cloud layer.
          */
 
-        Plane sky = new Plane(new Vector3(0,1,0), gameObject.transform.position);
+        Plane sky = new Plane(new Vector3(0, 1, 0), gameObject.transform.position);
         sky.Raycast(ray, out rayDistance);
         Vector3 skyImpact = ray.GetPoint(rayDistance);
 
         /*
-         * Now slide the sky around so that the two line up.  Child's play.
+         * Now slide the sky around so that the two line up. Child's play.
          */
 
         mat.SetVector("AdjustViewpoint", new Vector4((worldCenter.x - skyImpact.x), 0, (worldCenter.z - skyImpact.z), 0));
     }
 
-    internal Viewport GetViewport() {
+    // Made by Linas.
+    internal Viewport GetViewport()
+    {
         return _currentSummaryViewport;
     }
 }

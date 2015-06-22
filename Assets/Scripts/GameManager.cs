@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
-
     }
 
     void SpawnSoldiers()

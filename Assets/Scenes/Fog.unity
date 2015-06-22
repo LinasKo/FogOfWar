@@ -349,12 +349,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 969550afa60858740b688896ae0f91f3, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &263390179 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11400000, guid: d10995d81fe5bbf47aab2ddee57cbf76,
-    type: 2}
-  m_PrefabInternal: {fileID: 359537497}
-  m_Script: {fileID: 11500000, guid: e2c703b490511bc41b8ffe3c4d0a7b26, type: 3}
 --- !u!1 &332086712
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,7 +788,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staticBeacon: {fileID: 100000, guid: 916f101035de01b42acc8d4f3cac7449, type: 2}
   dynamicBeacon: {fileID: 100000, guid: fa08f0f90c6fa8d4bac93bcc2fa6ad02, type: 2}
-  fog: {fileID: 263390179}
   beaconStrength: 2
   beaconRange: 5
 --- !u!1001 &1287318941
