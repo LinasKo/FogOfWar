@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     private FogControlState fogCtrlState;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
 
         // Use the only active camera
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case FogControlState.CLEARING:
                     Vector3 mousePosition = MousePosition();
-                    if (MousePosition() != Vector3.down)
+                    if (mousePosition != Vector3.down && !fogManager.IsFoggy(mousePosition))
                     {
                         fogManager.ClearFogCircle(mousePosition);
                     }
@@ -120,7 +120,8 @@ public class GameManager : MonoBehaviour
         coordinates.y = 0;
         Collider[] colliders = Physics.OverlapSphere(coordinates, radius);
         ArrayList objects = new ArrayList();
-        foreach (Collider col in colliders) {
+        foreach (Collider col in colliders)
+        {
             GameObject gameObject = col.gameObject;
             if (tag == null || gameObject.tag == tag)
             {

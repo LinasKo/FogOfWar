@@ -9,7 +9,8 @@ public class FogManager : MonoBehaviour
 
     public float beaconStrength = 2.0f;
     public float beaconRange = 5.0f;
-    
+
+    private GameManager gameManager;
     private FogOfWar fog;
 
     // Private so that unity would not interfere. Because it sets it to 0 -_-
@@ -23,6 +24,9 @@ public class FogManager : MonoBehaviour
     // Use this for initialization
     public void Initialize()
     {
+
+        gameManager = GetComponent<GameManager>();
+
         redCastle = GameObject.Find("RedCastle");
         blueCastle = GameObject.Find("BlueCastle");
 
@@ -30,9 +34,18 @@ public class FogManager : MonoBehaviour
 
         canPlaceBeacon = true;
 
+        // Hide all static objects.
+        foreach (GameObject tree in GameObject.FindGameObjectsWithTag("Tree"))
+        {
+            tree.GetComponent<Renderer>().enabled = false;
+        }
+        foreach (GameObject building in GameObject.FindGameObjectsWithTag("Building"))
+        {
+            building.GetComponent<Renderer>().enabled = false;
+        }
 
+        // Reveal Red Castle.
         ClearFogCircle(redCastle.transform.position, 2.0F, true);
-        ClearFogCircle(blueCastle.transform.position, 2.0F, true);
     }
 
     public void ClearFogCircle(Vector3 position, float rangeMultiplier = 1.0F, bool permanent = false)
@@ -41,12 +54,14 @@ public class FogManager : MonoBehaviour
         {
             Beacon beacon = new Beacon(fog, BeaconType.Static, position, beaconStrength, beaconRange * rangeMultiplier);
             fog.AddBeacon(beacon);
+            RevealStaticObjects(position, beaconRange * rangeMultiplier);
         }
         else if (canPlaceBeacon)
         {
             canPlaceBeacon = false;
             Beacon beacon = new Beacon(fog, BeaconType.Dynamic, position, beaconStrength, beaconRange * rangeMultiplier);
             fog.AddBeacon(beacon);
+            RevealStaticObjects(position, beaconRange * rangeMultiplier);
             StartCoroutine(WaitForBeacon(beacon, beaconDelay));
         }
     }
@@ -62,5 +77,15 @@ public class FogManager : MonoBehaviour
         Texture2D map = fog.GetViewport().Map;
         Color pixel = map.GetPixelBilinear((point.x + 25.0F) * 0.02F * 1.1F, (point.z + 25.0F) * 0.02F * 1.1F);
         return pixel.a >= 0.5;
+    }
+
+    public void RevealStaticObjects(Vector3 position, float radius)
+    {
+        foreach (GameObject gameObject in gameManager.ObjectsInCircle(position, radius * 0.5F)) {
+            if (gameObject.tag == "Tree" || gameObject.tag == "Building")
+            {
+                gameObject.GetComponent<Renderer>().enabled = true;
+            }
+        }
     }
 }

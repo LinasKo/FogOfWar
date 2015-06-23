@@ -8,12 +8,29 @@ public enum UnitType
 
 public abstract class Unit : MonoBehaviour {
 
+    private FogManager fogManager;
+    private Renderer rend;
+
     private int _health, _attackDmg, _attackSpd, _movementSpd;
     private UnitType _type;
 
-    public void Awake()
+    public void Start()
     {
         SetUnit(_health, _attackDmg, _attackSpd, _movementSpd, _type);
+        rend = GetComponent<Renderer>();
+        fogManager = FindObjectOfType<GameManager>().GetComponent<FogManager>();
+    }
+
+    public void Update()
+    {
+        if (fogManager.IsFoggy(transform.position))
+        {
+            rend.enabled = false;
+        }
+        else
+        {
+            rend.enabled = true;
+        }
     }
 
     public void SetUnit(int health, int attackDmg, int attackSpd, int movementSpd, UnitType type)
