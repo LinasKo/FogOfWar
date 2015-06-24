@@ -67,7 +67,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Move Camera with arrow keys
-        camera.transform.Translate(new Vector3(Input.GetAxis("Horizontal") * cameraSpeed * Time.deltaTime, Input.GetAxis("Vertical") * cameraSpeed * Time.deltaTime, 0F));
+        Vector3 forwardDirection = Vector3.ProjectOnPlane(camera.transform.up, Vector3.up).normalized * Input.GetAxis("Vertical") * cameraSpeed * Time.deltaTime;
+        camera.transform.Translate(new Vector3(Input.GetAxis("Horizontal") * cameraSpeed * Time.deltaTime, 0F, 0F));
+        camera.transform.Translate(forwardDirection, Space.World);
 
         //   Manipulate fog of war
 
@@ -83,6 +85,8 @@ public class GameManager : MonoBehaviour
             Vector3 mousePosition = MousePosition();
             // TODO if foggy:
             // TODO fogCtrlState = FogControlState.CREATING;
+            Debug.Log("" + mousePosition + ", " + fogManager.IsFoggy(mousePosition) + ", " + (mousePosition.x + 25.0F) * 0.02F + ", " + (mousePosition.z + 25.0F) * 0.02F +
+                "\n" + FogOfWar.FindExisting.GetViewport().Map.GetPixelBilinear((mousePosition.x + 25.0F) * 0.02F, (mousePosition.z + 25.0F) * 0.02F));
             if (MousePosition() != Vector3.down && !fogManager.IsFoggy(mousePosition))
             {
                 fogCtrlState = FogControlState.CLEARING;
