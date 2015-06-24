@@ -1,0 +1,75 @@
+
+-------------------------------------------------------------------------------
+BASIC USE
+-------------------------------------------------------------------------------
+
+This is a fairly straight-forward fog of war shader and supporting scripts.
+The easiest way to use it is:
+
+* Visit the Assets/Fog of War directory, where you will find three prefabs
+
+* Drag the "FogOfWar" prefab into your scene.  Once there, you'll need to
+  arrange it as a low-flying cloud layer: put it as close to your ground as
+  you can without letting anything break through (unless you want that,
+  I guess).  If your terrain is really big you naturally might need to scale
+  the object to fit.
+
+* Click Play, and your scene will be almost completely obscured by some
+  moving clouds.  Select your new FogOfWar object in the hierarchy and
+  look at its Script properties, and you'll see a Cloud Strength slider
+  that's set to 1; drag it lower to make the default cloud visibility lower
+  if you want.
+
+* Okay, that part's boring.  While the scene is running, drag a DynamicBeacon
+  prefab onto your scene, and you'll see that it punches a hole through the
+  cloud cover wherever it goes.  The degree to which it affects the cloud
+  cover is controlled by its Strength, and the range of its effect is
+  controlled by its Range value.
+
+* Try attaching beacon prefabs to the characters so that the player is
+  constrained in what he sees based on where the characters are.  Or attach
+  beacons to interesting objects in your scene to help them stand out.
+
+* Of potential interest: you can make a *reverse* fog of war by setting the
+  default cloud strength lower (so, only light clouds) and then putting
+  beacons on the field that have *negative* strength: this will cause them
+  to attract clouds.
+
+You can, of course, mess with the fog of war programmatically--you don't
+even need the prefabs, as you can just run "new Beacon(...)" to create
+a beacon with the desired properties.
+
+
+-------------------------------------------------------------------------------
+PERFORMANCE
+-------------------------------------------------------------------------------
+
+This fog is pretty lightweight: it's just one shader which does one rendering
+pass, and all its computation is done on a fixed-size internal buffer outside
+of the primary render channel.  So I don't expect that this thing will cause
+much in the way of performance trouble.
+
+But if you're desperate for CPU anyway, here are a couple of things you can do:
+
+* Open FogOfWar.cs and change the "Precision = 128" constant to something
+  smaller.  This might make the holes in the clouds look a little ragged around
+  the edges, but it will significantly reduce the computation that the fog has
+  to do whenever beacons change.
+
+* Divide your beacons into Static and Dynamic ones: use Static beacons for
+  ones that aren't changing much, and use Dynamic beacons for ones that are.
+  (Whenever a Static beacon changes, the fog has to recompute a lot of stuff--
+  but when a Dynamic beacon changes, the fog only has to think about the
+  collection of other Dynamic beacons.)
+
+
+-------------------------------------------------------------------------------
+ABOUT
+-------------------------------------------------------------------------------
+
+If you get stuck using this, please write to support@randomsoftware.com.
+Random Software is a one-man hobby practice run by me: I'm a professional
+programmer who just happens to write video games in his free time.  I'm
+fairly new to Unity and can't promise that I can solve all your woes,
+but I'd be happy to try.
+
