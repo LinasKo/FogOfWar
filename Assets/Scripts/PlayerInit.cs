@@ -10,7 +10,8 @@ public class PlayerInit : MonoBehaviour {
         playerWood = 100;
         playerExp = 300;
         playerHealth = 100;
-	}
+        Debug.Log("I am alive!");
+    }
 	
 	// Update is called once per frame
 	void Update () {
