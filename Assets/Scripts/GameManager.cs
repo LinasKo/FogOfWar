@@ -100,30 +100,39 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosition = MousePosition();
-            // TODO if foggy:
-            // TODO fogCtrlState = FogControlState.CREATING;
-            if (MousePosition() != Vector3.down && !fogManager.IsFoggy(mousePosition))
+            if (MousePosition() != Vector3.down)
             {
-                fogCtrlState = FogControlState.CLEARING;
+                if (fogManager.IsFoggy(mousePosition)) {
+                    fogCtrlState = FogControlState.CREATING;
+                }
+                else
+                {
+                    fogCtrlState = FogControlState.CLEARING;
+                }
             }
         }
 
-        // Manipulate fog based on fogCtrlState
+        // Manipulate fog based on fogControlState
         if (Input.GetMouseButton(0))
         {
-            switch (fogCtrlState)
+            Vector3 mousePosition = MousePosition();
+            if (mousePosition != Vector3.down)
             {
-                // TODO take player into account
-                case FogControlState.CREATING:
-                    // TODO
-                    break;
-                case FogControlState.CLEARING:
-                    Vector3 mousePosition = MousePosition();
-                    if (mousePosition != Vector3.down && !fogManager.IsFoggy(mousePosition))
-                    {
-                        fogManager.ClearFogCircle(mousePosition);
-                    }
-                    break;
+                switch (fogCtrlState)
+                {
+                    case FogControlState.CREATING:
+                        if (!fogManager.IsFoggy(mousePosition))
+                        {
+                            fogManager.CreateFogCircle(mousePosition);
+                        }
+                        break;
+                    case FogControlState.CLEARING:
+                        if (!fogManager.IsFoggy(mousePosition))
+                        {
+                            fogManager.ClearFogCircle(mousePosition);
+                        }
+                        break;
+                }
             }
         }
 
@@ -165,7 +174,7 @@ public class GameManager : MonoBehaviour
         GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), menuBG1);
 
         GUIStyle gs = new GUIStyle();
-        gs.fontSize = (int) _fontSize;
+        gs.fontSize = (int)_fontSize;
 
         // NEEDS SEPARATE FLOAT VALUES, TO CHANGE
         // THE POSITIONING OF TEXT FOR DIFFERENT

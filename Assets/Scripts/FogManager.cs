@@ -50,19 +50,31 @@ public class FogManager : MonoBehaviour
 
     public void ClearFogCircle(Vector3 position, float rangeMultiplier = 1.0F, bool permanent = false)
     {
-        if (permanent)
+        if (permanent || canPlaceBeacon)
         {
             Beacon beacon = new Beacon(fog, BeaconType.Static, position, beaconStrength, beaconRange * rangeMultiplier);
             fog.AddBeacon(beacon);
             RevealStaticObjects(position, beaconRange * rangeMultiplier);
+            if (canPlaceBeacon)
+            {
+                canPlaceBeacon = false;
+                StartCoroutine(WaitForBeacon(beacon, beaconDelay));
+            }
         }
-        else if (canPlaceBeacon)
+    }
+
+    public void CreateFogCircle(Vector3 position, float rangeMultiplier = 1.0F, bool permanent = false)
+    {
+        if (permanent || canPlaceBeacon)
         {
-            canPlaceBeacon = false;
-            Beacon beacon = new Beacon(fog, BeaconType.Dynamic, position, beaconStrength, beaconRange * rangeMultiplier);
+            Beacon beacon = new Beacon(fog, BeaconType.Static, position, beaconStrength * -1.0F, beaconRange * rangeMultiplier);
             fog.AddBeacon(beacon);
-            RevealStaticObjects(position, beaconRange * rangeMultiplier);
-            StartCoroutine(WaitForBeacon(beacon, beaconDelay));
+            HideStaticObjects(position, beaconRange * rangeMultiplier);
+            if (canPlaceBeacon)
+            {
+                canPlaceBeacon = false;
+                StartCoroutine(WaitForBeacon(beacon, beaconDelay));
+            }
         }
     }
 
@@ -84,6 +96,18 @@ public class FogManager : MonoBehaviour
             if (gameObject.tag == "Tree" || gameObject.tag == "Building")
             {
                 gameObject.GetComponent<Renderer>().enabled = true;
+            }
+        }
+    }
+
+    // TODO: ditto
+    public void HideStaticObjects(Vector3 position, float radius)
+    {
+        foreach (GameObject gameObject in gameManager.ObjectsInCircle(position, radius * 0.5F))
+        {
+            if (gameObject.tag == "Tree" || gameObject.tag == "Building")
+            {
+                gameObject.GetComponent<Renderer>().enabled = false;
             }
         }
     }
