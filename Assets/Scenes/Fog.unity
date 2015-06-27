@@ -352,6 +352,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: d10995d81fe5bbf47aab2ddee57cbf76, type: 2}
+      propertyPath: m_UseLightProbes
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11403766, guid: d10995d81fe5bbf47aab2ddee57cbf76, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d10995d81fe5bbf47aab2ddee57cbf76, type: 2}
@@ -638,17 +642,6 @@ MonoBehaviour:
   dynamicBeacon: {fileID: 100000, guid: fa08f0f90c6fa8d4bac93bcc2fa6ad02, type: 2}
   beaconStrength: 2
   beaconRange: 5
---- !u!114 &1266009900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1266009898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5debca4a3779a45479e03cdf5a12a15e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1287318941
 Prefab:
   m_ObjectHideFlags: 0
