@@ -533,5 +533,44 @@ public class FogOfWar : MonoBehaviour
     {
         return _currentSummaryViewport;
     }
+
+    /*
+     * You can poll the fog of war to see what the outer bounds of
+     * visibility are, in world-space coordinates on the XZ plane.
+     */
+    private bool HasVisibleRegion
+    {
+        get
+        {
+            return (_currentSummaryViewport != null);
+        }
+    }
+    private Rect VisibleRegion
+    {
+        get
+        {
+            if (_currentSummaryViewport == null)
+            {
+                return new Rect(0, 0, 0, 0);
+            }
+            else
+            {
+                return _currentSummaryViewport.Area;
+            }
+        }
+    }
+    public float GetOpacity(Vector3 coord)
+    {
+        Rect rr = VisibleRegion;
+        Vector2 coordXZ = new Vector2(coord.x, coord.z);
+        if (!rr.Contains(coordXZ))
+        {
+            return CloudStrength;
+        }
+        float uu = (coord.x - rr.xMin) / rr.width;
+        float vv = (coord.z - rr.yMin) / rr.height;
+        Color color = _currentSummaryViewport.Map.GetPixelBilinear(uu, vv);
+        return color.a;
+    }
 }
 

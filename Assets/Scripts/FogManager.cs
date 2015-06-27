@@ -74,11 +74,10 @@ public class FogManager : MonoBehaviour
 
     public bool IsFoggy(Vector3 point)
     {
-        Texture2D map = fog.GetViewport().Map;
-        Color pixel = map.GetPixelBilinear((point.x + 25.0F) * 0.02F, (point.z + 25.0F) * 0.02F);
-        return pixel.a >= 0.5;
+        return fog.GetOpacity(point) >= 0.5;
     }
 
+    // TODO: See if manually enabling / disabling the renderer at every timestep is better.
     public void RevealStaticObjects(Vector3 position, float radius)
     {
         foreach (GameObject gameObject in gameManager.ObjectsInCircle(position, radius * 0.5F)) {

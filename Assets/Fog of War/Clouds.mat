@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Clouds
-  m_Shader: {fileID: 4800000, guid: 499b0b6d837df68428a9a89a941bf0f3, type: 3}
+  m_Shader: {fileID: 4800000, guid: bb8fcfd79d39acc4d89737b36def708b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
