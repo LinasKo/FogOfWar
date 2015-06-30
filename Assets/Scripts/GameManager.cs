@@ -167,9 +167,11 @@ public class GameManager : MonoBehaviour
         return objects;
     }
 
-    // What's displayed when in the gameplay
+    // BELOW: NOT USED AS IT IS LEGACY CODING STYLE
+    // INSTEAD, CREATED A GAMEOBJECT CALLED CANVAS
 
-    void OnGUI()
+    // What's displayed when in the gameplay
+    /* void OnGUI()
     {
         GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), menuBG1);
 
@@ -184,5 +186,6 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(300f, 3f, Screen.width, Screen.height), ("Experience: " + playerExp.ToString()), gs);
         GUI.Label(new Rect(550f, 3f, Screen.width, Screen.height), ("Base health: " + playerHealth.ToString()), gs);
     }
+    */
 
 }
