@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
   - enabled: 1
     path: Assets/Scenes/Fog.unity
+  - enabled: 1
+    path: Assets/Scenes/MenuOptions.unity
