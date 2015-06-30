@@ -14,4 +14,8 @@ public class MenuManager : MonoBehaviour {
 	void Update () {
 
     }
+
+    public void LaunchGame () {
+        Application.LoadLevel("Fog");
+    }
 }
