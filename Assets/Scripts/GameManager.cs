@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum Player { RED, BLUE };
 
@@ -9,7 +10,11 @@ public class GameManager : MonoBehaviour
 
     private MapManager mapManager;
     private UnitManager unitManager;
-    private FogManager fogManager;
+    private FogOfWar2 fog;
+    public float beaconStrength = 2.0f;
+    public float beaconRange = 5.0f;
+    private bool canManipulateFog = true;
+    private float fogTimeout = 0.5f;
 
     private Camera camera;
 
@@ -18,6 +23,7 @@ public class GameManager : MonoBehaviour
     // GameManager will work for one player
     private Player currentPlayer;
 
+    List<Vector3> fogPointList;
     private enum FogControlState { NONE, CLEARING, CREATING };
     private FogControlState fogCtrlState;
 
@@ -36,13 +42,13 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-
         // Use the only active camera
         camera = Camera.main;
 
         mapManager = GetComponent<MapManager>();
         unitManager = GetComponent<UnitManager>();
-        fogManager = GetComponent<FogManager>();
+        fog = FogOfWar2.FindExisting;
+        //fogManager = GetComponent<FogManager>();
 
         // Populate the map
         mapManager.MapSetup();
@@ -55,10 +61,14 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("SpawnSoldiers", 0, 5);
 
         // Initialize input settings
+        fogPointList = new List<Vector3>();
         fogCtrlState = FogControlState.NONE;
 
         // Initialize fog
-        fogManager.Initialize();
+        //fogManager.Initialize();
+        List<Vector3> castleList = new List<Vector3>();
+        castleList.Add(GameObject.Find("RedCastle").transform.position);
+        fog.ManipulateFog(castleList, beaconStrength, beaconRange * 2);
 
         // Initialize resources
         playerWood = 100;
@@ -88,11 +98,18 @@ public class GameManager : MonoBehaviour
         camera.transform.Translate(new Vector3(Input.GetAxis("Horizontal") * cameraSpeed * Time.deltaTime, 0F, 0F));
         camera.transform.Translate(forwardDirection, Space.World);
 
-        //   Manipulate fog of war
-
         // Capture the moment when the button was released
         if (Input.GetMouseButtonUp(0))
         {
+            switch(fogCtrlState)
+            {
+                case FogControlState.CLEARING:
+                    fog.ManipulateFog(fogPointList, beaconStrength, beaconRange);
+                    break;
+                case FogControlState.CREATING:
+                    fog.ManipulateFog(fogPointList, -beaconStrength, beaconRange);
+                    break;
+            }
             fogCtrlState = FogControlState.NONE;
         }
 
@@ -102,7 +119,8 @@ public class GameManager : MonoBehaviour
             Vector3 mousePosition = MousePosition();
             if (MousePosition() != Vector3.down)
             {
-                if (fogManager.IsFoggy(mousePosition)) {
+                fogPointList = new List<Vector3>();
+                if (fog.IsFoggy(mousePosition)) {
                     fogCtrlState = FogControlState.CREATING;
                 }
                 else
@@ -113,25 +131,17 @@ public class GameManager : MonoBehaviour
         }
 
         // Manipulate fog based on fogControlState
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && canManipulateFog)
         {
             Vector3 mousePosition = MousePosition();
             if (mousePosition != Vector3.down)
             {
-                switch (fogCtrlState)
+                if ((fogCtrlState == FogControlState.CREATING && fog.IsFoggy(mousePosition)) ||
+                    (fogCtrlState == FogControlState.CLEARING && !fog.IsFoggy(mousePosition)))
                 {
-                    case FogControlState.CREATING:
-                        if (!fogManager.IsFoggy(mousePosition))
-                        {
-                            fogManager.CreateFogCircle(mousePosition);
-                        }
-                        break;
-                    case FogControlState.CLEARING:
-                        if (!fogManager.IsFoggy(mousePosition))
-                        {
-                            fogManager.ClearFogCircle(mousePosition);
-                        }
-                        break;
+                    canManipulateFog = false;
+                    fogPointList.Add(mousePosition);
+                    StartCoroutine(ReallowFogInSeconds(fogTimeout));
                 }
             }
         }
@@ -143,6 +153,12 @@ public class GameManager : MonoBehaviour
             _oldHeight = Screen.height;
             _fontSize = Mathf.Min(Screen.width, Screen.height) / Ratio;
         }
+    }
+
+    IEnumerator ReallowFogInSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        canManipulateFog = true;
     }
 
     void SpawnSoldiers()

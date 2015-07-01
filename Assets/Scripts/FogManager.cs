@@ -11,7 +11,8 @@ public class FogManager : MonoBehaviour
     public float beaconRange = 5.0f;
 
     private GameManager gameManager;
-    private FogOfWar fog;
+    //private FogOfWar fog;
+    private FogOfWar2 fog;
 
     // Private so that unity would not interfere. Because it sets it to 0 -_-
     private float beaconDelay = 0.33f;
@@ -30,7 +31,7 @@ public class FogManager : MonoBehaviour
         redCastle = GameObject.Find("RedCastle");
         blueCastle = GameObject.Find("BlueCastle");
 
-        fog = FogOfWar.FindExisting;
+        fog = FogOfWar2.FindExisting;
 
         canPlaceBeacon = true;
 
@@ -45,9 +46,10 @@ public class FogManager : MonoBehaviour
         }
 
         // Reveal Red Castle.
-        ClearFogCircle(redCastle.transform.position, 2.0F, true);
+        //ClearFogCircle(redCastle.transform.position, 2.0F, true);
     }
 
+    /*
     public void ClearFogCircle(Vector3 position, float rangeMultiplier = 1.0F, bool permanent = false)
     {
         if (permanent || canPlaceBeacon)
@@ -62,7 +64,7 @@ public class FogManager : MonoBehaviour
             }
         }
     }
-
+    
     public void CreateFogCircle(Vector3 position, float rangeMultiplier = 1.0F, bool permanent = false)
     {
         if (permanent || canPlaceBeacon)
@@ -77,16 +79,20 @@ public class FogManager : MonoBehaviour
             }
         }
     }
+    */
+
+    
 
     private IEnumerator WaitForBeacon(Beacon beacon, float time)
     {
         yield return new WaitForSeconds(time);
         canPlaceBeacon = true;
     }
-
+    
     public bool IsFoggy(Vector3 point)
     {
-        return fog.GetOpacity(point) >= 0.5;
+        //return fog.GetOpacity(point) >= 0.5;
+        return fog.IsFoggy(point);
     }
 
     // TODO: See if manually enabling / disabling the renderer at every timestep is better.
