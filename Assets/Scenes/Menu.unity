@@ -251,9 +251,9 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .669117689, g: 0, b: 0, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a8f94066a44f34245a15bf5aad7fbddd, type: 3}
+    m_Font: {fileID: 12800000, guid: 1a66955e98aa7da49a766fb46dc6d048, type: 3}
     m_FontSize: 16
-    m_FontStyle: 2
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
@@ -317,9 +317,9 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .669117689, g: 0, b: 0, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a8f94066a44f34245a15bf5aad7fbddd, type: 3}
+    m_Font: {fileID: 12800000, guid: 1a66955e98aa7da49a766fb46dc6d048, type: 3}
     m_FontSize: 16
-    m_FontStyle: 2
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
@@ -1314,9 +1314,9 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .669117689, g: 0, b: 0, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a8f94066a44f34245a15bf5aad7fbddd, type: 3}
+    m_Font: {fileID: 12800000, guid: 1a66955e98aa7da49a766fb46dc6d048, type: 3}
     m_FontSize: 16
-    m_FontStyle: 2
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
@@ -1380,9 +1380,9 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .669117689, g: 0, b: 0, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a8f94066a44f34245a15bf5aad7fbddd, type: 3}
+    m_Font: {fileID: 12800000, guid: 1a66955e98aa7da49a766fb46dc6d048, type: 3}
     m_FontSize: 16
-    m_FontStyle: 2
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
@@ -1391,7 +1391,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Click Me!!!
+  m_Text: Click Me
 --- !u!222 &1844353628
 CanvasRenderer:
   m_ObjectHideFlags: 0

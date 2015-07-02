@@ -201,9 +201,9 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: .669117689, g: 0, b: 0, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a8f94066a44f34245a15bf5aad7fbddd, type: 3}
+    m_Font: {fileID: 12800000, guid: 1a66955e98aa7da49a766fb46dc6d048, type: 3}
     m_FontSize: 16
-    m_FontStyle: 2
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
@@ -543,6 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc248892b2728114db724eecc0147f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trololo: {fileID: 0}
 --- !u!23 &875470084
 MeshRenderer:
   m_ObjectHideFlags: 0
