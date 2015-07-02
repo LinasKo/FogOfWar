@@ -6,27 +6,37 @@ public enum Player { RED, BLUE };
 
 public class GameManager : MonoBehaviour
 {
+    // Effects camera movement speed.
     public float cameraSpeed = 12.0F;
 
+    // Declare all managers
     private MapManager mapManager;
     private UnitManager unitManager;
-    private FogOfWar2 fog;
-    public float beaconStrength = 2.0f;
-    public float beaconRange = 5.0f;
+    private FogOfWar fog;
+
+    // Effects fog manipulation
+    public float fogActionStrength = 1.0f;
+    public float fogActionRange = 7.5f;
+
+    // Required for new fog manipulations
+    List<Vector3> fogPointList;
+    private enum FogControlState { NONE, CLEARING, CREATING };
+    private FogControlState fogCtrlState;
+
+    // Fog manipulation restrictions
     private bool canManipulateFog = true;
     private float fogTimeout = 0.5f;
+
+    // Tags of all static objects that need to be rendered according to fog.
     private string[] tagList = new string[] { "Tree", "Building" };
 
+    // TODO find out why it's giving a warning
     private Camera camera;
 
     private float startTime;
 
     // GameManager will work for one player
     private Player currentPlayer;
-
-    List<Vector3> fogPointList;
-    private enum FogControlState { NONE, CLEARING, CREATING };
-    private FogControlState fogCtrlState;
 
     // Main player stats
     public int playerWood, playerExp, playerHealth;
@@ -46,10 +56,10 @@ public class GameManager : MonoBehaviour
         // Use the only active camera
         camera = Camera.main;
 
+        // Find the managers
         mapManager = GetComponent<MapManager>();
         unitManager = GetComponent<UnitManager>();
-        fog = FogOfWar2.FindExisting;
-        //fogManager = GetComponent<FogManager>();
+        fog = FogOfWar.FindExisting;
 
         // Populate the map
         mapManager.MapSetup();
@@ -65,13 +75,10 @@ public class GameManager : MonoBehaviour
         fogPointList = new List<Vector3>();
         fogCtrlState = FogControlState.NONE;
 
-        // Initialize fog
-        //fogManager.Initialize();
+        // Initialize fog; Remove fog from castle
         List<Vector3> castleList = new List<Vector3>();
         castleList.Add(GameObject.Find("RedCastle").transform.position);
-        fog.ManipulateFog(castleList, beaconStrength, beaconRange * 2);
-
-        //
+        fog.ManipulateFog(castleList, fogActionStrength, fogActionRange * 2);
 
         // Initialize resources (NOT NEEDED ATM, USE UNITY INTERFACE)
         // playerWood = 50;
@@ -79,6 +86,7 @@ public class GameManager : MonoBehaviour
         // playerHealth = 100;
     }
 
+    // returns coordinates of current mouse position
     Vector3 MousePosition()
     {
         RaycastHit rayHit = new RaycastHit();
@@ -96,8 +104,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Draw static objects:
-        // Manage visibility of all tagged resources.
+        // Manage visibility of all tagged static objects.
         foreach (string tag in tagList)
         {
             foreach (GameObject resource in GameObject.FindGameObjectsWithTag(tag))
@@ -123,14 +130,15 @@ public class GameManager : MonoBehaviour
         {
             switch(fogCtrlState)
             {
-                // ATTENTION: Message to Linas
-                // Suradau ir apkeiciau (-beaconStrength) (kai naikini) ir (beaconStrength) (kai uzdedi)
-                // nes dabar jis nuima fog'a ten, kur jo yra ant jo paspaudus, o uzdeda ten, kur jo nera :)
+                // ATTENTION: Message to Vytautas
+                // Intentional. Atkeiciau atgal. Cia del to kad galima butu tik is arti ruka nuiminet.
+                // Dar padidinsiu range ir bus prototipui gerai. Veliau dar patobulinsiu kad galima butu nuimineti grandinele.
+                // PM jei nori kad paaiskinciau. Istrink, jei perskaitys.
                 case FogControlState.CLEARING:
-                    fog.ManipulateFog(fogPointList, -beaconStrength, beaconRange);
+                    fog.ManipulateFog(fogPointList, fogActionStrength, fogActionRange);
                     break;
                 case FogControlState.CREATING:
-                    fog.ManipulateFog(fogPointList, beaconStrength, beaconRange);
+                    fog.ManipulateFog(fogPointList, -fogActionStrength, fogActionRange);
                     break;
             }
             fogCtrlState = FogControlState.NONE;

@@ -6,13 +6,13 @@ public class Soldier : MonoBehaviour
 
     // Added some things just to test rendering (not rendering) in fog of war. These can be deleted if class extends Unit.
     private Renderer rend;
-    private FogOfWar2 fog;
+    private FogOfWar fog;
 
     // Use this for initialization
     void Start()
     {
         rend = GetComponent<Renderer>();
-        fog = FogOfWar2.FindExisting;
+        fog = FogOfWar.FindExisting;
     }
 
     // Update is called once per frame

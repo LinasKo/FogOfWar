@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 /*
@@ -13,35 +12,21 @@ using System.Collections.Generic;
  * word "ground" in this source file to find the relevant code and then
  * plug in any special code you want there to get better behavior.
  *
- * By itself, that Fog of War plane is just a bunch of clouds--prettyish
- * ones, true, but also boring.  To actually use it as a fog of war,
- * just instantiate Beacon objects on the map--and they'll create holes
- * in the clouds through which you can see.  (For an interesting effect,
- * you can also set the default cloud opacity lower and then use some
- * negative-strength beacons, which will draw clouds around them.)
- *
- * This model is designed to provide very low performance cost during
- * normal rendering: instead, a performance penalty is assessed at most
- * once per frame, and then only on frames when a beacon is changed.
- * Further, you can divide your beacons into Static and Dynamic ones,
- * so that changes to Dynamic beacons will not require recalculating the
- * Static beacons--and so the performance cost of the fog of war can
- * be further reduced.
- *
+ * Fog Of War can be cleared and redrawn using ManipulateFog function.
  */
 
-public class FogOfWar : MonoBehaviour
+public class FogOfWar: MonoBehaviour
 {
     /*
      * The CloudStrength property indicates how visible the clouds are
-     * on the Fog of War plane by default, wherever there are no beacons
-     * affecting the view.  A value of 0 means the clouds are completely
-     * absent, and 1 means they completely obscure anything underneath.
+     * on the Fog of War plane by default, where the fog was not cleared.
+     * Bear in mind that cloud visibility on cleared areas can be changed
+     * in the shader, attached to FogOfWar GameObject. A value of 0 means
+     * the clouds are completely absent, and 1 means they completely
+     * obscure anything underneath.
      */
-
     [Range(0, 1)]
     public float CloudStrength = 1.0f;
-
 
     /*
      * When a new beacon appears or an old one disappears, or even when
@@ -51,30 +36,7 @@ public class FogOfWar : MonoBehaviour
      * the old view and the new one over a short period of time, expressed
      * in seconds.
      */
-
     public float ChangeTime = 0.5f;
-
-
-    /*
-     * The Fog of War uses lazy updating: on most display frames it does
-     * no thinking at all, just renders the shader using precalculated
-     * data.  On any frame when a beacon changes (position, strength, etc)
-     * we flag that corresponding list of beacons as needing to be studied
-     * to update the instructions for the shader.
-     */
-
-    public void Invalidate(BeaconType type)
-    {
-        if (type == BeaconType.Static)
-        {
-            _recalcStaticViewport = true;
-        }
-        _recalcSummaryViewport = true;
-    }
-
-    private bool _recalcStaticViewport = true;
-    private bool _recalcSummaryViewport = true;
-
 
     /*
      * This constant is pretty important: it indicates the size of the
@@ -86,35 +48,16 @@ public class FogOfWar : MonoBehaviour
      * as you can visually get away with; 128 is a good general-purpose
      * value that seems to work for most scenes, so it's a good default.
      */
-
     public const int Precision = 128;
 
-
     /*
-     * There are two kinds of beacons: static and dynamic.  Functionally
-     * they're the same--you can move or change the properties of any
-     * beacon at any time and everything will work fine.  They're separated
-     * because when you change a static beacon we have to think hard about
-     * every beacon in your scene--but when you change a dynamic beacon, we
-     * only have to think hard about the other dynamic beacons.  So if you
-     * have some beacons that aren't going to change much, make them Static
-     * and you'll have to do less thinking when the more mobile Dynamic
-     * beacons change.
-     */
-
-    public List<Beacon> StaticBeacons = new List<Beacon>();
-    public List<Beacon> DynamicBeacons = new List<Beacon>();
-
-
-    /*
-     * The cloud image shown by the shader involves one image, but
-     * we'll interpolate between two versions of it: one regular and
-     * one reversed--and the two images will move at different rates,
-     * to make the clouds look a little more flowing and billowy.
-     * These values represent the speeds at which those cloud layers
-     * move, and their current positions.
-     */
-
+    * The cloud image shown by the shader involves one image, but
+    * we'll interpolate between two versions of it: one regular and
+    * one reversed--and the two images will move at different rates,
+    * to make the clouds look a little more flowing and billowy.
+    * These values represent the speeds at which those cloud layers
+    * move, and their current positions.
+    */
     private const float RollLeftSpeed1 = 0.04f;
     private const float RollUpSpeed1 = 0.025f;
     private const float RollLeftSpeed2 = 0.03f;
@@ -125,24 +68,31 @@ public class FogOfWar : MonoBehaviour
     private float RollLeft2 = 500;
     private float RollUp2 = 0;
 
-
     /*
-     * The Viewport class represents a 2D image summarizing where all
-     * the beacons are in the world.  We'll have one Viewport that
-     * summarizes all the static beacons, and a second one that
-     * summarizes all the static beacons plus all the dynamic beacons.
+     * The Viewport class represents a 2D image summarizing the revealed
+     * map space in the world. The Viewport class is what remains from
+     * the original FogOfWar asset - it might be possible to refactor
+     * this code without using viewports. However, they are critical
+     * for current implementation.
+     * visibleViewport is the main viewport. oldViewport is used as a
+     * temporary storage during transitions to smoothly fade into 
+     * visibleViewport. redraw is used to notify the shader that viewport
+     * has changed.
      */
+    private Viewport visibleViewport = null;
+    private Viewport oldViewport = null;
+    private bool redraw = true;
 
-    internal class Viewport : IDisposable
+    private class Viewport
     {
         public Rect Area = new Rect(0, 0, 0, 0);
         public Texture2D Map = null;
         public bool IsEmpty = true;
 
-
-        void Expand(Vector3 position, float range)
+        // Expand current area to include all points to be modified.
+        public void Expand(Vector3 position, float range)
         {
-            // Expand a *little* more than we really need to, so the edges stay clean
+            // Expand a *little* more than we really need to, so the edges stay clean.
             range *= 1.1f;
             if (IsEmpty)
             {
@@ -158,146 +108,109 @@ public class FogOfWar : MonoBehaviour
             IsEmpty = false;
         }
 
+        // Returns Vector4 with Area data. Needed for the shader.
         public Vector4 ToVector4()
         {
             return new Vector4(Area.xMin, Area.yMin, Area.xMax, Area.yMax);
         }
+    }
 
-        public void Dispose()
+    // Draw a map with new fog points at given coordinates and given strength, range.
+    private Viewport DrawMap(List<Vector3> list, float strength, float range, Viewport baseViewport, float cloudStrength)
+    {
+        // Get a new Viewport (clone of visibleViewport if it exists).
+        Viewport newViewport = new Viewport();
+        if (baseViewport != null)
         {
-            if (Map != null)
-            {
-                Texture2D.Destroy(Map);
-                Map = null;
-                IsEmpty = true;
-            }
+            newViewport.Area = baseViewport.Area;
+            newViewport.Map = baseViewport.Map;
+            newViewport.IsEmpty = false;
+        }
+        // Expand area to include all new points.
+        foreach (Vector3 point in list)
+        {
+            newViewport.Expand(point, range);
         }
 
+        Color[] colors = new Color[Precision * Precision];
+        float baseAlpha = cloudStrength;
 
-        public void DrawMap(List<Beacon> list, Viewport baseViewport, bool isRequired, float cloudStrength)
+        int index = 0;
+        // Texture is divided into 'Precision'^2 amount of pieces. For each piece:
+        for (int yy = 0; yy < Precision; ++yy)
         {
-            foreach (Beacon beacon in list)
+            for (int xx = 0; xx < Precision; ++xx, ++index)
             {
-                Expand(beacon.Position, beacon.Range);
-            }
-            if (IsEmpty && !isRequired)
-            {
-                return;
-            }
+                // TODO ???? wat is dis?:
+                float wx = newViewport.Area.xMin + xx * newViewport.Area.width / Precision;
+                float wz = newViewport.Area.yMin + yy * newViewport.Area.height / Precision;
 
-            if (baseViewport != null && baseViewport.IsEmpty)
-            {
-                baseViewport = null;
-            }
-            if (baseViewport != null)
-            {
-                if (IsEmpty)
+                // Initialize the cell to not be visible;
+                float visible = 0;
+
+                // If something was visible before:
+                if (baseViewport != null)
                 {
-                    Area = baseViewport.Area;
+                    // TODO Gets the coordinates of the visible area???:
+                    float ux = (wx - baseViewport.Area.xMin) / (baseViewport.Area.width);
+                    float vy = (wz - baseViewport.Area.yMin) / (baseViewport.Area.height);
+                    // If not outside bounds, get base color, opaque and visibility values:
+                    if (ux >= 0 && ux <= 1 && vy >= 0 && vy <= 1)
+                    {
+                        Color baseColor = baseViewport.Map.GetPixelBilinear(ux, vy);
+                        visible = baseColor.g;
+                    }
+                }
+
+                // For each fog change point:
+                foreach (Vector3 point in list)
+                {
+                    // Get X and Y distances:
+                    float dx = Math.Abs(point.x - wx);
+                    float dz = Math.Abs(point.z - wz);
+
+                    // For each point withing X, Y bounds:
+                    if (dx < range && dz < range)
+                    {
+                        // Get distance; If within range:
+                        float dist = Mathf.Sqrt(dx * dx + dz * dz);
+                        if (dist < range)
+                        {
+                            // Power depends on distance, range, strength.
+                            float away = dist / range;
+                            float power = strength * (1 - away * away);
+                            // Modify the visibility value in terms of point strength.
+                            visible += power;
+                        }
+                    }
+                }
+
+                // Clamp visiblity value between 0 and 1 and set colors accordingly.
+                float colorVis = Mathf.Clamp(visible, 0, 1);
+                colors[index].r = 1 - colorVis;
+                colors[index].g = colorVis;
+                colors[index].b = 0;
+
+                // Smoothly fade fog out if visibility is positive. Fade in if not.
+                if (visible >= 0)
+                {   // visible
+                    colors[index].a = Mathf.Lerp(baseAlpha, 0, visible);
                 }
                 else
                 {
-                    Area.xMin = Math.Min(Area.xMin, baseViewport.Area.xMin);
-                    Area.yMin = Math.Min(Area.yMin, baseViewport.Area.yMin);
-                    Area.xMax = Math.Max(Area.xMax, baseViewport.Area.xMax);
-                    Area.yMax = Math.Max(Area.yMax, baseViewport.Area.yMax);
+                    colors[index].a = Mathf.Lerp(baseAlpha, 1, 0 - visible);
                 }
             }
-
-            Color[] colors = new Color[FogOfWar.Precision * FogOfWar.Precision];
-
-            float baseAlpha = cloudStrength;
-
-            int index = 0;
-            for (int yy = 0; yy < FogOfWar.Precision; ++yy)
-            {
-                for (int xx = 0; xx < FogOfWar.Precision; ++xx, ++index)
-                {
-                    float wx = Area.xMin + xx * Area.width / FogOfWar.Precision;
-                    float wz = Area.yMin + yy * Area.height / FogOfWar.Precision;
-
-                    float opaqued = 0;
-                    float revealed = 0;
-                    if (baseViewport != null)
-                    {
-                        float ux = (wx - baseViewport.Area.xMin) / (baseViewport.Area.width);
-                        float vy = (wz - baseViewport.Area.yMin) / (baseViewport.Area.height);
-                        if (ux >= 0 && ux <= 1 && vy >= 0 && vy <= 1)
-                        {
-                            Color baseColor = baseViewport.Map.GetPixelBilinear(ux, vy);
-                            opaqued = baseColor.r;
-                            revealed = baseColor.g;
-                        }
-                    }
-
-                    foreach (Beacon beacon in list)
-                    {
-                        float dx = Math.Abs(beacon.Position.x - wx);
-                        float dz = Math.Abs(beacon.Position.z - wz);
-                        if (dx < beacon.Range && dz < beacon.Range)
-                        {
-                            float dist = Mathf.Sqrt(dx * dx + dz * dz);
-                            if (dist < beacon.Range)
-                            {
-                                float away = dist / beacon.Range;
-                                float power = beacon.Strength * (1 - away * away);
-                                if (power > 0)
-                                {
-                                    revealed = Mathf.Max(revealed, power);
-                                }
-                                else
-                                {
-                                    opaqued = Mathf.Max(opaqued, 0 - power);
-                                }
-                            }
-                        }
-                    }
-
-                    colors[index].r = Mathf.Clamp(opaqued, 0, 1);
-                    colors[index].g = Mathf.Clamp(revealed, 0, 1);
-                    colors[index].b = 0;
-
-                    float visible = revealed - opaqued;
-                    if (visible > 0)
-                    {   // visible
-                        colors[index].a = Mathf.Lerp(baseAlpha, 0, visible);
-                    }
-                    else
-                    {
-                        colors[index].a = Mathf.Lerp(baseAlpha, 1, 0 - visible);
-                    }
-                }
-            }
-
-            Map = new Texture2D(FogOfWar.Precision, FogOfWar.Precision);
-            Map.SetPixels(colors);
-            Map.Apply();
         }
+
+        // Redraw the map
+        newViewport.Map = new Texture2D(Precision, Precision);
+        newViewport.Map.SetPixels(colors);
+        newViewport.Map.Apply();
+        return newViewport;
     }
 
-    private Viewport _currentStaticViewport = null;
-    private Viewport _currentSummaryViewport = null;
-
-
-    /*
-     * If you've recently moved some beacons, we'll attempt to fade
-     * gracefully from the prior summary viewport to the current one.
-     * The shader will interpolate between this old summary viewport
-     * to the current summary viewport over a selectable period of time.
-     */
-
-    private float _transitionStartTime = 0;
-    private Viewport _oldSummaryViewport = null;
-    private float _oldCloudStrength = 0;
-
-
-    /*
-     * If you're using the beacon prefabs and StaticBeacon/DynamicBeacon
-     * scripts, then you'll need to instantiate a FogOfWar object in your
-     * scene hierarchy using the name "FogOfWar" since those scripts look
-     * for that object name to figure out which FogOfWar to affect.
-     */
-
+    // Always use this method to find the fog instance.
     public static FogOfWar FindExisting
     {
         get
@@ -311,43 +224,11 @@ public class FogOfWar : MonoBehaviour
         }
     }
 
-
     /*
-     * Your fog of war should automatically adjust as you add, remove
-     * or update beacons within it.
-     */
-
-    public void AddBeacon(Beacon beacon)
-    {
-        if (beacon.Type == BeaconType.Static)
-        {
-            StaticBeacons.Add(beacon);
-        }
-        else
-        {
-            DynamicBeacons.Add(beacon);
-        }
-        Invalidate(beacon.Type);
-    }
-
-    public void RemoveBeacon(Beacon beacon)
-    {
-        if (beacon.Type == BeaconType.Static)
-        {
-            StaticBeacons.Remove(beacon);
-        }
-        else
-        {
-            DynamicBeacons.Remove(beacon);
-        }
-        Invalidate(beacon.Type);
-    }
-
-    public void UpdateBeacon(Beacon beacon)
-    {
-        Invalidate(beacon.Type);
-    }
-
+    * Variables used for cloud fading.
+    */
+    private float _oldCloudStrength = 0;
+    private float _transitionStartTime = 0;
 
     /*
      * The important bit: this method is invoked on every frame, and
@@ -357,6 +238,7 @@ public class FogOfWar : MonoBehaviour
 
     void Update()
     {
+        // Do nothing if fog is not active.
         if (!gameObject.activeInHierarchy)
         {
             return;
@@ -389,51 +271,8 @@ public class FogOfWar : MonoBehaviour
 
         if (CloudStrength != _oldCloudStrength)
         {
-            _recalcStaticViewport = true;
-            _recalcSummaryViewport = true;
+            redraw = true;
             _oldCloudStrength = CloudStrength;
-        }
-
-        /*
-         * Update the viewports if the beacons have changed.  We have
-         * two possible viewports to update, since we don't want to
-         * have to rethink all the static becaons just because a
-         * dynamic beacon changed.
-         */
-
-        if (_recalcStaticViewport || _recalcSummaryViewport)
-        {
-            if (_oldSummaryViewport != null)
-            {
-                _oldSummaryViewport.Dispose();
-            }
-            _oldSummaryViewport = _currentSummaryViewport;
-            _currentSummaryViewport = null;
-        }
-
-        /*
-         * First step: if the static beacons have changed, then we
-         * have to rebuild the static viewport.
-         */
-
-        if (_recalcStaticViewport)
-        {
-            if (_currentStaticViewport != null)
-            {
-                _currentStaticViewport.Dispose();
-            }
-            _currentStaticViewport = new Viewport();
-            _currentStaticViewport.DrawMap(StaticBeacons, null, false, CloudStrength);
-        }
-
-        if (_recalcSummaryViewport)
-        {
-            if (_currentSummaryViewport != null)
-            {
-                _currentSummaryViewport.Dispose();
-            }
-            _currentSummaryViewport = new Viewport();
-            _currentSummaryViewport.DrawMap(DynamicBeacons, _currentStaticViewport, true, CloudStrength);
         }
 
         /*
@@ -441,19 +280,19 @@ public class FogOfWar : MonoBehaviour
          * updating the viewports.  Whew.
          */
 
-        if (_recalcStaticViewport || _recalcSummaryViewport)
+        if (redraw)
         {
-            if (_currentStaticViewport.IsEmpty && _currentSummaryViewport.IsEmpty)
+            if (visibleViewport.IsEmpty)
             {
                 mat.SetVector("CurrentViewport", new Vector4(0, 0, 0, 0));
                 mat.SetTexture("CurrentTexture", null);
             }
             else
             {
-                mat.SetVector("CurrentViewport", _currentSummaryViewport.ToVector4());
-                mat.SetTexture("CurrentBeaconMap", _currentSummaryViewport.Map);
+                mat.SetVector("CurrentViewport", visibleViewport.ToVector4());
+                mat.SetTexture("CurrentBeaconMap", visibleViewport.Map);
 
-                if (_oldSummaryViewport == null)
+                if (oldViewport == null)
                 {
                     _transitionStartTime = 0;
                     mat.SetVector("PreviousViewport", new Vector4(0, 0, 0, 0));
@@ -462,20 +301,19 @@ public class FogOfWar : MonoBehaviour
                 else
                 {
                     _transitionStartTime = Time.time;
-                    mat.SetVector("PreviousViewport", _oldSummaryViewport.ToVector4());
-                    mat.SetTexture("PreviousBeaconMap", _oldSummaryViewport.Map);
+                    mat.SetVector("PreviousViewport", oldViewport.ToVector4());
+                    mat.SetTexture("PreviousBeaconMap", oldViewport.Map);
                 }
             }
         }
 
-        _recalcStaticViewport = false;
-        _recalcSummaryViewport = false;
+        // We have already scheduled a redraw. No need to do it again.
+        redraw = false;
 
         /*
          * If we're still transitioning from an old viewport to a new one,
          * update the lerp value.
          */
-
         float deltaTime = Time.time - _transitionStartTime;
         if (deltaTime > ChangeTime)
         {
@@ -488,7 +326,7 @@ public class FogOfWar : MonoBehaviour
         }
         else
         {
-            mat.SetTexture("PreviousBeaconMap", _oldSummaryViewport.Map);
+            mat.SetTexture("PreviousBeaconMap", oldViewport.Map);
             mat.SetFloat("PreviousPercent", (ChangeTime - deltaTime) / ChangeTime);
         }
 
@@ -528,38 +366,33 @@ public class FogOfWar : MonoBehaviour
         mat.SetVector("AdjustViewpoint", new Vector4((worldCenter.x - skyImpact.x), 0, (worldCenter.z - skyImpact.z), 0));
     }
 
-    // Made by Linas.
-    internal Viewport GetViewport()
-    {
-        return _currentSummaryViewport;
-    }
-
-    /*
-     * You can poll the fog of war to see what the outer bounds of
-     * visibility are, in world-space coordinates on the XZ plane.
-     */
+    // Returns true if map has a visible region.
     private bool HasVisibleRegion
     {
         get
         {
-            return (_currentSummaryViewport != null);
+            return (visibleViewport != null);
         }
     }
+
+    // Returns a visible region.
     private Rect VisibleRegion
     {
         get
         {
-            if (_currentSummaryViewport == null)
+            if (visibleViewport == null)
             {
                 return new Rect(0, 0, 0, 0);
             }
             else
             {
-                return _currentSummaryViewport.Area;
+                return visibleViewport.Area;
             }
         }
     }
-    public float GetOpacity(Vector3 coord)
+
+    // Returns the alpha value of a pixel at the given coordinates.
+    private float GetOpacity(Vector3 coord)
     {
         Rect rr = VisibleRegion;
         Vector2 coordXZ = new Vector2(coord.x, coord.z);
@@ -569,8 +402,21 @@ public class FogOfWar : MonoBehaviour
         }
         float uu = (coord.x - rr.xMin) / rr.width;
         float vv = (coord.z - rr.yMin) / rr.height;
-        Color color = _currentSummaryViewport.Map.GetPixelBilinear(uu, vv);
+        Color color = visibleViewport.Map.GetPixelBilinear(uu, vv);
         return color.a;
     }
-}
 
+    // Retuns true if it is foggy at the given coordinate.
+    public bool IsFoggy(Vector3 coord)
+    {
+        return GetOpacity(coord) >= 0.5;
+    }
+
+    // Changes the fog values around given points, according to given stremgth, range.
+    public void ManipulateFog(List<Vector3> points, float strength, float range)
+    {
+        oldViewport = visibleViewport;
+        visibleViewport = DrawMap(points, strength, range, visibleViewport, CloudStrength);
+        redraw = true;
+    }
+}
