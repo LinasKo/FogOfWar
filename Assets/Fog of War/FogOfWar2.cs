@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 /*
@@ -13,30 +12,52 @@ using System.Collections.Generic;
  * word "ground" in this source file to find the relevant code and then
  * plug in any special code you want there to get better behavior.
  *
- * By itself, that Fog of War plane is just a bunch of clouds--prettyish
- * ones, true, but also boring.  To actually use it as a fog of war,
- * just instantiate Beacon objects on the map--and they'll create holes
- * in the clouds through which you can see.  (For an interesting effect,
- * you can also set the default cloud opacity lower and then use some
- * negative-strength beacons, which will draw clouds around them.)
- *
- * This model is designed to provide very low performance cost during
- * normal rendering: instead, a performance penalty is assessed at most
- * once per frame, and then only on frames when a beacon is changed.
- * Further, you can divide your beacons into Static and Dynamic ones,
- * so that changes to Dynamic beacons will not require recalculating the
- * Static beacons--and so the performance cost of the fog of war can
- * be further reduced.
- *
+ * Fog Of War can be cleared and redrawn using ManipulateFog function.
  */
 
 public class FogOfWar2 : MonoBehaviour
 {
-
+    /*
+     * The CloudStrength property indicates how visible the clouds are
+     * on the Fog of War plane by default, where the fog was not cleared.
+     * Bear in mind that cloud visibility on cleared areas can be changed
+     * in the shader, attached to FogOfWar GameObject. A value of 0 means
+     * the clouds are completely absent, and 1 means they completely
+     * obscure anything underneath.
+     */
     [Range(0, 1)]
     public float CloudStrength = 1.0f;
+
+    /*
+     * When a new beacon appears or an old one disappears, or even when
+     * an existing beacon changes properties (location, strength etc),
+     * the Fog of War changes to accomodate the new visibility pattern.
+     * In most cases the shader is able to gracefully transition between
+     * the old view and the new one over a short period of time, expressed
+     * in seconds.
+     */
     public float ChangeTime = 0.5f;
 
+    /*
+     * This constant is pretty important: it indicates the size of the
+     * Viewport textures that we calculate.  Higher numbers will burn a
+     * lot more CPU whenever we have to rebuild a viewport (which happens
+     * on any frame in which a beacon changes), while lower numbers will
+     * produce a more jagged appearance to the cloud cover around the
+     * edges of a beacon.  I'd recommend using as low a constant here
+     * as you can visually get away with; 128 is a good general-purpose
+     * value that seems to work for most scenes, so it's a good default.
+     */
+    public const int Precision = 128;
+
+    /*
+    * The cloud image shown by the shader involves one image, but
+    * we'll interpolate between two versions of it: one regular and
+    * one reversed--and the two images will move at different rates,
+    * to make the clouds look a little more flowing and billowy.
+    * These values represent the speeds at which those cloud layers
+    * move, and their current positions.
+    */
     private const float RollLeftSpeed1 = 0.04f;
     private const float RollUpSpeed1 = 0.025f;
     private const float RollLeftSpeed2 = 0.03f;
@@ -47,19 +68,31 @@ public class FogOfWar2 : MonoBehaviour
     private float RollLeft2 = 500;
     private float RollUp2 = 0;
 
+    /*
+     * The Viewport class represents a 2D image summarizing the revealed
+     * map space in the world. The Viewport class is what remains from
+     * the original FogOfWar asset - it might be possible to refactor
+     * this code without using viewports. However, they are critical
+     * for current implementation.
+     * visibleViewport is the main viewport. oldViewport is used as a
+     * temporary storage during transitions to smoothly fade into 
+     * visibleViewport. redraw is used to notify the shader that viewport
+     * has changed.
+     */
     private Viewport visibleViewport = null;
     private Viewport oldViewport = null;
     private bool redraw = true;
 
-    private class Viewport : IDisposable
+    private class Viewport
     {
         public Rect Area = new Rect(0, 0, 0, 0);
         public Texture2D Map = null;
         public bool IsEmpty = true;
 
+        // Expand current area to include all points to be modified.
         public void Expand(Vector3 position, float range)
         {
-            // Expand a *little* more than we really need to, so the edges stay clean
+            // Expand a *little* more than we really need to, so the edges stay clean.
             range *= 1.1f;
             if (IsEmpty)
             {
@@ -75,24 +108,17 @@ public class FogOfWar2 : MonoBehaviour
             IsEmpty = false;
         }
 
+        // Returns Vector4 with Area data. Needed for the shader.
         public Vector4 ToVector4()
         {
             return new Vector4(Area.xMin, Area.yMin, Area.xMax, Area.yMax);
         }
-
-        public void Dispose()
-        {
-            if (Map != null)
-            {
-                Texture2D.Destroy(Map);
-                Map = null;
-                IsEmpty = true;
-            }
-        }
     }
 
+    // Draw a map with new fog points at given coordinates and given strength, range.
     private Viewport DrawMap(List<Vector3> list, float strength, float range, Viewport baseViewport, float cloudStrength)
     {
+        // Get a new Viewport (clone of visibleViewport if it exists).
         Viewport newViewport = new Viewport();
         if (baseViewport != null)
         {
@@ -100,20 +126,20 @@ public class FogOfWar2 : MonoBehaviour
             newViewport.Map = baseViewport.Map;
             newViewport.IsEmpty = false;
         }
+        // Expand area to include all new points.
         foreach (Vector3 point in list)
         {
             newViewport.Expand(point, range);
         }
 
-        Color[] colors = new Color[FogOfWar.Precision * FogOfWar.Precision];
-
+        Color[] colors = new Color[Precision * Precision];
         float baseAlpha = cloudStrength;
 
         int index = 0;
         // Texture is divided into 'Precision'^2 amount of pieces. For each piece:
-        for (int yy = 0; yy < FogOfWar.Precision; ++yy)
+        for (int yy = 0; yy < Precision; ++yy)
         {
-            for (int xx = 0; xx < FogOfWar.Precision; ++xx, ++index)
+            for (int xx = 0; xx < Precision; ++xx, ++index)
             {
                 // TODO ???? wat is dis?:
                 float wx = newViewport.Area.xMin + xx * newViewport.Area.width / FogOfWar.Precision;
@@ -126,7 +152,7 @@ public class FogOfWar2 : MonoBehaviour
                 // If something was revealed before:
                 if (baseViewport != null)
                 {
-                    // TODO Get the coordinates of the revealed area?:
+                    // TODO Gets the coordinates of the revealed area???:
                     float ux = (wx - baseViewport.Area.xMin) / (baseViewport.Area.width);
                     float vy = (wz - baseViewport.Area.yMin) / (baseViewport.Area.height);
                     // If not outside bounds, get base color, opaque and revealed values:
@@ -187,15 +213,13 @@ public class FogOfWar2 : MonoBehaviour
         }
 
         // Redraw the map
-        newViewport.Map = new Texture2D(FogOfWar.Precision, FogOfWar.Precision);
+        newViewport.Map = new Texture2D(Precision, Precision);
         newViewport.Map.SetPixels(colors);
         newViewport.Map.Apply();
         return newViewport;
     }
-    
-    private float _oldCloudStrength = 0;
-    private float _transitionStartTime = 0;
 
+    // Always use this method to find the fog instance.
     public static FogOfWar2 FindExisting
     {
         get
@@ -209,8 +233,21 @@ public class FogOfWar2 : MonoBehaviour
         }
     }
 
+    /*
+    * Variables used for cloud fading.
+    */
+    private float _oldCloudStrength = 0;
+    private float _transitionStartTime = 0;
+
+    /*
+     * The important bit: this method is invoked on every frame, and
+     * is an opportunity for us to tell the Fog of War shader how it
+     * should do its work.
+     */
+
     void Update()
     {
+        // Do nothing if fog is not active.
         if (!gameObject.activeInHierarchy)
         {
             return;
@@ -279,13 +316,13 @@ public class FogOfWar2 : MonoBehaviour
             }
         }
 
+        // We have already scheduled a redraw. No need to do it again.
         redraw = false;
 
         /*
          * If we're still transitioning from an old viewport to a new one,
          * update the lerp value.
          */
-
         float deltaTime = Time.time - _transitionStartTime;
         if (deltaTime > ChangeTime)
         {
@@ -338,6 +375,7 @@ public class FogOfWar2 : MonoBehaviour
         mat.SetVector("AdjustViewpoint", new Vector4((worldCenter.x - skyImpact.x), 0, (worldCenter.z - skyImpact.z), 0));
     }
 
+    // Returns true if map has a visible region.
     private bool HasVisibleRegion
     {
         get
@@ -346,6 +384,7 @@ public class FogOfWar2 : MonoBehaviour
         }
     }
 
+    // Returns a visible region.
     private Rect VisibleRegion
     {
         get
@@ -361,6 +400,7 @@ public class FogOfWar2 : MonoBehaviour
         }
     }
 
+    // Returns the alpha value of a pixel at the given coordinates.
     private float GetOpacity(Vector3 coord)
     {
         Rect rr = VisibleRegion;
@@ -375,13 +415,16 @@ public class FogOfWar2 : MonoBehaviour
         return color.a;
     }
 
+    // Retuns true if it is foggy at the given coordinate.
     public bool IsFoggy(Vector3 coord)
     {
         return GetOpacity(coord) >= 0.5;
     }
 
+    // Changes the fog values around given points, according to given stremgth, range.
     public void ManipulateFog(List<Vector3> points, float strength, float range)
     {
+        oldViewport = visibleViewport;
         visibleViewport = DrawMap(points, strength, range, visibleViewport, CloudStrength);
         redraw = true;
     }

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public float beaconRange = 5.0f;
     private bool canManipulateFog = true;
     private float fogTimeout = 0.5f;
+    private string[] tagList = new string[] { "Tree", "Building" };
 
     private Camera camera;
 
@@ -70,6 +71,8 @@ public class GameManager : MonoBehaviour
         castleList.Add(GameObject.Find("RedCastle").transform.position);
         fog.ManipulateFog(castleList, beaconStrength, beaconRange * 2);
 
+        //
+
         // Initialize resources
         playerWood = 100;
         playerExp = 300;
@@ -93,6 +96,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Draw static objects:
+        // Manage visibility of all tagged resources.
+        foreach (string tag in tagList)
+        {
+            foreach (GameObject resource in GameObject.FindGameObjectsWithTag(tag))
+            {
+                if (fog.IsFoggy(resource.transform.position))
+                {
+                    resource.GetComponent<Renderer>().enabled = false;
+                }
+                else
+                {
+                    resource.GetComponent<Renderer>().enabled = true;
+                }
+            }
+        }
+
         // Move Camera with arrow keys
         Vector3 forwardDirection = Vector3.ProjectOnPlane(camera.transform.up, Vector3.up).normalized * Input.GetAxis("Vertical") * cameraSpeed * Time.deltaTime;
         camera.transform.Translate(new Vector3(Input.GetAxis("Horizontal") * cameraSpeed * Time.deltaTime, 0F, 0F));

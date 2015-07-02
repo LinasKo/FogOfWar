@@ -8,8 +8,9 @@ public class Resources : MonoBehaviour
 
     private int wood;
     private int meet;
+
     // Use this for initialization
-    void Start()
+    void Awake()
     {
 
     }
@@ -17,7 +18,7 @@ public class Resources : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //feferferfe
+        
     }
 
     public Resources(int startingWood, int startingMeet)

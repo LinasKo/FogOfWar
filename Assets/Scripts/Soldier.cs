@@ -6,21 +6,21 @@ public class Soldier : MonoBehaviour
 
     // Added some things just to test rendering (not rendering) in fog of war. These can be deleted if class extends Unit.
     private Renderer rend;
-    //private FogManager fogManager;
+    private FogOfWar2 fog;
 
     // Use this for initialization
     void Start()
     {
         rend = GetComponent<Renderer>();
-        //fogManager = FindObjectOfType<GameManager>().GetComponent<FogManager>();
+        fog = FogOfWar2.FindExisting;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Lock z axis so it wouldn't roll? right? TODO - find out what I did here.
         transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
-        /*
-        if (fogManager.IsFoggy(transform.position))
+        if (fog.IsFoggy(transform.position))
         {
             rend.enabled = false;
         }
@@ -28,6 +28,5 @@ public class Soldier : MonoBehaviour
         {
             rend.enabled = true;
         }
-        */
     }
 }

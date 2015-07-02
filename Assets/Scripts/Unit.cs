@@ -23,16 +23,7 @@ public abstract class Unit : MonoBehaviour {
 
     public void Update()
     {
-        /*
-        if (fogManager.IsFoggy(transform.position))
-        {
-            rend.enabled = false;
-        }
-        else
-        {
-            rend.enabled = true;
-        }
-        */
+
     }
 
     public void SetUnit(int health, int attackDmg, int attackSpd, int movementSpd, UnitType type)
