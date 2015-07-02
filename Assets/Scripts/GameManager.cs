@@ -73,10 +73,10 @@ public class GameManager : MonoBehaviour
 
         //
 
-        // Initialize resources
-        playerWood = 100;
-        playerExp = 300;
-        playerHealth = 100;
+        // Initialize resources (NOT NEEDED ATM, USE UNITY INTERFACE)
+        // playerWood = 50;
+        // playerExp = 0;
+        // playerHealth = 100;
     }
 
     Vector3 MousePosition()
@@ -123,11 +123,14 @@ public class GameManager : MonoBehaviour
         {
             switch(fogCtrlState)
             {
+                // ATTENTION: Message to Linas
+                // Suradau ir apkeiciau (-beaconStrength) (kai naikini) ir (beaconStrength) (kai uzdedi)
+                // nes dabar jis nuima fog'a ten, kur jo yra ant jo paspaudus, o uzdeda ten, kur jo nera :)
                 case FogControlState.CLEARING:
-                    fog.ManipulateFog(fogPointList, beaconStrength, beaconRange);
+                    fog.ManipulateFog(fogPointList, -beaconStrength, beaconRange);
                     break;
                 case FogControlState.CREATING:
-                    fog.ManipulateFog(fogPointList, -beaconStrength, beaconRange);
+                    fog.ManipulateFog(fogPointList, beaconStrength, beaconRange);
                     break;
             }
             fogCtrlState = FogControlState.NONE;
@@ -156,12 +159,16 @@ public class GameManager : MonoBehaviour
             Vector3 mousePosition = MousePosition();
             if (mousePosition != Vector3.down)
             {
-                if ((fogCtrlState == FogControlState.CREATING && fog.IsFoggy(mousePosition)) ||
-                    (fogCtrlState == FogControlState.CLEARING && !fog.IsFoggy(mousePosition)))
+                if ((fogCtrlState == FogControlState.CREATING && fog.IsFoggy(mousePosition) && playerWood >= 25) ||
+                    (fogCtrlState == FogControlState.CLEARING && !fog.IsFoggy(mousePosition) && playerWood >= 25))
                 {
                     canManipulateFog = false;
                     fogPointList.Add(mousePosition);
                     StartCoroutine(ReallowFogInSeconds(fogTimeout));
+
+                    // Using resources for deletion and creation of fog, plus experience gain
+                    playerWood -= 25;
+                    playerExp += 10;
                 }
             }
         }
@@ -201,6 +208,26 @@ public class GameManager : MonoBehaviour
             }
         }
         return objects;
+    }
+
+    public string GetWood()
+    {
+        return playerWood.ToString();
+    }
+
+    public string GetExp()
+    {
+        return playerExp.ToString();
+    }
+
+    public string GetHealth()
+    {
+        return playerHealth.ToString();
+    }
+
+    public void ToMenu()
+    {
+        Application.LoadLevel("Menu");
     }
 
     // BELOW: NOT USED AS IT IS LEGACY CODING STYLE
