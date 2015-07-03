@@ -33,9 +33,6 @@ public class UnitManager : MonoBehaviour
         redUnits = new Hashtable();
         blueUnits = new Hashtable();
 
-        redUnits = new Hashtable();
-        blueUnits = new Hashtable();
-
         foreach (UnitType type in System.Enum.GetValues(typeof(UnitType)))
         {
             redUnits.Add(type, new ArrayList());
@@ -66,30 +63,33 @@ public class UnitManager : MonoBehaviour
 
         // Get the castle coordinates for a player. Also get unit types.
         Vector3 castlePos = new Vector3(0, 0, 0);
-        GameObject soldier = null;
+
+        GameObject soldier = RedSoldier.GetComponent<Soldier>().gameObject;
+        GameObject gatherer = RedGatherer.GetComponent<Gatherer>().gameObject;
+
         switch (color)
         {
             case Player.RED:
                 castlePos = redCastle.transform.position;
                 soldier = RedSoldier;
+                gatherer = RedGatherer;
                 break;
             case Player.BLUE:
                 castlePos = blueCastle.transform.position;
                 soldier = BlueSoldier;
+                gatherer = BlueGatherer;
                 break;
         }
 
-        // Calcualte a point near a castle.
+        // Calculate a point near a castle.
         Vector3 spawn = castlePos + new Vector3(spawnDistance * Mathf.Cos(spawnAngle), 0.5F, spawnDistance * Mathf.Sin(spawnAngle));
 
         // Spawn a unit
-
-
         switch (unit)
         {
             case (UnitType.GATHERER):
-                GameObject spawnedGath = Instantiate(soldier, spawn, Quaternion.identity) as GameObject;
-                ((ArrayList)redUnits[UnitType.SOLDIER]).Add(spawnedGath);
+                GameObject spawnedGath = Instantiate(gatherer, spawn, Quaternion.identity) as GameObject;
+                ((ArrayList)redUnits[UnitType.GATHERER]).Add(spawnedGath);
                 return spawnedGath;
             case (UnitType.SOLDIER):
                 GameObject spawned = Instantiate(soldier, spawn, Quaternion.identity) as GameObject;

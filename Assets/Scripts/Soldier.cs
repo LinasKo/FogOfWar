@@ -1,32 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Soldier : MonoBehaviour
+public class Soldier : Unit
 {
-
-    // Added some things just to test rendering (not rendering) in fog of war. These can be deleted if class extends Unit.
-    private Renderer rend;
-    private FogOfWar fog;
+    public int soldHealth, soldAtt, soldAttSpd, soldSpeed;
+    private Unit soldier;
 
     // Use this for initialization
-    void Start()
+    new void Start()
     {
-        rend = GetComponent<Renderer>();
-        fog = FogOfWar.FindExisting;
+        base.Start();
+        soldier = gameObject.GetComponent<Unit>();
+        soldier.SetUnit(soldHealth, soldAtt, soldAttSpd, soldSpeed, UnitType.SOLDIER);
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
-        // Lock z axis so it wouldn't roll? right? TODO - find out what I did here.
-        transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
-        if (fog.IsFoggy(transform.position))
-        {
-            rend.enabled = false;
-        }
-        else
-        {
-            rend.enabled = true;
-        }
+        base.Update();
     }
 }

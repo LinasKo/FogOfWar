@@ -69,7 +69,8 @@ public class GameManager : MonoBehaviour
 
         // Initialize the UnitManager
         unitManager.Initialize();
-        InvokeRepeating("SpawnSoldiers", 0, 5);
+        InvokeRepeating("SpawnSoldier", 0, 5);
+        InvokeRepeating("SpawnGatherer", 0, 10);
 
         // Initialize input settings
         fogPointList = new List<Vector3>();
@@ -130,10 +131,6 @@ public class GameManager : MonoBehaviour
         {
             switch(fogCtrlState)
             {
-                // ATTENTION: Message to Vytautas
-                // Intentional. Atkeiciau atgal. Cia del to kad galima butu tik is arti ruka nuiminet.
-                // Dar padidinsiu range ir bus prototipui gerai. Veliau dar patobulinsiu kad galima butu nuimineti grandinele.
-                // PM jei nori kad paaiskinciau. Istrink, jei perskaitys.
                 case FogControlState.CLEARING:
                     fog.ManipulateFog(fogPointList, fogActionStrength, fogActionRange);
                     break;
@@ -196,11 +193,26 @@ public class GameManager : MonoBehaviour
         canManipulateFog = true;
     }
 
-    void SpawnSoldiers()
+    void SpawnSoldier()
     {
         unitManager.Spawn(UnitType.SOLDIER, Player.RED);
+    }
+
+    void SpawnGatherer()
+    {
+        unitManager.Spawn(UnitType.GATHERER, Player.RED);
+    }
+
+    void SpawnEnemySoldier()
+    {
         unitManager.Spawn(UnitType.SOLDIER, Player.BLUE);
     }
+
+    void SpawnEnemyGatherer()
+    {
+        unitManager.Spawn(UnitType.SOLDIER, Player.BLUE);
+    }
+
 
     public ArrayList ObjectsInCircle(Vector3 coordinates, float radius, string tag = null)
     {
@@ -237,26 +249,4 @@ public class GameManager : MonoBehaviour
     {
         Application.LoadLevel("Menu");
     }
-
-    // BELOW: NOT USED AS IT IS LEGACY CODING STYLE
-    // INSTEAD, CREATED A GAMEOBJECT CALLED CANVAS
-
-    // What's displayed when in the gameplay
-    /* void OnGUI()
-    {
-        GUI.DrawTexture(new Rect(0f, 0f, Screen.width, Screen.height), menuBG1);
-
-        GUIStyle gs = new GUIStyle();
-        gs.fontSize = (int)_fontSize;
-
-        // NEEDS SEPARATE FLOAT VALUES, TO CHANGE
-        // THE POSITIONING OF TEXT FOR DIFFERENT
-        // SCREEN RESOLUTIONS (where Rect(50f, 20f,..))
-
-        GUI.Label(new Rect(60f, 3f, Screen.width, Screen.height), ("Wood: " + playerWood.ToString()), gs);
-        GUI.Label(new Rect(300f, 3f, Screen.width, Screen.height), ("Experience: " + playerExp.ToString()), gs);
-        GUI.Label(new Rect(550f, 3f, Screen.width, Screen.height), ("Base health: " + playerHealth.ToString()), gs);
-    }
-    */
-
 }
