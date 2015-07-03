@@ -18,7 +18,6 @@ public abstract class Unit : MonoBehaviour {
     {
         SetUnit(_health, _attackDmg, _attackSpd, _movementSpd, _type);
         rend = GetComponent<Renderer>();
-        //fogManager = FindObjectOfType<GameManager>().GetComponent<FogManager>();
     }
 
     public void Update()
