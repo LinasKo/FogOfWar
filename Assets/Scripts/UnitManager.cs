@@ -49,6 +49,16 @@ public class UnitManager : MonoBehaviour
             UpdateUnits(Player.RED);
             UpdateUnits(Player.BLUE);
         }
+
+        // For debugging - destroy castle when health reaches 0
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GetComponent<GameManager>().playerHealth -= 25;
+        }
+        if (GetComponent<GameManager>().playerHealth <= 0)
+        {
+            Destroy(redCastle);
+        }
     }
 
     // Spawn a unit for a particular player, near a castle
