@@ -75,19 +75,19 @@ public class UnitManager : MonoBehaviour
         Vector3 castlePos = new Vector3(0, 0, 0);
 
         GameObject soldier = RedSoldier.GetComponent<Soldier>().gameObject;
-        GameObject gatherer = RedGatherer.GetComponent<Gatherer>().gameObject;
+        //GameObject gatherer = RedGatherer.GetComponent<Gatherer>().gameObject;
 
         switch (color)
         {
             case Player.RED:
                 castlePos = redCastle.transform.position;
                 soldier = RedSoldier;
-                gatherer = RedGatherer;
+                //gatherer = RedGatherer;
                 break;
             case Player.BLUE:
                 castlePos = blueCastle.transform.position;
                 soldier = BlueSoldier;
-                gatherer = BlueGatherer;
+                //gatherer = BlueGatherer;
                 break;
         }
 
@@ -98,9 +98,9 @@ public class UnitManager : MonoBehaviour
         switch (unit)
         {
             case (UnitType.GATHERER):
-                GameObject spawnedGath = Instantiate(gatherer, spawn, Quaternion.identity) as GameObject;
-                ((ArrayList)redUnits[UnitType.GATHERER]).Add(spawnedGath);
-                return spawnedGath;
+            //GameObject spawnedGath = Instantiate(gatherer, spawn, Quaternion.identity) as GameObject;
+            //((ArrayList)redUnits[UnitType.GATHERER]).Add(spawnedGath);
+            //return spawnedGath;
             case (UnitType.SOLDIER):
                 GameObject spawned = Instantiate(soldier, spawn, Quaternion.identity) as GameObject;
                 ((ArrayList)redUnits[UnitType.SOLDIER]).Add(spawned);
@@ -114,5 +114,17 @@ public class UnitManager : MonoBehaviour
     void UpdateUnits(Player playerColor)
     {
 
+    }
+
+    public ArrayList GetUnitList(Player color, UnitType type)
+    {
+        if (color == Player.RED)
+        {
+            return (ArrayList)redUnits[type];
+        }
+        else
+        {
+            return (ArrayList)blueUnits[type];
+        }
     }
 }

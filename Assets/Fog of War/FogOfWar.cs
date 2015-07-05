@@ -376,7 +376,7 @@ public class FogOfWar: MonoBehaviour
     }
 
     // Returns a visible region.
-    private Rect VisibleRegion
+    public Rect VisibleRegion
     {
         get
         {
