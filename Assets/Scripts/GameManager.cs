@@ -69,8 +69,9 @@ public class GameManager : MonoBehaviour
 
         // Initialize the UnitManager
         unitManager.Initialize();
-        InvokeRepeating("SpawnSoldier", 0, 5);
-        InvokeRepeating("SpawnGatherer", 0, 10);
+        InvokeRepeating("SpawnSoldierRed", 0, 5);
+        InvokeRepeating("SpawnSoldierBlue", 0, 5);
+        //InvokeRepeating("SpawnGatherer", 0, 10);
 
         // Initialize input settings
         fogPointList = new List<Vector3>();
@@ -193,22 +194,12 @@ public class GameManager : MonoBehaviour
         canManipulateFog = true;
     }
 
-    void SpawnSoldier()
+    void SpawnSoldierRed()
     {
         unitManager.Spawn(UnitType.SOLDIER, Player.RED);
     }
 
-    void SpawnGatherer()
-    {
-        unitManager.Spawn(UnitType.GATHERER, Player.RED);
-    }
-
-    void SpawnEnemySoldier()
-    {
-        unitManager.Spawn(UnitType.SOLDIER, Player.BLUE);
-    }
-
-    void SpawnEnemyGatherer()
+    void SpawnSoldierBlue()
     {
         unitManager.Spawn(UnitType.SOLDIER, Player.BLUE);
     }

@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class UnitManager : MonoBehaviour
 {
-
     public string redBase = "RedCastle";
     public string blueBase = "BlueCastle";
 
@@ -19,8 +18,7 @@ public class UnitManager : MonoBehaviour
     private GameObject redCastle;
     private GameObject blueCastle;
 
-    private Hashtable redUnits;
-    private Hashtable blueUnits;
+    private Dictionary<Player, List<GameObject>> unitList;
 
     private bool initialized = false;
 
@@ -30,13 +28,11 @@ public class UnitManager : MonoBehaviour
         redCastle = GameObject.Find(redBase);
         blueCastle = GameObject.Find(blueBase);
 
-        redUnits = new Hashtable();
-        blueUnits = new Hashtable();
+        unitList = new Dictionary<Player, List<GameObject>>();
 
-        foreach (UnitType type in System.Enum.GetValues(typeof(UnitType)))
+        foreach (Player color in System.Enum.GetValues(typeof(Player)))
         {
-            redUnits.Add(type, new ArrayList());
-            blueUnits.Add(type, new ArrayList());
+            unitList.Add(color, new List<GameObject>());
         }
         initialized = true;
     }
@@ -44,11 +40,6 @@ public class UnitManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (initialized)
-        {
-            UpdateUnits(Player.RED);
-            UpdateUnits(Player.BLUE);
-        }
 
         // For debugging - destroy castle when health reaches 0
         if (Input.GetKeyDown(KeyCode.K))
@@ -75,7 +66,6 @@ public class UnitManager : MonoBehaviour
         Vector3 castlePos = new Vector3(0, 0, 0);
 
         GameObject soldier = RedSoldier.GetComponent<Soldier>().gameObject;
-        //GameObject gatherer = RedGatherer.GetComponent<Gatherer>().gameObject;
 
         switch (color)
         {
@@ -103,7 +93,7 @@ public class UnitManager : MonoBehaviour
             //return spawnedGath;
             case (UnitType.SOLDIER):
                 GameObject spawned = Instantiate(soldier, spawn, Quaternion.identity) as GameObject;
-                ((ArrayList)redUnits[UnitType.SOLDIER]).Add(spawned);
+                unitList[color].Add(spawned);
                 return spawned;
             default:
                 return null;
@@ -111,20 +101,8 @@ public class UnitManager : MonoBehaviour
 
     }
 
-    void UpdateUnits(Player playerColor)
+    public List<GameObject> GetUnitList(Player color)
     {
-
-    }
-
-    public ArrayList GetUnitList(Player color, UnitType type)
-    {
-        if (color == Player.RED)
-        {
-            return (ArrayList)redUnits[type];
-        }
-        else
-        {
-            return (ArrayList)blueUnits[type];
-        }
+        return unitList[color];
     }
 }
