@@ -9,7 +9,7 @@ using RAIN.Entities;
 using RAIN.Entities.Aspects;
 
 [RAINAction]
-public class Attack : RAINAction
+public class Cut : RAINAction
 {
     private int attackDamage;
 
@@ -21,8 +21,11 @@ public class Attack : RAINAction
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
-        GameObject target = ai.WorkingMemory.GetItem<GameObject>("attackableEnemy");
+        GameObject target = ai.WorkingMemory.GetItem<GameObject>("cuttableTree");
         target.GetComponent<DamageReceiver>().Damage(attackDamage);
+        ai.Body.GetComponent<ResourceCarrier>().TakeWood(attackDamage);
+        ai.WorkingMemory.SetItem<bool>("atCap", ai.Body.GetComponent<ResourceCarrier>().AtCap());
+        ai.WorkingMemory.SetItem<bool>("hasWood", ai.Body.GetComponent<ResourceCarrier>().HasWood());
         return ActionResult.SUCCESS;
     }
 

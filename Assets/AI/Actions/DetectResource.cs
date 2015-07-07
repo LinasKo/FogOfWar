@@ -6,24 +6,19 @@ using RAIN.Core;
 using RAIN.Representation;
 
 [RAINAction]
-public class DetectEnemy : RAINAction
+public class DetectResource : RAINAction
 {
     public Expression Range = new Expression();
-    public Expression TargetAllegiance = new Expression();
 
-    private UnitManager unitManager;
     private FogOfWar fog;
     private Vector3 position;
     private float range;
-    private Player targetColor;
 
     public override void Start(RAIN.Core.AI ai)
     {
         base.Start(ai);
-        unitManager = (UnitManager)(GameObject.Find("GameManager").GetComponent<UnitManager>());
         fog = FogOfWar.FindExisting;
         range = Range.Evaluate<float>(ai.DeltaTime, ai.WorkingMemory);
-        targetColor = TargetAllegiance.Evaluate<string>(ai.DeltaTime, ai.WorkingMemory) == "Red" ? Player.RED : Player.BLUE;
     }
 
     public override ActionResult Execute(RAIN.Core.AI ai)
@@ -32,23 +27,19 @@ public class DetectEnemy : RAINAction
         float maxDist = Mathf.Infinity;
         Vector3 closest = Vector3.zero;
         
-        foreach (GameObject unit in unitManager.GetUnitList(targetColor))
+        foreach (GameObject tree in GameObject.FindGameObjectsWithTag("Tree"))
         {
-            if (unit == null)
-            {
-                continue;
-            }
-            float dist = Vector3.Distance(position, unit.transform.position);
+            float dist = Vector3.Distance(position, tree.transform.position);
             
-            if (dist < range && dist < maxDist && !fog.IsFoggy(unit.transform.position))
+            if (dist < range && dist < maxDist && !fog.IsFoggy(tree.transform.position))
             {
                 maxDist = dist;
-                closest = unit.transform.position;
+                closest = tree.transform.position;
             }
         }
         if (closest != Vector3.zero)
         {
-            ai.WorkingMemory.SetItem<Vector3>("sightedEnemy", closest);
+            ai.WorkingMemory.SetItem<Vector3>("sightedTree", closest);
             return ActionResult.SUCCESS;
         }
         return ActionResult.FAILURE;

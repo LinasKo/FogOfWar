@@ -65,19 +65,28 @@ public class UnitManager : MonoBehaviour
         // Get the castle coordinates for a player. Also get unit types.
         Vector3 castlePos = new Vector3(0, 0, 0);
 
-        GameObject soldier = RedSoldier.GetComponent<Soldier>().gameObject;
+        GameObject soldier = RedSoldier;
+        GameObject gatherer = RedGatherer;
 
         switch (color)
         {
             case Player.RED:
+                if (redCastle == null)
+                {
+                    return null;
+                }
                 castlePos = redCastle.transform.position;
                 soldier = RedSoldier;
-                //gatherer = RedGatherer;
+                gatherer = RedGatherer;
                 break;
             case Player.BLUE:
+                if (blueCastle == null)
+                {
+                    return null;
+                }
                 castlePos = blueCastle.transform.position;
                 soldier = BlueSoldier;
-                //gatherer = BlueGatherer;
+                gatherer = BlueGatherer;
                 break;
         }
 
@@ -85,14 +94,15 @@ public class UnitManager : MonoBehaviour
         Vector3 spawn = castlePos + new Vector3(spawnDistance * Mathf.Cos(spawnAngle), 0.5F, spawnDistance * Mathf.Sin(spawnAngle));
 
         // Spawn a unit
+        GameObject spawned;
         switch (unit)
         {
             case (UnitType.GATHERER):
-            //GameObject spawnedGath = Instantiate(gatherer, spawn, Quaternion.identity) as GameObject;
-            //((ArrayList)redUnits[UnitType.GATHERER]).Add(spawnedGath);
-            //return spawnedGath;
+                spawned = Instantiate(gatherer, spawn, Quaternion.identity) as GameObject;
+                unitList[color].Add(spawned);
+                return spawned;
             case (UnitType.SOLDIER):
-                GameObject spawned = Instantiate(soldier, spawn, Quaternion.identity) as GameObject;
+                spawned = Instantiate(soldier, spawn, Quaternion.identity) as GameObject;
                 unitList[color].Add(spawned);
                 return spawned;
             default:
