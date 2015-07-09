@@ -204,18 +204,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 438958, guid: 3751427cb79260f4ba6b9bc3ff102761, type: 2}
-      propertyPath: m_LocalScale.x
-      value: .699999988
-      objectReference: {fileID: 0}
-    - target: {fileID: 438958, guid: 3751427cb79260f4ba6b9bc3ff102761, type: 2}
-      propertyPath: m_LocalScale.y
-      value: .699999988
-      objectReference: {fileID: 0}
-    - target: {fileID: 438958, guid: 3751427cb79260f4ba6b9bc3ff102761, type: 2}
-      propertyPath: m_LocalScale.z
-      value: .699999988
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3751427cb79260f4ba6b9bc3ff102761, type: 2}
   m_IsPrefabParent: 0
@@ -354,92 +342,48 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 423460, guid: 969550afa60858740b688896ae0f91f3, type: 2}
+    - target: {fileID: 444856, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 423460, guid: 969550afa60858740b688896ae0f91f3, type: 2}
+    - target: {fileID: 444856, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 423460, guid: 969550afa60858740b688896ae0f91f3, type: 2}
+    - target: {fileID: 444856, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 423460, guid: 969550afa60858740b688896ae0f91f3, type: 2}
+    - target: {fileID: 444856, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 423460, guid: 969550afa60858740b688896ae0f91f3, type: 2}
+    - target: {fileID: 444856, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 423460, guid: 969550afa60858740b688896ae0f91f3, type: 2}
+    - target: {fileID: 444856, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 423460, guid: 969550afa60858740b688896ae0f91f3, type: 2}
+    - target: {fileID: 444856, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 423460, guid: 969550afa60858740b688896ae0f91f3, type: 2}
+    - target: {fileID: 444856, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 11439688, guid: 969550afa60858740b688896ae0f91f3, type: 2}
+    - target: {fileID: 11423874, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
       propertyPath: RedSoldier
       value: 
       objectReference: {fileID: 507045896}
-    - target: {fileID: 11439688, guid: 969550afa60858740b688896ae0f91f3, type: 2}
-      propertyPath: BlueSoldier
-      value: 
-      objectReference: {fileID: 146376, guid: 3488f255bf9aa3949b365682d95b207a, type: 2}
-    - target: {fileID: 11488414, guid: 969550afa60858740b688896ae0f91f3, type: 2}
-      propertyPath: cameraSpeed
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 11488414, guid: 969550afa60858740b688896ae0f91f3, type: 2}
-      propertyPath: bgImage
-      value: 
-      objectReference: {fileID: 4900000, guid: afd09a9590d18124c8f4f2731c521f6b, type: 3}
-    - target: {fileID: 11488414, guid: 969550afa60858740b688896ae0f91f3, type: 2}
-      propertyPath: menuBG1
-      value: 
-      objectReference: {fileID: 2800000, guid: ebb359a332b219a4082b90e6e5436c74, type: 3}
-    - target: {fileID: 11488414, guid: 969550afa60858740b688896ae0f91f3, type: 2}
-      propertyPath: _fontSize
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 11488414, guid: 969550afa60858740b688896ae0f91f3, type: 2}
-      propertyPath: Ratio
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 11488414, guid: 969550afa60858740b688896ae0f91f3, type: 2}
-      propertyPath: playerWood
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 11488414, guid: 969550afa60858740b688896ae0f91f3, type: 2}
-      propertyPath: playerHealth
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 11439688, guid: 969550afa60858740b688896ae0f91f3, type: 2}
+    - target: {fileID: 11423874, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
       propertyPath: RedGatherer
       value: 
       objectReference: {fileID: 845317008}
-    - target: {fileID: 11439688, guid: 969550afa60858740b688896ae0f91f3, type: 2}
-      propertyPath: BlueGatherer
-      value: 
-      objectReference: {fileID: 146376, guid: 3488f255bf9aa3949b365682d95b207a, type: 2}
-    - target: {fileID: 11439688, guid: 969550afa60858740b688896ae0f91f3, type: 2}
-      propertyPath: health
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 11487880, guid: 969550afa60858740b688896ae0f91f3, type: 2}
-      propertyPath: treeCount
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 969550afa60858740b688896ae0f91f3, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &440001915
 GameObject:
@@ -704,7 +648,7 @@ GameObject:
   m_PrefabInternal: {fileID: 1260273987}
 --- !u!114 &518972609 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11488414, guid: 969550afa60858740b688896ae0f91f3,
+  m_PrefabParentObject: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e,
     type: 2}
   m_PrefabInternal: {fileID: 259035698}
   m_Script: {fileID: 11500000, guid: 24805e252e1bfd84ca427ae09e3748e6, type: 3}

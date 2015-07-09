@@ -5,7 +5,6 @@ public class ResourceCarrier : MonoBehaviour
 {
     public int woodCap;
     private int wood = 0;
-    private bool hasWood = false;
 
     private GameManager gameManager;
 
@@ -19,13 +18,18 @@ public class ResourceCarrier : MonoBehaviour
         wood += newWood;
     }
 
-    public void UnloadWood(int amount=0)
+    public void UnloadWood(int amount=-1)
     {
-        amount = amount > wood ? wood : amount;
-        amount = amount == 0 ? wood : amount;
+        if (amount >= wood || amount == -1)
+        {
+            wood = 0;
+        }
+        else
+        {
+            wood -= amount;
+        }
 
-        wood -= amount;
-        gameManager.playerWood += amount;
+        //gameManager.playerWood += amount;
     }
 
     public bool AtCap()

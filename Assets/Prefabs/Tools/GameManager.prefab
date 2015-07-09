@@ -1,16 +1,16 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &184418
+--- !u!1 &131212
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 423460}
-  - 114: {fileID: 11488414}
-  - 114: {fileID: 11439688}
-  - 114: {fileID: 11487880}
+  - 4: {fileID: 444856}
+  - 114: {fileID: 11463804}
+  - 114: {fileID: 11423874}
+  - 114: {fileID: 11403792}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -18,58 +18,68 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &423460
+--- !u!4 &444856
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 184418}
+  m_GameObject: {fileID: 131212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11439688
+--- !u!114 &11403792
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 184418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 824bd2647ff57284eb147c1c571f9580, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RedSoldier: {fileID: 0}
-  BlueSoldier: {fileID: 0}
-  minSpawnDistance: 1
-  maxSpawnDistance: 3
---- !u!114 &11487880
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 184418}
+  m_GameObject: {fileID: 131212}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f7a1645713652d4eb7ac1bf2d05120b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 122344, guid: f01e299f97fe564459c79b06d29f936e, type: 2}
-  treeCount: 10
---- !u!114 &11488414
+  treeCount: 20
+--- !u!114 &11423874
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 184418}
+  m_GameObject: {fileID: 131212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824bd2647ff57284eb147c1c571f9580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redBase: RedCastle
+  blueBase: BlueCastle
+  RedSoldier: {fileID: 0}
+  BlueSoldier: {fileID: 146376, guid: 3488f255bf9aa3949b365682d95b207a, type: 2}
+  RedGatherer: {fileID: 0}
+  BlueGatherer: {fileID: 146376, guid: 3488f255bf9aa3949b365682d95b207a, type: 2}
+  minSpawnDistance: 1
+  maxSpawnDistance: 3
+--- !u!114 &11463804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131212}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24805e252e1bfd84ca427ae09e3748e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 1.5
+  cameraSpeed: 12
+  fogActionStrength: 1
+  fogActionRange: 7.5
+  playerWood: 200
+  playerExp: 0
+  playerHealth: 1000
+  menuBG1: {fileID: 2800000, guid: ebb359a332b219a4082b90e6e5436c74, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -79,5 +89,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 184418}
+  m_RootGameObject: {fileID: 131212}
   m_IsPrefabParent: 1

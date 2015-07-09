@@ -264,7 +264,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 403780}
-  - 95: {fileID: 9580712}
+  - 95: {fileID: 9591372}
+  - 114: {fileID: 11446714}
   m_Layer: 0
   m_Name: MAX
   m_TagString: Untagged
@@ -1450,7 +1451,7 @@ Transform:
   m_GameObject: {fileID: 151614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -18.6743908, y: 0, z: -5.1992588}
-  m_LocalScale: {x: .800000012, y: .800000012, z: .800000012}
+  m_LocalScale: {x: .699999988, y: .699999988, z: .699999988}
   m_Children:
   - {fileID: 406420}
   - {fileID: 474620}
@@ -2105,7 +2106,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!95 &9580712
+--- !u!95 &9591372
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -2114,10 +2115,10 @@ Animator:
   m_GameObject: {fileID: 116734}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0d6446b00d81a9641a2eca08eb97949f, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
+  m_Controller: {fileID: 9100000, guid: 144983b3aec17bd41947ae9d1ea72b7f, type: 2}
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2156,6 +2157,17 @@ MonoBehaviour:
     - {fileID: 151614}
     - {fileID: 438958}
     _serializedCustomData: []
+--- !u!114 &11446714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455256fa15cdf894c8408efd31bb083e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11448092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2211,25 +2223,43 @@ MonoBehaviour:
       id="0"><field value="True" type="System.Boolean" id="_isActive" /><field type="UnityEngine.GameObject"
       id="_body" gameobject="0" /><field type="RAIN.Memory.BasicMemory" reference="1"
       id="_workingMemory" childrenvisible="False" /><field type="RAIN.Minds.BasicMind"
-      reference="7" id="_mind" childrenvisible="True" /><field type="RAIN.Motion.BasicMotor"
-      reference="8" id="_motor" childrenvisible="False" /><field type="RAIN.Animation.BasicAnimator"
-      reference="9" id="_animator" childrenvisible="False" /><field type="RAIN.Navigation.BasicNavigator"
+      reference="7" id="_mind" childrenvisible="False" /><field type="RAIN.Motion.BasicMotor"
+      reference="8" id="_motor" childrenvisible="False" /><field type="RAIN.Animation.MecanimAnimator"
+      reference="2" id="_animator" childrenvisible="True" /><field type="RAIN.Navigation.BasicNavigator"
       reference="10" id="_navigator" childrenvisible="False" /><field type="RAIN.Perception.BasicSenses"
       reference="11" id="_senses" childrenvisible="False" /><field type="System.Collections.Generic.List"
       id="_customElements" elementtype="RAIN.Core.CustomAIElement" /></reference><reference
       type="RAIN.Memory.BasicMemory" refcount="1" id="1"><field type="System.Collections.Generic.List"
       id="_memoryItems" elementtype="RAIN.Memory.BasicMemory+MemoryItem"><field type="RAIN.Memory.BasicMemory+MemoryItem"
       reference="3" id="element0" /><field type="RAIN.Memory.BasicMemory+MemoryItem"
-      reference="4" id="element1" /></field></reference><reference type="RAIN.Memory.BasicMemory+MemoryItem"
-      refcount="0" id="2" /><reference type="RAIN.Memory.BasicMemory+MemoryItem" refcount="1"
-      id="3"><field value="attackDamage" type="System.String" id="Key" /><field value="System.Int32"
-      type="System.Type" id="ValueType" /><field value="10" type="System.Int32" id="Value"
-      /></reference><reference type="RAIN.Memory.BasicMemory+MemoryItem" refcount="1"
-      id="4"><field value="attackSpeed" type="System.String" id="Key" /><field value="System.Single"
-      type="System.Type" id="ValueType" /><field value="1.75" type="System.Single"
-      id="Value" /></reference><reference type="RAIN.Memory.BasicMemory+MemoryItem"
-      refcount="0" id="5" /><reference type="RAIN.Memory.BasicMemory+MemoryItem" refcount="0"
-      id="6" /><reference type="RAIN.Minds.BasicMind" refcount="1" id="7"><field type="RAIN.BehaviorTrees.BTAsset"
+      reference="4" id="element1" /></field></reference><reference type="RAIN.Animation.MecanimAnimator"
+      refcount="1" id="2"><field type="RAIN.Animation.MecanimAnimator+IKTarget" reference="5"
+      id="_rightFoot" /><field type="RAIN.Animation.MecanimAnimator+IKTarget" reference="6"
+      id="_leftFoot" /><field type="RAIN.Animation.MecanimAnimator+IKTarget" reference="9"
+      id="_rightHand" /><field type="RAIN.Animation.MecanimAnimator+IKTarget" reference="13"
+      id="_leftHand" /><field type="RAIN.Animation.MecanimAnimator+IKLookAt" reference="14"
+      id="_lookAt" /><field type="System.Collections.Generic.List" id="_animationStates"
+      elementtype="RAIN.Animation.MecanimAnimator+MecanimAnimatorState"><field type="RAIN.Animation.MecanimAnimator+MecanimAnimatorState"
+      reference="20" id="element0" /><field type="RAIN.Animation.MecanimAnimator+MecanimAnimatorState"
+      reference="25" id="element1" /><field type="RAIN.Animation.MecanimAnimator+MecanimAnimatorState"
+      reference="30" id="element2" /><field type="RAIN.Animation.MecanimAnimator+MecanimAnimatorState"
+      reference="15" id="element3" /></field></reference><reference type="RAIN.Memory.BasicMemory+MemoryItem"
+      refcount="1" id="3"><field value="attackDamage" type="System.String" id="Key"
+      /><field value="System.Int32" type="System.Type" id="ValueType" /><field value="10"
+      type="System.Int32" id="Value" /></reference><reference type="RAIN.Memory.BasicMemory+MemoryItem"
+      refcount="1" id="4"><field value="attackSpeed" type="System.String" id="Key"
+      /><field value="System.Single" type="System.Type" id="ValueType" /><field value="1.75"
+      type="System.Single" id="Value" /></reference><reference type="RAIN.Animation.MecanimAnimator+IKTarget"
+      refcount="1" id="5"><field value="False" type="System.Boolean" id="isActive"
+      /><field value="0" type="System.Single" id="positionWeight" /><field value="0"
+      type="System.Single" id="rotationWeight" /><field value="0,0,0" type="UnityEngine.Vector3"
+      id="positionVector" /><field value="0,0,0" type="UnityEngine.Vector3" id="rotationVector"
+      /></reference><reference type="RAIN.Animation.MecanimAnimator+IKTarget" refcount="1"
+      id="6"><field value="False" type="System.Boolean" id="isActive" /><field value="0"
+      type="System.Single" id="positionWeight" /><field value="0" type="System.Single"
+      id="rotationWeight" /><field value="0,0,0" type="UnityEngine.Vector3" id="positionVector"
+      /><field value="0,0,0" type="UnityEngine.Vector3" id="rotationVector" /></reference><reference
+      type="RAIN.Minds.BasicMind" refcount="1" id="7"><field type="RAIN.BehaviorTrees.BTAsset"
       id="_behaviorTreeAsset" gameobject="1" /><field type="System.Collections.Generic.List"
       id="_behaviorTreeBindings" elementtype="RAIN.BehaviorTrees.BTAssetBinding" /></reference><reference
       type="RAIN.Motion.BasicMotor" refcount="1" id="8"><field value="5" type="System.Single"
@@ -2239,34 +2269,320 @@ MonoBehaviour:
       id="_faceBeforeMoveAngle" /><field value="1" type="System.Single" id="_maxHeightOffset"
       /><field value="False" type="System.Boolean" id="_allow3DMovement" /><field
       value="False" type="System.Boolean" id="_allow3DRotation" /><field value="True"
-      type="System.Boolean" id="_allowOffGraphMovement" /></reference><reference type="RAIN.Animation.BasicAnimator"
-      refcount="1" id="9"><field type="System.Collections.Generic.List" id="_animationStates"
-      elementtype="RAIN.Animation.BasicAnimator+BasicAnimatorState" /></reference><reference
-      type="RAIN.Navigation.BasicNavigator" refcount="1" id="10"><field value="False"
-      type="System.Boolean" id="_drawPaths" /><field value="0,1,0,1" type="UnityEngine.Color"
-      id="_pathColor" /><field value="-0.5" type="System.Single" id="_outlineColorOffset"
-      /><field value="100" type="System.Int32" id="_maxPathfindingSteps" /><field
-      value="0" type="System.Single" id="_maxPathLength" /><field type="System.Collections.Generic.List"
-      id="_graphTags" elementtype="System.String" /></reference><reference type="RAIN.Perception.BasicSenses"
-      refcount="1" id="11"><field type="System.Collections.Generic.List" id="_sensors"
-      elementtype="RAIN.Perception.Sensors.RAINSensor"><field type="RAIN.Perception.Sensors.VisualSensor"
-      reference="12" id="element0" /></field></reference><reference type="RAIN.Perception.Sensors.VisualSensor"
-      refcount="1" id="12"><field value="True" type="System.Boolean" id="_showVisual"
-      /><field value="Cutting Range" type="System.String" id="_sensorName" /><field
-      value="True" type="System.Boolean" id="_isActive" /><field value="0.6,0.6,0.6,1"
-      type="UnityEngine.Color" id="_sensorColor" /><field type="UnityEngine.Transform"
-      id="_mountPoint" gameobject="-1" /><field value="0,0,0" type="UnityEngine.Vector3"
-      id="_positionOffset" /><field value="0,0,0" type="UnityEngine.Vector3" id="_angleOffset"
-      /><field type="System.Collections.Generic.List" id="_filters" elementtype="RAIN.Perception.Sensors.Filters.RAINSensorFilter"
-      /><field value="1.5" type="System.Single" id="_range" /><field value="False"
-      type="System.Boolean" id="_canDetectSelf" /><field value="360" type="System.Single"
-      id="_horizontalAngle" /><field value="180" type="System.Single" id="_verticalAngle"
-      /><field value="False" type="System.Boolean" id="_lineOfSight" /><field value="-5"
-      type="UnityEngine.LayerMask" id="_lineOfSightMask" /></reference></references></component>
+      type="System.Boolean" id="_allowOffGraphMovement" /></reference><reference type="RAIN.Animation.MecanimAnimator+IKTarget"
+      refcount="1" id="9"><field value="False" type="System.Boolean" id="isActive"
+      /><field value="0" type="System.Single" id="positionWeight" /><field value="0"
+      type="System.Single" id="rotationWeight" /><field value="0,0,0" type="UnityEngine.Vector3"
+      id="positionVector" /><field value="0,0,0" type="UnityEngine.Vector3" id="rotationVector"
+      /></reference><reference type="RAIN.Navigation.BasicNavigator" refcount="1"
+      id="10"><field value="False" type="System.Boolean" id="_drawPaths" /><field
+      value="0,1,0,1" type="UnityEngine.Color" id="_pathColor" /><field value="-0.5"
+      type="System.Single" id="_outlineColorOffset" /><field value="100" type="System.Int32"
+      id="_maxPathfindingSteps" /><field value="0" type="System.Single" id="_maxPathLength"
+      /><field type="System.Collections.Generic.List" id="_graphTags" elementtype="System.String"
+      /></reference><reference type="RAIN.Perception.BasicSenses" refcount="1" id="11"><field
+      type="System.Collections.Generic.List" id="_sensors" elementtype="RAIN.Perception.Sensors.RAINSensor"><field
+      type="RAIN.Perception.Sensors.VisualSensor" reference="12" id="element0" /></field></reference><reference
+      type="RAIN.Perception.Sensors.VisualSensor" refcount="1" id="12"><field value="True"
+      type="System.Boolean" id="_showVisual" /><field value="Cutting Range" type="System.String"
+      id="_sensorName" /><field value="True" type="System.Boolean" id="_isActive"
+      /><field value="0.6,0.6,0.6,1" type="UnityEngine.Color" id="_sensorColor" /><field
+      type="UnityEngine.Transform" id="_mountPoint" gameobject="-1" /><field value="0,0,0"
+      type="UnityEngine.Vector3" id="_positionOffset" /><field value="0,0,0" type="UnityEngine.Vector3"
+      id="_angleOffset" /><field type="System.Collections.Generic.List" id="_filters"
+      elementtype="RAIN.Perception.Sensors.Filters.RAINSensorFilter" /><field value="1.5"
+      type="System.Single" id="_range" /><field value="False" type="System.Boolean"
+      id="_canDetectSelf" /><field value="360" type="System.Single" id="_horizontalAngle"
+      /><field value="180" type="System.Single" id="_verticalAngle" /><field value="False"
+      type="System.Boolean" id="_lineOfSight" /><field value="-5" type="UnityEngine.LayerMask"
+      id="_lineOfSightMask" /></reference><reference type="RAIN.Animation.MecanimAnimator+IKTarget"
+      refcount="1" id="13"><field value="False" type="System.Boolean" id="isActive"
+      /><field value="0" type="System.Single" id="positionWeight" /><field value="0"
+      type="System.Single" id="rotationWeight" /><field value="0,0,0" type="UnityEngine.Vector3"
+      id="positionVector" /><field value="0,0,0" type="UnityEngine.Vector3" id="rotationVector"
+      /></reference><reference type="RAIN.Animation.MecanimAnimator+IKLookAt" refcount="1"
+      id="14"><field value="False" type="System.Boolean" id="isActive" /><field value="0"
+      type="System.Single" id="lookAtWeight" /><field value="0" type="System.Single"
+      id="lookAtBodyWeight" /><field value="0" type="System.Single" id="lookAtHeadWeight"
+      /><field value="0" type="System.Single" id="lookAtEyesWeight" /><field value="0"
+      type="System.Single" id="lookAtClampWeight" /><field value="90" type="System.Single"
+      id="maxTurnRate" /><field value="0,0,0" type="UnityEngine.Vector3" id="positionVector"
+      /><field value="0,0,0" type="UnityEngine.Vector3" id="lastPositionVector" /></reference><reference
+      type="RAIN.Animation.MecanimAnimator+MecanimAnimatorState" refcount="1" id="15"><field
+      value="Base Layer.Idle" type="System.String" id="mecanimState" /><field value="0"
+      type="System.Int32" id="layer" /><field type="RAIN.Animation.MecanimParameterValue"
+      reference="16" id="startParameter" childrenvisible="True" /><field type="RAIN.Animation.MecanimParameterValue"
+      reference="18" id="stopParameter" childrenvisible="True" /></reference><reference
+      type="RAIN.Animation.MecanimParameterValue" refcount="1" id="16"><field value="Speed"
+      type="System.String" id="parameterName" /><field value="Float" type="RAIN.Animation.MecanimParameterValue+SupportedMecanimType"
+      id="parameterType" /><field type="RAIN.Representation.Expression" reference="17"
+      id="parameterValue" /><field value="0" type="System.Single" id="dampTime" /></reference><reference
+      type="RAIN.Representation.Expression" refcount="1" id="17" customdata="101"
+      /><reference type="RAIN.Animation.MecanimParameterValue" refcount="1" id="18"><field
+      value="Speed" type="System.String" id="parameterName" /><field value="Float"
+      type="RAIN.Animation.MecanimParameterValue+SupportedMecanimType" id="parameterType"
+      /><field type="RAIN.Representation.Expression" reference="19" id="parameterValue"
+      /><field value="0" type="System.Single" id="dampTime" /></reference><reference
+      type="RAIN.Representation.Expression" refcount="1" id="19" customdata="104"
+      /><reference type="RAIN.Animation.MecanimAnimator+MecanimAnimatorState" refcount="1"
+      id="20"><field value="Base Layer.Walk" type="System.String" id="mecanimState"
+      /><field value="0" type="System.Int32" id="layer" /><field type="RAIN.Animation.MecanimParameterValue"
+      reference="21" id="startParameter" childrenvisible="True" /><field type="RAIN.Animation.MecanimParameterValue"
+      reference="23" id="stopParameter" childrenvisible="True" /></reference><reference
+      type="RAIN.Animation.MecanimParameterValue" refcount="1" id="21"><field value="Speed"
+      type="System.String" id="parameterName" /><field value="Float" type="RAIN.Animation.MecanimParameterValue+SupportedMecanimType"
+      id="parameterType" /><field type="RAIN.Representation.Expression" reference="22"
+      id="parameterValue" /><field value="0" type="System.Single" id="dampTime" /></reference><reference
+      type="RAIN.Representation.Expression" refcount="1" id="22" customdata="5" /><reference
+      type="RAIN.Animation.MecanimParameterValue" refcount="1" id="23"><field value="Speed"
+      type="System.String" id="parameterName" /><field value="Float" type="RAIN.Animation.MecanimParameterValue+SupportedMecanimType"
+      id="parameterType" /><field type="RAIN.Representation.Expression" reference="24"
+      id="parameterValue" /><field value="0" type="System.Single" id="dampTime" /></reference><reference
+      type="RAIN.Representation.Expression" refcount="1" id="24" customdata="43" /><reference
+      type="RAIN.Animation.MecanimAnimator+MecanimAnimatorState" refcount="1" id="25"><field
+      value="Base Layer.Run" type="System.String" id="mecanimState" /><field value="0"
+      type="System.Int32" id="layer" /><field type="RAIN.Animation.MecanimParameterValue"
+      reference="26" id="startParameter" childrenvisible="True" /><field type="RAIN.Animation.MecanimParameterValue"
+      reference="28" id="stopParameter" childrenvisible="True" /></reference><reference
+      type="RAIN.Animation.MecanimParameterValue" refcount="1" id="26"><field value="Speed"
+      type="System.String" id="parameterName" /><field value="Float" type="RAIN.Animation.MecanimParameterValue+SupportedMecanimType"
+      id="parameterType" /><field type="RAIN.Representation.Expression" reference="27"
+      id="parameterValue" /><field value="0" type="System.Single" id="dampTime" /></reference><reference
+      type="RAIN.Representation.Expression" refcount="1" id="27" customdata="9" /><reference
+      type="RAIN.Animation.MecanimParameterValue" refcount="1" id="28"><field value="Speed"
+      type="System.String" id="parameterName" /><field value="Float" type="RAIN.Animation.MecanimParameterValue+SupportedMecanimType"
+      id="parameterType" /><field type="RAIN.Representation.Expression" reference="29"
+      id="parameterValue" /><field value="0" type="System.Single" id="dampTime" /></reference><reference
+      type="RAIN.Representation.Expression" refcount="1" id="29" customdata="44" /><reference
+      type="RAIN.Animation.MecanimAnimator+MecanimAnimatorState" refcount="1" id="30"><field
+      value="Base Layer.Punch" type="System.String" id="mecanimState" /><field value="0"
+      type="System.Int32" id="layer" /><field type="RAIN.Animation.MecanimParameterValue"
+      reference="31" id="startParameter" childrenvisible="True" /><field type="RAIN.Animation.MecanimParameterValue"
+      reference="33" id="stopParameter" childrenvisible="True" /></reference><reference
+      type="RAIN.Animation.MecanimParameterValue" refcount="1" id="31"><field value="Cutting"
+      type="System.String" id="parameterName" /><field value="Boolean" type="RAIN.Animation.MecanimParameterValue+SupportedMecanimType"
+      id="parameterType" /><field type="RAIN.Representation.Expression" reference="32"
+      id="parameterValue" /><field value="0" type="System.Single" id="dampTime" /></reference><reference
+      type="RAIN.Representation.Expression" refcount="1" id="32" customdata="92" /><reference
+      type="RAIN.Animation.MecanimParameterValue" refcount="1" id="33"><field value="Cutting"
+      type="System.String" id="parameterName" /><field value="Boolean" type="RAIN.Animation.MecanimParameterValue+SupportedMecanimType"
+      id="parameterType" /><field type="RAIN.Representation.Expression" reference="34"
+      id="parameterValue" /><field value="0" type="System.Single" id="dampTime" /></reference><reference
+      type="RAIN.Representation.Expression" refcount="1" id="34" customdata="88" /></references></component>
     _serializedGameObjects:
     - {fileID: 151614}
     - {fileID: 11400000, guid: 2b3a72e46f0d17040929c3a01d3667ee, type: 2}
-    _serializedCustomData: []
+    _serializedCustomData:
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: MA0K
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: Mw0K
+    - _data: 
+      _stringData: MA0K
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: NQ0K
+    - _data: 
+      _stringData: MA0K
+    - _data: 
+      _stringData: MA0K
+    - _data: 
+      _stringData: Mw0K
+    - _data: 
+      _stringData: MywNCg==
+    - _data: 
+      _stringData: MywgDQo=
+    - _data: 
+      _stringData: MywgNA0K
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: Mw0K
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: Rg0K
+    - _data: 
+      _stringData: RmENCg==
+    - _data: 
+      _stringData: RmFsDQo=
+    - _data: 
+      _stringData: RmFscw0K
+    - _data: 
+      _stringData: RmFsc2UNCg==
+    - _data: 
+      _stringData: RmFscw0K
+    - _data: 
+      _stringData: RmFsDQo=
+    - _data: 
+      _stringData: RmENCg==
+    - _data: 
+      _stringData: Rg0K
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: VA0K
+    - _data: 
+      _stringData: VHINCg==
+    - _data: 
+      _stringData: VHJ1DQo=
+    - _data: 
+      _stringData: VHJ1ZQ0K
+    - _data: 
+      _stringData: Qg0K
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: Rg0K
+    - _data: 
+      _stringData: RmENCg==
+    - _data: 
+      _stringData: RmFsDQo=
+    - _data: 
+      _stringData: RmFscw0K
+    - _data: 
+      _stringData: RmFsc2UNCg==
+    - _data: 
+      _stringData: Mw0K
+    - _data: 
+      _stringData: NQ0K
+    - _data: 
+      _stringData: MA0K
+    - _data: 
+      _stringData: MA0K
+    - _data: 
+      _stringData: Rg0K
+    - _data: 
+      _stringData: RmENCg==
+    - _data: 
+      _stringData: RmFsDQo=
+    - _data: 
+      _stringData: RmFscw0K
+    - _data: 
+      _stringData: RmFsc2UNCg==
+    - _data: 
+      _stringData: VA0K
+    - _data: 
+      _stringData: VHINCg==
+    - _data: 
+      _stringData: VHJ1DQo=
+    - _data: 
+      _stringData: VHJ1ZQ0K
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: VA0K
+    - _data: 
+      _stringData: VHINCg==
+    - _data: 
+      _stringData: VHJ1DQo=
+    - _data: 
+      _stringData: VHJ1ZQ0K
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: Mw0K
+    - _data: 
+      _stringData: MywNCg==
+    - _data: 
+      _stringData: MywgDQo=
+    - _data: 
+      _stringData: MywgNA0K
+    - _data: 
+      _stringData: MywgDQo=
+    - _data: 
+      _stringData: MywgNQ0K
+    - _data: 
+      _stringData: Rg0K
+    - _data: 
+      _stringData: RmENCg==
+    - _data: 
+      _stringData: RmFsDQo=
+    - _data: 
+      _stringData: RmFscw0K
+    - _data: 
+      _stringData: RmFsc2UNCg==
+    - _data: 
+      _stringData: Rg0K
+    - _data: 
+      _stringData: RmENCg==
+    - _data: 
+      _stringData: RmFsDQo=
+    - _data: 
+      _stringData: RmFscw0K
+    - _data: 
+      _stringData: RmFsc2UNCg==
+    - _data: 
+      _stringData: VA0K
+    - _data: 
+      _stringData: VHINCg==
+    - _data: 
+      _stringData: VHJ1DQo=
+    - _data: 
+      _stringData: VHJ1ZQ0K
+    - _data: 
+      _stringData: Rg0K
+    - _data: 
+      _stringData: RmENCg==
+    - _data: 
+      _stringData: RmFzDQo=
+    - _data: 
+      _stringData: RmFzbA0K
+    - _data: 
+      _stringData: RmFzDQo=
+    - _data: 
+      _stringData: RmENCg==
+    - _data: 
+      _stringData: RmFsDQo=
+    - _data: 
+      _stringData: RmFscw0K
+    - _data: 
+      _stringData: RmFsc2UNCg==
+    - _data: 
+      _stringData: VA0K
+    - _data: 
+      _stringData: VHINCg==
+    - _data: 
+      _stringData: VHJ1DQo=
+    - _data: 
+      _stringData: VHJ1ZQ0K
+    - _data: 
+      _stringData: MA0K
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: Mw0K
+    - _data: 
+      _stringData: Pg0K
+    - _data: 
+      _stringData: PiANCg==
+    - _data: 
+      _stringData: PiAwDQo=
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: DQo=
+    - _data: 
+      _stringData: MA0K
+    - _data: 
+      _stringData: Pg0K
+    - _data: 
+      _stringData: PiANCg==
+    - _data: 
+      _stringData: PiAwDQo=
 --- !u!137 &13744008
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
