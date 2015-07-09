@@ -41,12 +41,6 @@ public class GameManager : MonoBehaviour
     // Main player stats
     public int playerWood, playerExp, playerHealth;
 
-    // GUI text font variables
-    private float _oldWidth;
-    private float _oldHeight;
-    public float _fontSize;
-    public float Ratio = 25;
-
     // GUI background
     public Texture menuBG1;
 
@@ -69,9 +63,9 @@ public class GameManager : MonoBehaviour
         
         // Initialize the UnitManager
         unitManager.Initialize();
-        InvokeRepeating("SpawnSoldierRed", 0, 5);
-        InvokeRepeating("SpawnSoldierBlue", 0, 5);
-        InvokeRepeating("SpawnGathererRed", 0, 5);
+        InvokeRepeating("SpawnSoldierRed", 0, 10);
+        InvokeRepeating("SpawnSoldierBlue", 0, 10);
+        InvokeRepeating("SpawnGathererRed", 0, 10);
         //InvokeRepeating("SpawnGathererBlue", 0, 5);
 
         // Initialize input settings
@@ -178,14 +172,6 @@ public class GameManager : MonoBehaviour
                     playerExp += 10;
                 }
             }
-        }
-
-        // Script for scaling text (public float _fontSize)
-        if (_oldWidth != Screen.width || _oldHeight != Screen.height)
-        {
-            _oldWidth = Screen.width;
-            _oldHeight = Screen.height;
-            _fontSize = Mathf.Min(Screen.width, Screen.height) / Ratio;
         }
     }
 

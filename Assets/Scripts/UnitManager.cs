@@ -91,7 +91,7 @@ public class UnitManager : MonoBehaviour
         }
 
         // Calculate a point near a castle.
-        Vector3 spawn = castlePos + new Vector3(spawnDistance * Mathf.Cos(spawnAngle), 0.5F, spawnDistance * Mathf.Sin(spawnAngle));
+        Vector3 spawn = castlePos + new Vector3(spawnDistance * Mathf.Cos(spawnAngle), 0, spawnDistance * Mathf.Sin(spawnAngle));
 
         // Spawn a unit
         GameObject spawned;
