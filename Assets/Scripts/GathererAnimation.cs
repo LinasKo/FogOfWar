@@ -9,11 +9,14 @@ public class GathererAnimation : MonoBehaviour {
     int idleHash = Animator.StringToHash("Base Layer.Idle");
     int punchHash = Animator.StringToHash("Base Layer.Punch");
 
-    void Start () {
+    void Start ()
+    {
         anim = GetComponent<Animator>();
 	}
 	
-	void Update () {
+	void Update ()
+    {
+
         if (anim.GetFloat("Speed") == 0 && anim.GetBool("Cutting") == false)
             anim.Play(idleHash);
         else if (anim.GetFloat("Speed") == 3 && anim.GetBool("Cutting") == false)

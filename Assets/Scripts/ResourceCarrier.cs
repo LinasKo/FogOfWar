@@ -22,10 +22,12 @@ public class ResourceCarrier : MonoBehaviour
     {
         if (amount >= wood || amount == -1)
         {
+            gameManager.playerWood += wood;
             wood = 0;
         }
         else
         {
+            gameManager.playerWood += amount;
             wood -= amount;
         }
 

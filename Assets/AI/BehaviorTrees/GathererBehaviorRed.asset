@@ -26,79 +26,101 @@ MonoBehaviour:
       != null&quot;&gt;&lt;sequencer usepriorities=&quot;False&quot; repeatuntil=&quot;&quot;
       name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;parallel tiebreaker=&quot;fail&quot;
       succeed=&quot;all&quot; repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;parallel&quot;
-      fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;action repeatuntil=&quot;&quot;
-      parametervalues=&quot;&quot; parameters=&quot;&quot; namespace=&quot;(global)&quot;
-      name=&quot;Cut&quot; debugbreak=&quot;False&quot; classname=&quot;Cut&quot;
-      /&gt;&lt;animate repeatuntil=&quot;&quot; name=&quot;Animate Cutting&quot; debugbreak=&quot;False&quot;
-      animationstate=&quot;Base Layer.Punch&quot; /&gt;&lt;/parallel&gt;&lt;parallel
-      tiebreaker=&quot;fail&quot; succeed=&quot;all&quot; repeatuntil=&quot;&quot;
-      priority=&quot;&quot; name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;timer
-      waitforsec=&quot;1.75&quot; returnvalue=&quot;success&quot; name=&quot;cuttingPause&quot;
-      debugbreak=&quot;False&quot; /&gt;&lt;animate repeatuntil=&quot;&quot; name=&quot;Animate
-      Idle&quot; debugbreak=&quot;False&quot; animationstate=&quot;Base Layer.Idle&quot;
-      /&gt;&lt;/parallel&gt;&lt;constraint repeatuntil=&quot;&quot; priority=&quot;&quot;
-      name=&quot;Wood carrying capacity reached?&quot; debugbreak=&quot;False&quot;
+      fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;mecparam valueexpression=&quot;true&quot;
+      repeatuntil=&quot;&quot; parametertype=&quot;boolean&quot; parametername=&quot;Cutting&quot;
+      name=&quot;Set Cutting to True&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      namespace=&quot;(global)&quot; name=&quot;Cut&quot; debugbreak=&quot;False&quot;
+      classname=&quot;Cut&quot; /&gt;&lt;/parallel&gt;&lt;parallel tiebreaker=&quot;fail&quot;
+      succeed=&quot;all&quot; repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;parallel&quot;
+      fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;mecparam valueexpression=&quot;0&quot;
+      repeatuntil=&quot;&quot; parametertype=&quot;float&quot; parametername=&quot;Speed&quot;
+      name=&quot;Set speed to Idle&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot;
+      /&gt;&lt;timer waitforsec=&quot;1.75&quot; returnvalue=&quot;success&quot; name=&quot;cuttingPause&quot;
+      debugbreak=&quot;False&quot; /&gt;&lt;/parallel&gt;&lt;constraint repeatuntil=&quot;&quot;
+      priority=&quot;&quot; name=&quot;Wood carrying capacity reached?&quot; debugbreak=&quot;False&quot;
       constraint=&quot;atCap == true&quot;&gt;&lt;parallel tiebreaker=&quot;fail&quot;
       succeed=&quot;all&quot; repeatuntil=&quot;&quot; name=&quot;parallel&quot; fail=&quot;any&quot;
-      debugbreak=&quot;False&quot;&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot;
+      debugbreak=&quot;False&quot;&gt;&lt;mecparam valueexpression=&quot;3&quot; repeatuntil=&quot;&quot;
+      parametertype=&quot;float&quot; parametername=&quot;Speed&quot; name=&quot;Set
+      speed to Walk&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot; /&gt;&lt;mecparam
+      valueexpression=&quot;false&quot; repeatuntil=&quot;&quot; parametertype=&quot;boolean&quot;
+      parametername=&quot;Cutting&quot; name=&quot;Set Cutting to False&quot; debugbreak=&quot;False&quot;
+      damptime=&quot;0&quot; /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot;
       name=&quot;Move to castle&quot; movetarget=&quot;gameobject(&amp;quot;RedCastle&amp;quot;)&quot;
       movespeed=&quot;3&quot; facetarget=&quot;&quot; debugbreak=&quot;False&quot;
-      closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot; /&gt;&lt;animate
-      repeatuntil=&quot;&quot; name=&quot;Animate Walk&quot; debugbreak=&quot;False&quot;
-      animationstate=&quot;Base Layer.Walk&quot; /&gt;&lt;/parallel&gt;&lt;parallel
+      closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot; /&gt;&lt;/parallel&gt;&lt;parallel
       tiebreaker=&quot;fail&quot; succeed=&quot;all&quot; repeatuntil=&quot;&quot;
-      name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;action
-      repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
-      namespace=&quot;(global)&quot; name=&quot;Deposit wood&quot; debugbreak=&quot;False&quot;
-      classname=&quot;DepositWood&quot; /&gt;&lt;animate repeatuntil=&quot;&quot;
-      name=&quot;Animate Idle&quot; debugbreak=&quot;False&quot; animationstate=&quot;Base
-      Layer.Idle&quot; /&gt;&lt;/parallel&gt;&lt;/constraint&gt;&lt;/sequencer&gt;&lt;/constraint&gt;&lt;selector
+      name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;mecparam
+      valueexpression=&quot;0&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
+      parametername=&quot;Speed&quot; name=&quot;Set speed to Idle&quot; debugbreak=&quot;False&quot;
+      damptime=&quot;0&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;(global)&quot; name=&quot;Deposit wood&quot;
+      debugbreak=&quot;False&quot; classname=&quot;DepositWood&quot; /&gt;&lt;/parallel&gt;&lt;/constraint&gt;&lt;/sequencer&gt;&lt;/constraint&gt;&lt;selector
       usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
       name=&quot;selector&quot; debugbreak=&quot;False&quot;&gt;&lt;sequencer usepriorities=&quot;False&quot;
       repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action
       repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;NTA=&quot;
       parameters=&quot;UmFuZ2U=&quot; namespace=&quot;(global)&quot; name=&quot;Detect
       far tree&quot; debugbreak=&quot;False&quot; classname=&quot;DetectResource&quot;
-      /&gt;&lt;parallel tiebreaker=&quot;fail&quot; succeed=&quot;all&quot; repeatuntil=&quot;&quot;
-      priority=&quot;&quot; name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;move
-      turnspeed=&quot;&quot; repeatuntil=&quot;&quot; name=&quot;Move closer&quot;
-      movetarget=&quot;sightedTree&quot; movespeed=&quot;5&quot; facetarget=&quot;&quot;
-      debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot;
-      /&gt;&lt;animate repeatuntil=&quot;&quot; name=&quot;Animate Run&quot; debugbreak=&quot;False&quot;
-      animationstate=&quot;Base Layer.Run&quot; /&gt;&lt;/parallel&gt;&lt;/sequencer&gt;&lt;constraint
+      /&gt;&lt;mecparam valueexpression=&quot;false&quot; repeatuntil=&quot;&quot;
+      priority=&quot;&quot; parametertype=&quot;boolean&quot; parametername=&quot;Cutting&quot;
+      name=&quot;Set Cutting to False&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot;
+      /&gt;&lt;constraint repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;Tree
+      sighted?&quot; debugbreak=&quot;False&quot; constraint=&quot;sightedTree !=
+      null&quot;&gt;&lt;parallel tiebreaker=&quot;fail&quot; succeed=&quot;all&quot;
+      repeatuntil=&quot;&quot; name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;mecparam
+      valueexpression=&quot;5&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
+      parametername=&quot;Speed&quot; name=&quot;Set speed to Run&quot; debugbreak=&quot;False&quot;
+      damptime=&quot;0&quot; /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot;
+      name=&quot;Move closer&quot; movetarget=&quot;sightedTree&quot; movespeed=&quot;5&quot;
+      facetarget=&quot;&quot; debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.6&quot;
+      closeenoughangle=&quot;&quot; /&gt;&lt;/parallel&gt;&lt;/constraint&gt;&lt;/sequencer&gt;&lt;constraint
       repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;Has Wood?&quot; debugbreak=&quot;False&quot;
       constraint=&quot;hasWood == true&quot;&gt;&lt;parallel tiebreaker=&quot;fail&quot;
       succeed=&quot;all&quot; repeatuntil=&quot;&quot; name=&quot;parallel&quot; fail=&quot;any&quot;
-      debugbreak=&quot;False&quot;&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot;
+      debugbreak=&quot;False&quot;&gt;&lt;mecparam valueexpression=&quot;false&quot;
+      repeatuntil=&quot;&quot; parametertype=&quot;boolean&quot; parametername=&quot;Cutting&quot;
+      name=&quot;Set Cutting to False&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot;
+      /&gt;&lt;mecparam valueexpression=&quot;3&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
+      parametername=&quot;Speed&quot; name=&quot;Set speed to Walk&quot; debugbreak=&quot;False&quot;
+      damptime=&quot;0&quot; /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot;
       name=&quot;Move to castle&quot; movetarget=&quot;gameobject(&amp;quot;RedCastle&amp;quot;)&quot;
       movespeed=&quot;3&quot; facetarget=&quot;&quot; debugbreak=&quot;False&quot;
-      closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot; /&gt;&lt;animate
-      repeatuntil=&quot;&quot; name=&quot;Animate Walk&quot; debugbreak=&quot;False&quot;
-      animationstate=&quot;Base Layer.Walk&quot; /&gt;&lt;/parallel&gt;&lt;parallel
+      closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot; /&gt;&lt;/parallel&gt;&lt;parallel
       tiebreaker=&quot;fail&quot; succeed=&quot;all&quot; repeatuntil=&quot;&quot;
-      name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;action
-      repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
-      namespace=&quot;(global)&quot; name=&quot;Deposit wood&quot; debugbreak=&quot;False&quot;
-      classname=&quot;DepositWood&quot; /&gt;&lt;animate repeatuntil=&quot;&quot;
-      name=&quot;Animate Idle&quot; debugbreak=&quot;False&quot; animationstate=&quot;Base
-      Layer.Idle&quot; /&gt;&lt;/parallel&gt;&lt;/constraint&gt;&lt;sequencer usepriorities=&quot;False&quot;
-      repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action
-      repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;NQA1&quot;
-      parameters=&quot;TWFwSGVpZ2h0AE1hcFdpZHRo&quot; namespace=&quot;&quot; name=&quot;Loiter&quot;
-      debugbreak=&quot;False&quot; classname=&quot;Loiter&quot; /&gt;&lt;parallel
+      name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;mecparam
+      valueexpression=&quot;0&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
+      parametername=&quot;Speed&quot; name=&quot;Set speed to Idle&quot; debugbreak=&quot;False&quot;
+      damptime=&quot;0&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;(global)&quot; name=&quot;Deposit wood&quot;
+      debugbreak=&quot;False&quot; classname=&quot;DepositWood&quot; /&gt;&lt;/parallel&gt;&lt;/constraint&gt;&lt;sequencer
+      usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
+      name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action repeatuntil=&quot;&quot;
+      priority=&quot;&quot; parametervalues=&quot;NQA1&quot; parameters=&quot;TWFwSGVpZ2h0AE1hcFdpZHRo&quot;
+      namespace=&quot;&quot; name=&quot;Loiter&quot; debugbreak=&quot;False&quot;
+      classname=&quot;Loiter&quot; /&gt;&lt;mecparam valueexpression=&quot;false&quot;
+      repeatuntil=&quot;&quot; priority=&quot;&quot; parametertype=&quot;boolean&quot;
+      parametername=&quot;Cutting&quot; name=&quot;Set Cutting to False&quot; debugbreak=&quot;False&quot;
+      damptime=&quot;0&quot; /&gt;&lt;selector usepriorities=&quot;False&quot; repeatuntil=&quot;&quot;
+      priority=&quot;&quot; name=&quot;selector&quot; debugbreak=&quot;False&quot;&gt;&lt;parallel
       tiebreaker=&quot;fail&quot; succeed=&quot;all&quot; repeatuntil=&quot;&quot;
-      priority=&quot;&quot; name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;move
-      turnspeed=&quot;&quot; repeatuntil=&quot;&quot; name=&quot;movo to loiter&quot;
-      movetarget=&quot;loiterTarget&quot; movespeed=&quot;3&quot; facetarget=&quot;&quot;
-      debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot;
-      /&gt;&lt;animate repeatuntil=&quot;&quot; name=&quot;Animate Walk&quot; debugbreak=&quot;False&quot;
-      animationstate=&quot;Base Layer.Walk&quot; /&gt;&lt;/parallel&gt;&lt;parallel
+      priority=&quot;&quot; name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;sequencer
+      usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; name=&quot;sequencer&quot;
+      debugbreak=&quot;False&quot;&gt;&lt;mecparam valueexpression=&quot;3&quot; repeatuntil=&quot;&quot;
+      priority=&quot;&quot; parametertype=&quot;float&quot; parametername=&quot;Speed&quot;
+      name=&quot;Set speed to Walk&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot;
+      /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
+      name=&quot;movo to loiter&quot; movetarget=&quot;loiterTarget&quot; movespeed=&quot;3&quot;
+      facetarget=&quot;&quot; debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.6&quot;
+      closeenoughangle=&quot;&quot; /&gt;&lt;timer waitforsec=&quot;0&quot; returnvalue=&quot;failure&quot;
+      priority=&quot;&quot; name=&quot;timer&quot; debugbreak=&quot;False&quot; /&gt;&lt;/sequencer&gt;&lt;/parallel&gt;&lt;parallel
       tiebreaker=&quot;fail&quot; succeed=&quot;all&quot; repeatuntil=&quot;&quot;
-      priority=&quot;&quot; name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;timer
-      waitforsec=&quot;1&quot; returnvalue=&quot;success&quot; name=&quot;timer&quot;
-      debugbreak=&quot;False&quot; /&gt;&lt;animate repeatuntil=&quot;&quot; name=&quot;Animate
-      Idle&quot; debugbreak=&quot;False&quot; animationstate=&quot;Base Layer.Idle&quot;
-      /&gt;&lt;/parallel&gt;&lt;/sequencer&gt;&lt;/selector&gt;&lt;/selector&gt;&lt;/parallel&gt;&lt;/behaviortree&gt;"
+      priority=&quot;&quot; name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;mecparam
+      valueexpression=&quot;0&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
+      parametername=&quot;Speed&quot; name=&quot;Set speed to Idle&quot; debugbreak=&quot;False&quot;
+      damptime=&quot;0&quot; /&gt;&lt;timer waitforsec=&quot;1&quot; returnvalue=&quot;success&quot;
+      name=&quot;timer&quot; debugbreak=&quot;False&quot; /&gt;&lt;/parallel&gt;&lt;/selector&gt;&lt;/sequencer&gt;&lt;/selector&gt;&lt;/selector&gt;&lt;/parallel&gt;&lt;/behaviortree&gt;"
       type="System.String" id="treeData" /><field type="System.Array" id="treeBindings"
       elementtype="System.String" /></fields><references /></scriptableobject>
     _serializedGameObjects: []
