@@ -9,7 +9,9 @@ using RAIN.Representation;
 public class DetectResource : RAINAction
 {
     public Expression Range = new Expression();
+    public Expression Allegiance = new Expression();
 
+    private Player myColor;
     private FogOfWar fog;
     private Vector3 position;
     private float range;
@@ -17,7 +19,15 @@ public class DetectResource : RAINAction
     public override void Start(RAIN.Core.AI ai)
     {
         base.Start(ai);
-        fog = FogOfWar.FindExisting;
+        if (Allegiance.Evaluate<string>(ai.DeltaTime, ai.WorkingMemory) == "Red")
+        {
+            myColor = Player.RED;
+        }
+        else
+        {
+            myColor = Player.BLUE;
+        }
+        fog = FogOfWar.FindExisting(myColor);
         range = Range.Evaluate<float>(ai.DeltaTime, ai.WorkingMemory);
     }
 

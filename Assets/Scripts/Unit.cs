@@ -11,14 +11,14 @@ public abstract class Unit : MonoBehaviour
     // Added some things just to test rendering (not rendering) in fog of war. 
     private Renderer rend;
     private FogOfWar fog;
-
-    private int _health, _attackDmg, _attackSpd, _movementSpd;
+    
     private UnitType _type;
 
     public void Start()
     {
         rend = GetComponent<Renderer>();
-        fog = FogOfWar.FindExisting;
+        // manage unit rendering for red player.
+        fog = FogOfWar.FindExisting(Player.RED);
     }
 
     public void Update()
@@ -33,12 +33,8 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
-    public void SetUnit(int health, int attackDmg, int attackSpd, int movementSpd, UnitType type)
+    public void SetUnit(UnitType type)
     {
-        _health = health;
-        _attackDmg = attackDmg;
-        _attackSpd = attackSpd;
-        _movementSpd = movementSpd;
         _type = type;
     }
 
@@ -46,11 +42,7 @@ public abstract class Unit : MonoBehaviour
     {
         ArrayList list = new ArrayList();
 
-        list[0] = _health;
-        list[1] = _attackDmg;
-        list[2] = _attackSpd;
-        list[3] = _movementSpd;
-        list[4] = _type;
+        list[0] = _type;
 
         list.TrimToSize();
 

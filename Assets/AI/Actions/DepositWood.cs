@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using RAIN.Action;
 using RAIN.Core;
+using RAIN.Representation;
 
 [RAINAction]
 public class DepositWood : RAINAction

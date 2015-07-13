@@ -8,9 +8,11 @@ using RAIN.Representation;
 [RAINAction]
 public class Loiter : RAINAction
 {
+    public Expression Allegiance = new Expression();
     public Expression MapHeight = new Expression();
     public Expression MapWidth = new Expression();
 
+    private Player myColor;
     private FogOfWar fog;
     private float mapHeight, mapWidth;
 
@@ -18,7 +20,16 @@ public class Loiter : RAINAction
     public override void Start(RAIN.Core.AI ai)
     {
         base.Start(ai);
-        fog = FogOfWar.FindExisting;
+
+        if (Allegiance.Evaluate<string>(ai.DeltaTime, ai.WorkingMemory) == "Red")
+        {
+            myColor = Player.RED;
+        }
+        else
+        {
+            myColor = Player.BLUE;
+        }
+        fog = FogOfWar.FindExisting(myColor);
     }
 
     public override ActionResult Execute(RAIN.Core.AI ai)

@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     // Declare all managers
     private MapManager mapManager;
     private UnitManager unitManager;
-    private FogOfWar fog;
+    private FogOfWar fog_red;
+    private FogOfWar fog_blue;
 
     // Effects fog manipulation
     public float fogActionStrength = 1.0f;
@@ -53,7 +54,8 @@ public class GameManager : MonoBehaviour
         // Find the managers
         mapManager = GetComponent<MapManager>();
         unitManager = GetComponent<UnitManager>();
-        fog = FogOfWar.FindExisting;
+        fog_red  = FogOfWar.FindExisting(Player.RED);
+        fog_blue = FogOfWar.FindExisting(Player.BLUE);
 
         // Populate the map
         mapManager.MapSetup();
@@ -63,19 +65,23 @@ public class GameManager : MonoBehaviour
         
         // Initialize the UnitManager
         unitManager.Initialize();
-        //InvokeRepeating("SpawnSoldierRed", 0, 10);
-        //InvokeRepeating("SpawnSoldierBlue", 0, 10);
-        //InvokeRepeating("SpawnGathererRed", 0, 10);
-        //InvokeRepeating("SpawnGathererBlue", 0, 5);
+        InvokeRepeating("SpawnSoldierRed", 0, 10);
+        InvokeRepeating("SpawnSoldierBlue", 0, 10);
+        InvokeRepeating("SpawnGathererRed", 0, 5);
+        InvokeRepeating("SpawnGathererBlue", 0, 5);
 
         // Initialize input settings
-        fogPointList = new List<Vector3>();
         fogCtrlState = FogControlState.NONE;
+        fogPointList = new List<Vector3>();
 
-        // Initialize fog; Remove fog from castle
-        List<Vector3> castleList = new List<Vector3>();
-        castleList.Add(GameObject.Find("RedCastle").transform.position);
-        fog.ManipulateFog(castleList, fogActionStrength, fogActionRange * 2);
+        // Initialize fog; Remove fog from castles
+        fogPointList.Add(GameObject.Find("RedCastle").transform.position);
+        fog_red.ManipulateFog(fogPointList, fogActionStrength, fogActionRange * 2);
+        fogPointList.Clear();
+
+        fogPointList.Add(GameObject.Find("BlueCastle").transform.position);
+        fog_blue.ManipulateFog(fogPointList, fogActionStrength, fogActionRange * 2);
+        fogPointList.Clear();
 
         // Initialize resources (NOT NEEDED ATM, USE UNITY INTERFACE)
         // playerWood = 50;
@@ -101,12 +107,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Manage visibility of all tagged static objects.
+        // Manage visibility (to red player) of all tagged static objects.
         foreach (string tag in tagList)
         {
             foreach (GameObject resource in GameObject.FindGameObjectsWithTag(tag))
             {
-                if (fog.IsFoggy(resource.transform.position))
+                if (fog_red.IsFoggy(resource.transform.position))
                 {
                     resource.GetComponent<Renderer>().enabled = false;
                 }
@@ -122,16 +128,17 @@ public class GameManager : MonoBehaviour
         camera.transform.Translate(new Vector3(Input.GetAxis("Horizontal") * cameraSpeed * Time.deltaTime, 0F, 0F));
         camera.transform.Translate(forwardDirection, Space.World);
 
+        // Manipulate fog for red player.
         // Capture the moment when the button was released
         if (Input.GetMouseButtonUp(0))
         {
             switch(fogCtrlState)
             {
                 case FogControlState.CLEARING:
-                    fog.ManipulateFog(fogPointList, fogActionStrength, fogActionRange);
+                    fog_red.ManipulateFog(fogPointList, fogActionStrength, fogActionRange);
                     break;
                 case FogControlState.CREATING:
-                    fog.ManipulateFog(fogPointList, -fogActionStrength, fogActionRange);
+                    fog_red.ManipulateFog(fogPointList, -fogActionStrength, fogActionRange);
                     break;
             }
             fogCtrlState = FogControlState.NONE;
@@ -144,7 +151,7 @@ public class GameManager : MonoBehaviour
             if (MousePosition() != Vector3.down)
             {
                 fogPointList = new List<Vector3>();
-                if (fog.IsFoggy(mousePosition)) {
+                if (fog_red.IsFoggy(mousePosition)) {
                     fogCtrlState = FogControlState.CREATING;
                 }
                 else
@@ -160,8 +167,8 @@ public class GameManager : MonoBehaviour
             Vector3 mousePosition = MousePosition();
             if (mousePosition != Vector3.down)
             {
-                if ((fogCtrlState == FogControlState.CREATING && fog.IsFoggy(mousePosition) && playerWood >= 25) ||
-                    (fogCtrlState == FogControlState.CLEARING && !fog.IsFoggy(mousePosition) && playerWood >= 25))
+                if ((fogCtrlState == FogControlState.CREATING && fog_red.IsFoggy(mousePosition) && playerWood >= 25) ||
+                    (fogCtrlState == FogControlState.CLEARING && !fog_red.IsFoggy(mousePosition) && playerWood >= 25))
                 {
                     canManipulateFog = false;
                     fogPointList.Add(mousePosition);

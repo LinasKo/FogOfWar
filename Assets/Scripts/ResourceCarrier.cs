@@ -30,8 +30,6 @@ public class ResourceCarrier : MonoBehaviour
             gameManager.playerWood += amount;
             wood -= amount;
         }
-
-        //gameManager.playerWood += amount;
     }
 
     public bool AtCap()

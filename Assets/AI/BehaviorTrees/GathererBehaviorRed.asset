@@ -60,9 +60,9 @@ MonoBehaviour:
       usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
       name=&quot;selector&quot; debugbreak=&quot;False&quot;&gt;&lt;sequencer usepriorities=&quot;False&quot;
       repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action
-      repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;NTA=&quot;
-      parameters=&quot;UmFuZ2U=&quot; namespace=&quot;(global)&quot; name=&quot;Detect
-      far tree&quot; debugbreak=&quot;False&quot; classname=&quot;DetectResource&quot;
+      repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;NTAAIlJlZCI=&quot;
+      parameters=&quot;UmFuZ2UAQWxsZWdpYW5jZQ==&quot; namespace=&quot;(global)&quot;
+      name=&quot;Detect far tree&quot; debugbreak=&quot;False&quot; classname=&quot;DetectResource&quot;
       /&gt;&lt;mecparam valueexpression=&quot;false&quot; repeatuntil=&quot;&quot;
       priority=&quot;&quot; parametertype=&quot;boolean&quot; parametername=&quot;Cutting&quot;
       name=&quot;Set Cutting to False&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot;
@@ -97,7 +97,7 @@ MonoBehaviour:
       debugbreak=&quot;False&quot; classname=&quot;DepositWood&quot; /&gt;&lt;/parallel&gt;&lt;/constraint&gt;&lt;sequencer
       usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
       name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action repeatuntil=&quot;&quot;
-      priority=&quot;&quot; parametervalues=&quot;NQA1&quot; parameters=&quot;TWFwSGVpZ2h0AE1hcFdpZHRo&quot;
+      priority=&quot;&quot; parametervalues=&quot;IlJlZCIANQA1&quot; parameters=&quot;QWxsZWdpYW5jZQBNYXBIZWlnaHQATWFwV2lkdGg=&quot;
       namespace=&quot;&quot; name=&quot;Loiter&quot; debugbreak=&quot;False&quot;
       classname=&quot;Loiter&quot; /&gt;&lt;mecparam valueexpression=&quot;false&quot;
       repeatuntil=&quot;&quot; priority=&quot;&quot; parametertype=&quot;boolean&quot;

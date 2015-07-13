@@ -15,7 +15,7 @@ using System.Collections.Generic;
  * Fog Of War can be cleared and redrawn using ManipulateFog function.
  */
 
-public class FogOfWar: MonoBehaviour
+public class FogOfWar : MonoBehaviour
 {
     /*
      * The CloudStrength property indicates how visible the clouds are
@@ -211,212 +211,222 @@ public class FogOfWar: MonoBehaviour
     }
 
     // Always use this method to find the fog instance.
-    public static FogOfWar FindExisting
+    public static FogOfWar FindExisting(Player color)
     {
-        get
+        GameObject obj;
+        if (color == Player.RED)
         {
-            GameObject obj = GameObject.Find("FogOfWar");
-            if (obj != null && obj.activeInHierarchy)
-            {
-                return obj.GetComponent<FogOfWar>();
-            }
-            return null;
+            obj = GameObject.Find("FogOfWar_red");
         }
-    }
-
-    /*
-    * Variables used for cloud fading.
-    */
-    private float _oldCloudStrength = 0;
-    private float _transitionStartTime = 0;
-
-    /*
-     * The important bit: this method is invoked on every frame, and
-     * is an opportunity for us to tell the Fog of War shader how it
-     * should do its work.
-     */
-
-    void Update()
-    {
-        // Do nothing if fog is not active.
-        if (!gameObject.activeInHierarchy)
+        else if (color == Player.BLUE)
         {
-            return;
-        }
-        Material mat = GetComponent<MeshRenderer>().material;
-
-        /*
-         * Roll the cloud textures and tell the shader how strongly
-         * they should appear (except where beacon map says otherise)
-         */
-
-        mat.SetFloat("Strength", CloudStrength);
-        mat.SetFloat("CosFactor", 0.50f + Mathf.Cos(Time.time / 2f) * 0.30f);
-
-        RollLeft1 -= RollLeftSpeed1 * Time.deltaTime;
-        RollUp1 -= RollUpSpeed1 * Time.deltaTime;
-        RollLeft2 -= RollLeftSpeed2 * Time.deltaTime;
-        RollUp2 -= RollUpSpeed2 * Time.deltaTime;
-
-        mat.SetFloat("RollLeft1", RollLeft1);
-        mat.SetFloat("RollUp1", RollUp1);
-        mat.SetFloat("RollLeft2", RollLeft2);
-        mat.SetFloat("RollUp2", RollUp2);
-
-        /*
-         * If the overall cloud strength has changed, we have to
-         * rebuild our viewports so the shader's viewport region
-         * will react to the new conditions.
-         */
-
-        if (CloudStrength != _oldCloudStrength)
-        {
-            redraw = true;
-            _oldCloudStrength = CloudStrength;
-        }
-
-        /*
-         * Push the new viewport into the shader, and then we're done with
-         * updating the viewports.  Whew.
-         */
-
-        if (redraw)
-        {
-            if (visibleViewport.IsEmpty)
-            {
-                mat.SetVector("CurrentViewport", new Vector4(0, 0, 0, 0));
-                mat.SetTexture("CurrentTexture", null);
-            }
-            else
-            {
-                mat.SetVector("CurrentViewport", visibleViewport.ToVector4());
-                mat.SetTexture("CurrentBeaconMap", visibleViewport.Map);
-
-                if (oldViewport == null)
-                {
-                    _transitionStartTime = 0;
-                    mat.SetVector("PreviousViewport", new Vector4(0, 0, 0, 0));
-                    mat.SetTexture("PreviousBeaconMap", null);
-                }
-                else
-                {
-                    _transitionStartTime = Time.time;
-                    mat.SetVector("PreviousViewport", oldViewport.ToVector4());
-                    mat.SetTexture("PreviousBeaconMap", oldViewport.Map);
-                }
-            }
-        }
-
-        // We have already scheduled a redraw. No need to do it again.
-        redraw = false;
-
-        /*
-         * If we're still transitioning from an old viewport to a new one,
-         * update the lerp value.
-         */
-        float deltaTime = Time.time - _transitionStartTime;
-        if (deltaTime > ChangeTime)
-        {
-            _transitionStartTime = 0;
-        }
-        if (_transitionStartTime == 0)
-        {
-            mat.SetTexture("PreviousBeaconMap", null);
-            mat.SetFloat("PreviousPercent", 0);
+            obj = GameObject.Find("FogOfWar_blue");
         }
         else
         {
-            mat.SetTexture("PreviousBeaconMap", oldViewport.Map);
-            mat.SetFloat("PreviousPercent", (ChangeTime - deltaTime) / ChangeTime);
+            obj = null;
         }
 
-        /*
-         * Now the hard part: we need to reposition the fog-of-war plane.
-         * The first step is to find the screen-space pixel in the middle
-         * of the screen, and cast a ray from there down through the camera
-         * until we hit the ground--so we can find out what world-space
-         * pixel you're staring at directly.  Since we don't know the real
-         * topology of your world, we'll use Y=0 as the touch plane;
-         * you're welcome to insert your own logic here to find what
-         * world-space coordinate is in the center of the camera.
-         */
-
-        float groundPlaneY = 0; // Pick your own value here
-
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-        Plane ground = new Plane(new Vector3(0, 1, 0), new Vector3(0, groundPlaneY, 0));
-
-        float rayDistance = 0;
-        ground.Raycast(ray, out rayDistance);
-        Vector3 worldCenter = ray.GetPoint(rayDistance);
-
-        /*
-         * Now things get a little easier: find out where that same ray
-         * presently intersects our cloud layer.
-         */
-
-        Plane sky = new Plane(new Vector3(0, 1, 0), gameObject.transform.position);
-        sky.Raycast(ray, out rayDistance);
-        Vector3 skyImpact = ray.GetPoint(rayDistance);
-
-        /*
-         * Now slide the sky around so that the two line up. Child's play.
-         */
-
-        mat.SetVector("AdjustViewpoint", new Vector4((worldCenter.x - skyImpact.x), 0, (worldCenter.z - skyImpact.z), 0));
-    }
-
-    // Returns true if map has a visible region.
-    private bool HasVisibleRegion
-    {
-        get
+        if (obj != null && obj.activeInHierarchy)
         {
-            return (visibleViewport != null);
+            return obj.GetComponent<FogOfWar>();
         }
+        return null;
     }
 
-    // Returns a visible region.
-    public Rect VisibleRegion
+/*
+* Variables used for cloud fading.
+*/
+private float _oldCloudStrength = 0;
+private float _transitionStartTime = 0;
+
+/*
+ * The important bit: this method is invoked on every frame, and
+ * is an opportunity for us to tell the Fog of War shader how it
+ * should do its work.
+ */
+
+void Update()
+{
+    // Do nothing if fog is not active.
+    if (!gameObject.activeInHierarchy)
     {
-        get
+        return;
+    }
+    Material mat = GetComponent<MeshRenderer>().material;
+
+    /*
+     * Roll the cloud textures and tell the shader how strongly
+     * they should appear (except where beacon map says otherise)
+     */
+
+    mat.SetFloat("Strength", CloudStrength);
+    mat.SetFloat("CosFactor", 0.50f + Mathf.Cos(Time.time / 2f) * 0.30f);
+
+    RollLeft1 -= RollLeftSpeed1 * Time.deltaTime;
+    RollUp1 -= RollUpSpeed1 * Time.deltaTime;
+    RollLeft2 -= RollLeftSpeed2 * Time.deltaTime;
+    RollUp2 -= RollUpSpeed2 * Time.deltaTime;
+
+    mat.SetFloat("RollLeft1", RollLeft1);
+    mat.SetFloat("RollUp1", RollUp1);
+    mat.SetFloat("RollLeft2", RollLeft2);
+    mat.SetFloat("RollUp2", RollUp2);
+
+    /*
+     * If the overall cloud strength has changed, we have to
+     * rebuild our viewports so the shader's viewport region
+     * will react to the new conditions.
+     */
+
+    if (CloudStrength != _oldCloudStrength)
+    {
+        redraw = true;
+        _oldCloudStrength = CloudStrength;
+    }
+
+    /*
+     * Push the new viewport into the shader, and then we're done with
+     * updating the viewports.  Whew.
+     */
+
+    if (redraw)
+    {
+        if (visibleViewport.IsEmpty)
         {
-            if (visibleViewport == null)
+            mat.SetVector("CurrentViewport", new Vector4(0, 0, 0, 0));
+            mat.SetTexture("CurrentTexture", null);
+        }
+        else
+        {
+            mat.SetVector("CurrentViewport", visibleViewport.ToVector4());
+            mat.SetTexture("CurrentBeaconMap", visibleViewport.Map);
+
+            if (oldViewport == null)
             {
-                return new Rect(0, 0, 0, 0);
+                _transitionStartTime = 0;
+                mat.SetVector("PreviousViewport", new Vector4(0, 0, 0, 0));
+                mat.SetTexture("PreviousBeaconMap", null);
             }
             else
             {
-                return visibleViewport.Area;
+                _transitionStartTime = Time.time;
+                mat.SetVector("PreviousViewport", oldViewport.ToVector4());
+                mat.SetTexture("PreviousBeaconMap", oldViewport.Map);
             }
         }
     }
 
-    // Returns the alpha value of a pixel at the given coordinates.
-    private float GetOpacity(Vector3 coord)
+    // We have already scheduled a redraw. No need to do it again.
+    redraw = false;
+
+    /*
+     * If we're still transitioning from an old viewport to a new one,
+     * update the lerp value.
+     */
+    float deltaTime = Time.time - _transitionStartTime;
+    if (deltaTime > ChangeTime)
     {
-        Rect rr = VisibleRegion;
-        Vector2 coordXZ = new Vector2(coord.x, coord.z);
-        if (!rr.Contains(coordXZ))
+        _transitionStartTime = 0;
+    }
+    if (_transitionStartTime == 0)
+    {
+        mat.SetTexture("PreviousBeaconMap", null);
+        mat.SetFloat("PreviousPercent", 0);
+    }
+    else
+    {
+        mat.SetTexture("PreviousBeaconMap", oldViewport.Map);
+        mat.SetFloat("PreviousPercent", (ChangeTime - deltaTime) / ChangeTime);
+    }
+
+    /*
+     * Now the hard part: we need to reposition the fog-of-war plane.
+     * The first step is to find the screen-space pixel in the middle
+     * of the screen, and cast a ray from there down through the camera
+     * until we hit the ground--so we can find out what world-space
+     * pixel you're staring at directly.  Since we don't know the real
+     * topology of your world, we'll use Y=0 as the touch plane;
+     * you're welcome to insert your own logic here to find what
+     * world-space coordinate is in the center of the camera.
+     */
+
+    float groundPlaneY = 0; // Pick your own value here
+
+    Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+    Plane ground = new Plane(new Vector3(0, 1, 0), new Vector3(0, groundPlaneY, 0));
+
+    float rayDistance = 0;
+    ground.Raycast(ray, out rayDistance);
+    Vector3 worldCenter = ray.GetPoint(rayDistance);
+
+    /*
+     * Now things get a little easier: find out where that same ray
+     * presently intersects our cloud layer.
+     */
+
+    Plane sky = new Plane(new Vector3(0, 1, 0), gameObject.transform.position);
+    sky.Raycast(ray, out rayDistance);
+    Vector3 skyImpact = ray.GetPoint(rayDistance);
+
+    /*
+     * Now slide the sky around so that the two line up. Child's play.
+     */
+
+    mat.SetVector("AdjustViewpoint", new Vector4((worldCenter.x - skyImpact.x), 0, (worldCenter.z - skyImpact.z), 0));
+}
+
+// Returns true if map has a visible region.
+private bool HasVisibleRegion
+{
+    get
+    {
+        return (visibleViewport != null);
+    }
+}
+
+// Returns a visible region.
+public Rect VisibleRegion
+{
+    get
+    {
+        if (visibleViewport == null)
         {
-            return CloudStrength;
+            return new Rect(0, 0, 0, 0);
         }
-        float uu = (coord.x - rr.xMin) / rr.width;
-        float vv = (coord.z - rr.yMin) / rr.height;
-        Color color = visibleViewport.Map.GetPixelBilinear(uu, vv);
-        return color.a;
+        else
+        {
+            return visibleViewport.Area;
+        }
     }
+}
 
-    // Retuns true if it is foggy at the given coordinate.
-    public bool IsFoggy(Vector3 coord)
+// Returns the alpha value of a pixel at the given coordinates.
+private float GetOpacity(Vector3 coord)
+{
+    Rect rr = VisibleRegion;
+    Vector2 coordXZ = new Vector2(coord.x, coord.z);
+    if (!rr.Contains(coordXZ))
     {
-        return GetOpacity(coord) >= 0.5;
+        return CloudStrength;
     }
+    float uu = (coord.x - rr.xMin) / rr.width;
+    float vv = (coord.z - rr.yMin) / rr.height;
+    Color color = visibleViewport.Map.GetPixelBilinear(uu, vv);
+    return color.a;
+}
 
-    // Changes the fog values around given points, according to given stremgth, range.
-    public void ManipulateFog(List<Vector3> points, float strength, float range)
-    {
-        oldViewport = visibleViewport;
-        visibleViewport = DrawMap(points, strength, range, visibleViewport, CloudStrength);
-        redraw = true;
-    }
+// Retuns true if it is foggy at the given coordinate.
+public bool IsFoggy(Vector3 coord)
+{
+    return GetOpacity(coord) >= 0.5;
+}
+
+// Changes the fog values around given points, according to given stremgth, range.
+public void ManipulateFog(List<Vector3> points, float strength, float range)
+{
+    oldViewport = visibleViewport;
+    visibleViewport = DrawMap(points, strength, range, visibleViewport, CloudStrength);
+    redraw = true;
+}
 }

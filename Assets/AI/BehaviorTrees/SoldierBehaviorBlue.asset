@@ -21,7 +21,7 @@ MonoBehaviour:
       entityobjectvariable=&quot;attackableEnemy&quot; debugbreak=&quot;False&quot;
       consistent=&quot;True&quot; aspectvariable=&quot;&quot; aspectobjectvariable=&quot;&quot;
       aspect=&quot;&amp;quot;Red&amp;quot;&quot; /&gt;&lt;selector usepriorities=&quot;False&quot;
-      repeatuntil=&quot;success&quot; name=&quot;selector&quot; debugbreak=&quot;False&quot;&gt;&lt;constraint
+      repeatuntil=&quot;&quot; name=&quot;selector&quot; debugbreak=&quot;False&quot;&gt;&lt;constraint
       repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;Enemy in attack range?&quot;
       debugbreak=&quot;False&quot; constraint=&quot;attackableEnemy != null&quot;&gt;&lt;action
       repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
@@ -32,7 +32,7 @@ MonoBehaviour:
       priority=&quot;&quot; name=&quot;selector&quot; debugbreak=&quot;False&quot;&gt;&lt;sequencer
       usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
       name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action repeatuntil=&quot;&quot;
-      priority=&quot;&quot; parametervalues=&quot;NTAAIlJlZCI=&quot; parameters=&quot;UmFuZ2UAVGFyZ2V0QWxsZWdpYW5jZQ==&quot;
+      priority=&quot;&quot; parametervalues=&quot;NTAAIkJsdWUi&quot; parameters=&quot;UmFuZ2UAQWxsZWdpYW5jZQ==&quot;
       namespace=&quot;(global)&quot; name=&quot;Detect far enemy&quot; debugbreak=&quot;False&quot;
       classname=&quot;DetectEnemy&quot; /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot;
       priority=&quot;&quot; name=&quot;Move to melee&quot; movetarget=&quot;sightedEnemy&quot;
@@ -40,7 +40,7 @@ MonoBehaviour:
       closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot; /&gt;&lt;/sequencer&gt;&lt;sequencer
       usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
       name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action repeatuntil=&quot;&quot;
-      priority=&quot;&quot; parametervalues=&quot;NQA1&quot; parameters=&quot;TWFwSGVpZ2h0AE1hcFdpZHRo&quot;
+      priority=&quot;&quot; parametervalues=&quot;IkJsdWUiADUANQ==&quot; parameters=&quot;QWxsZWdpYW5jZQBNYXBIZWlnaHQATWFwV2lkdGg=&quot;
       namespace=&quot;&quot; name=&quot;Loiter&quot; debugbreak=&quot;False&quot;
       classname=&quot;Loiter&quot; /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot;
       priority=&quot;&quot; name=&quot;movo to loiter&quot; movetarget=&quot;loiterTarget&quot;

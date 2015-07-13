@@ -31,22 +31,22 @@ MonoBehaviour:
       usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
       name=&quot;selector&quot; debugbreak=&quot;False&quot;&gt;&lt;sequencer usepriorities=&quot;False&quot;
       repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action
-      repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;NTAAQmx1ZQ==&quot;
-      parameters=&quot;UmFuZ2UAVGFyZ2V0QWxsZWdpYW5jZQ==&quot; namespace=&quot;(global)&quot;
+      repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;NTAAIlJlZCI=&quot;
+      parameters=&quot;UmFuZ2UAQWxsZWdpYW5jZQ==&quot; namespace=&quot;(global)&quot;
       name=&quot;Detect far enemy&quot; debugbreak=&quot;False&quot; classname=&quot;DetectEnemy&quot;
       /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
       name=&quot;Move to melee&quot; movetarget=&quot;sightedEnemy&quot; movespeed=&quot;10&quot;
       facetarget=&quot;&quot; debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.6&quot;
       closeenoughangle=&quot;&quot; /&gt;&lt;/sequencer&gt;&lt;sequencer usepriorities=&quot;False&quot;
       repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action
-      repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;NQA1&quot;
-      parameters=&quot;TWFwSGVpZ2h0AE1hcFdpZHRo&quot; namespace=&quot;&quot; name=&quot;Loiter&quot;
-      debugbreak=&quot;False&quot; classname=&quot;Loiter&quot; /&gt;&lt;move turnspeed=&quot;&quot;
-      repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;movo to loiter&quot;
-      movetarget=&quot;loiterTarget&quot; movespeed=&quot;5&quot; facetarget=&quot;&quot;
-      debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot;
-      /&gt;&lt;timer waitforsec=&quot;1&quot; returnvalue=&quot;success&quot; priority=&quot;&quot;
-      name=&quot;timer&quot; debugbreak=&quot;False&quot; /&gt;&lt;/sequencer&gt;&lt;/selector&gt;&lt;/selector&gt;&lt;/parallel&gt;&lt;/behaviortree&gt;"
+      repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;IlJlZCIANQA1&quot;
+      parameters=&quot;QWxsZWdpYW5jZQBNYXBIZWlnaHQATWFwV2lkdGg=&quot; namespace=&quot;&quot;
+      name=&quot;Loiter&quot; debugbreak=&quot;False&quot; classname=&quot;Loiter&quot;
+      /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
+      name=&quot;movo to loiter&quot; movetarget=&quot;loiterTarget&quot; movespeed=&quot;5&quot;
+      facetarget=&quot;&quot; debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.6&quot;
+      closeenoughangle=&quot;&quot; /&gt;&lt;timer waitforsec=&quot;1&quot; returnvalue=&quot;success&quot;
+      priority=&quot;&quot; name=&quot;timer&quot; debugbreak=&quot;False&quot; /&gt;&lt;/sequencer&gt;&lt;/selector&gt;&lt;/selector&gt;&lt;/parallel&gt;&lt;/behaviortree&gt;"
       type="System.String" id="treeData" /><field type="System.Array" id="treeBindings"
       elementtype="System.String" /></fields><references /></scriptableobject>
     _serializedGameObjects: []

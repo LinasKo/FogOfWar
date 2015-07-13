@@ -9,21 +9,31 @@ using RAIN.Representation;
 public class DetectEnemy : RAINAction
 {
     public Expression Range = new Expression();
-    public Expression TargetAllegiance = new Expression();
+    public Expression Allegiance = new Expression();
 
     private UnitManager unitManager;
     private FogOfWar fog;
     private Vector3 position;
     private float range;
+    private Player myColor;
     private Player targetColor;
 
     public override void Start(RAIN.Core.AI ai)
     {
         base.Start(ai);
         unitManager = (UnitManager)(GameObject.Find("GameManager").GetComponent<UnitManager>());
-        fog = FogOfWar.FindExisting;
         range = Range.Evaluate<float>(ai.DeltaTime, ai.WorkingMemory);
-        targetColor = TargetAllegiance.Evaluate<string>(ai.DeltaTime, ai.WorkingMemory) == "Red" ? Player.RED : Player.BLUE;
+        if (Allegiance.Evaluate<string>(ai.DeltaTime, ai.WorkingMemory) == "Red")
+        {
+            myColor = Player.RED;
+            targetColor = Player.BLUE;
+        }
+        else
+        {
+            myColor = Player.BLUE;
+            targetColor = Player.RED;
+        }
+        fog = FogOfWar.FindExisting(myColor);
     }
 
     public override ActionResult Execute(RAIN.Core.AI ai)
