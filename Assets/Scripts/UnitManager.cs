@@ -44,9 +44,9 @@ public class UnitManager : MonoBehaviour
         // For debugging - destroy castle when health reaches 0
         if (Input.GetKeyDown(KeyCode.K))
         {
-            GetComponent<GameManager>().playerHealth -= 25;
+            GetComponent<GameManager>().playerHealth_red -= 25;
         }
-        if (GetComponent<GameManager>().playerHealth <= 0)
+        if (GetComponent<GameManager>().playerHealth_red <= 0)
         {
             Destroy(redCastle);
         }

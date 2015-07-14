@@ -18,16 +18,17 @@ public class ResourceCarrier : MonoBehaviour
         wood += newWood;
     }
 
+    // TODO: split into two players.
     public void UnloadWood(int amount=-1)
     {
         if (amount >= wood || amount == -1)
         {
-            gameManager.playerWood += wood;
+            gameManager.playerWood_red += wood;
             wood = 0;
         }
         else
         {
-            gameManager.playerWood += amount;
+            gameManager.playerWood_red += amount;
             wood -= amount;
         }
     }
@@ -41,7 +42,4 @@ public class ResourceCarrier : MonoBehaviour
     {
         return wood > 0;
     }
-
-
 }
-

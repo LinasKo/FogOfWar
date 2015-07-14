@@ -344,6 +344,30 @@ Prefab:
       propertyPath: treeCount
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
+      propertyPath: playerWood_red
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
+      propertyPath: playerExp_red
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
+      propertyPath: playerHealth_red
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
+      propertyPath: playerWood_blue
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
+      propertyPath: playerExp_blue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
+      propertyPath: playerHealth_blue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
   m_IsPrefabParent: 0
@@ -1427,7 +1451,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2308978, guid: 9280a572dfcf51f4d8bf28d1a73ed06c, type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9280a572dfcf51f4d8bf28d1a73ed06c, type: 2}

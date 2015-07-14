@@ -40,7 +40,8 @@ public class GameManager : MonoBehaviour
     private Player currentPlayer;
 
     // Main player stats
-    public int playerWood, playerExp, playerHealth;
+    public int playerWood_red, playerExp_red, playerHealth_red;
+    public int playerWood_blue, playerExp_blue, playerHealth_blue;
 
     // GUI background
     public Texture menuBG1;
@@ -82,11 +83,6 @@ public class GameManager : MonoBehaviour
         fogPointList.Add(GameObject.Find("BlueCastle").transform.position);
         fog_blue.ManipulateFog(fogPointList, fogActionStrength, fogActionRange * 2);
         fogPointList.Clear();
-
-        // Initialize resources (NOT NEEDED ATM, USE UNITY INTERFACE)
-        // playerWood = 50;
-        // playerExp = 0;
-        // playerHealth = 100;
     }
 
     // returns coordinates of current mouse position
@@ -167,16 +163,16 @@ public class GameManager : MonoBehaviour
             Vector3 mousePosition = MousePosition();
             if (mousePosition != Vector3.down)
             {
-                if ((fogCtrlState == FogControlState.CREATING && fog_red.IsFoggy(mousePosition) && playerWood >= 25) ||
-                    (fogCtrlState == FogControlState.CLEARING && !fog_red.IsFoggy(mousePosition) && playerWood >= 25))
+                if ((fogCtrlState == FogControlState.CREATING && fog_red.IsFoggy(mousePosition) && playerWood_red >= 25) ||
+                    (fogCtrlState == FogControlState.CLEARING && !fog_red.IsFoggy(mousePosition) && playerWood_red >= 25))
                 {
                     canManipulateFog = false;
                     fogPointList.Add(mousePosition);
                     StartCoroutine(ReallowFogInSeconds(fogTimeout));
 
                     // Using resources for deletion and creation of fog, plus experience gain
-                    playerWood -= 25;
-                    playerExp += 10;
+                    playerWood_red -= 25;
+                    playerExp_red += 10;
                 }
             }
         }
@@ -227,17 +223,17 @@ public class GameManager : MonoBehaviour
 
     public string GetWood()
     {
-        return playerWood.ToString();
+        return playerWood_red.ToString();
     }
 
     public string GetExp()
     {
-        return playerExp.ToString();
+        return playerExp_red.ToString();
     }
 
     public string GetHealth()
     {
-        return playerHealth.ToString();
+        return playerHealth_red.ToString();
     }
 
     public void ToMenu()
