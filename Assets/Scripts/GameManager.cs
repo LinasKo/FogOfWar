@@ -6,8 +6,13 @@ public enum Player { RED, BLUE };
 
 public class GameManager : MonoBehaviour
 {
-    // Effects camera movement speed.
+    // Affects camera movement speed.
     public float cameraSpeed = 12.0F;
+
+    // Define camera zoom speed and zoom limits.
+    private float cameraZoomSpeed = 15.0F;
+    private float maxZoomOut = 50.0F;
+    private float maxZoomIn = 10.0F;
 
     // Declare all managers
     private MapManager mapManager;
@@ -15,7 +20,7 @@ public class GameManager : MonoBehaviour
     private FogOfWar fog_red;
     private FogOfWar fog_blue;
 
-    // Effects fog manipulation
+    // Affects fog manipulation
     public float fogActionStrength = 1.0f;
     public float fogActionRange = 7.5f;
 
@@ -126,6 +131,28 @@ public class GameManager : MonoBehaviour
         Vector3 forwardDirection = Vector3.ProjectOnPlane(camera.transform.up, Vector3.up).normalized * Input.GetAxis("Vertical") * cameraSpeed * Time.deltaTime;
         camera.transform.Translate(new Vector3(Input.GetAxis("Horizontal") * cameraSpeed * Time.deltaTime, 0F, 0F));
         camera.transform.Translate(forwardDirection, Space.World);
+
+
+        // Zoom in and out using the mouse scrollwheel
+        Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
+        camera.transform.Translate(Vector3.up * Input.GetAxis("Mouse ScrollWheel") * cameraZoomSpeed * Time.deltaTime, Space.World);
+        
+        // Zoom in and out using the keypad +/-
+        camera.transform.Translate(Vector3.up * Input.GetAxis("Keypad Zoom") * cameraZoomSpeed * Time.deltaTime, Space.World);
+
+        // Do not put camera higher than maxZoomOut or lower than maxZoomIn tresholds.
+        if (camera.transform.position.y > maxZoomOut)
+        {
+            Vector3 currPos = camera.transform.position;
+            camera.transform.position = new Vector3(currPos.x, maxZoomOut, currPos.z);
+        }
+
+        if (camera.transform.position.y < maxZoomIn)
+        {
+            Vector3 currPos = camera.transform.position;
+            camera.transform.position = new Vector3(currPos.x, maxZoomIn, currPos.z);
+        }
+
 
         // Manipulate fog for red player.
         // Capture the moment when the button was released
