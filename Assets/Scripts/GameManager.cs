@@ -134,7 +134,6 @@ public class GameManager : MonoBehaviour
 
 
         // Zoom in and out using the mouse scrollwheel
-        Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
         camera.transform.Translate(Vector3.up * Input.GetAxis("Mouse ScrollWheel") * cameraZoomSpeed * Time.deltaTime, Space.World);
         
         // Zoom in and out using the keypad +/-
