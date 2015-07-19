@@ -368,6 +368,14 @@ Prefab:
       propertyPath: playerHealth_blue
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 11423874, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
+      propertyPath: BlueSoldier
+      value: 
+      objectReference: {fileID: 117888, guid: d49d04807267d954fae870fd05433b7d, type: 2}
+    - target: {fileID: 11423874, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
+      propertyPath: BlueGatherer
+      value: 
+      objectReference: {fileID: 117888, guid: d49d04807267d954fae870fd05433b7d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
   m_IsPrefabParent: 0

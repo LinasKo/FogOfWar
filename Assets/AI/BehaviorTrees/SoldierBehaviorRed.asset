@@ -55,7 +55,7 @@ MonoBehaviour:
       namespace=&quot;&quot; name=&quot;Loiter&quot; debugbreak=&quot;False&quot;
       classname=&quot;Loiter&quot; /&gt;&lt;constraint repeatuntil=&quot;&quot; priority=&quot;&quot;
       name=&quot;Found a place to loiter?&quot; debugbreak=&quot;False&quot; constraint=&quot;loiterTarget
-      != null&quot;&gt;&lt;mecparam valueexpression=&quot;2&quot; repeatuntil=&quot;&quot;
+      != null&quot;&gt;&lt;mecparam valueexpression=&quot;3&quot; repeatuntil=&quot;&quot;
       parametertype=&quot;float&quot; parametername=&quot;Speed&quot; name=&quot;Set
       Speed to Walk&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot; /&gt;&lt;move
       turnspeed=&quot;&quot; repeatuntil=&quot;&quot; name=&quot;movo to loiter&quot;

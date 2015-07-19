@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11496960}
   - 114: {fileID: 11414064}
   m_Layer: 0
-  m_Name: BlueSoldier
+  m_Name: BlueSoldierOld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

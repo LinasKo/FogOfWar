@@ -105,7 +105,7 @@ GameObject:
   - 23: {fileID: 2323628}
   - 143: {fileID: 14308452}
   m_Layer: 0
-  m_Name: RedSoldier
+  m_Name: BlueSoldier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1473,7 +1473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15a4550c1f429a44aff6586425df199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 150
+  health: 0
 --- !u!137 &13706408
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
