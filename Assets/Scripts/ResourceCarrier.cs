@@ -4,6 +4,8 @@ using System.Collections;
 public class ResourceCarrier : MonoBehaviour
 {
     public int woodCap;
+    public Player player;
+
     private int wood = 0;
 
     private GameManager gameManager;
@@ -18,17 +20,30 @@ public class ResourceCarrier : MonoBehaviour
         wood += newWood;
     }
 
-    // TODO: split into two players.
     public void UnloadWood(int amount=-1)
     {
         if (amount >= wood || amount == -1)
         {
-            gameManager.playerWood_red += wood;
+            if (player == Player.RED)
+            {
+                gameManager.playerWood_red += wood;
+            }
+            else
+            {
+                gameManager.playerWood_blue += wood;
+            }
             wood = 0;
         }
         else
         {
-            gameManager.playerWood_red += amount;
+            if (player == Player.RED)
+            {
+                gameManager.playerWood_red += amount;
+            }
+            else
+            {
+                gameManager.playerWood_blue += amount;
+            }
             wood -= amount;
         }
     }

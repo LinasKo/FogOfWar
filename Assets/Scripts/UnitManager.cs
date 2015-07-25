@@ -56,7 +56,6 @@ public class UnitManager : MonoBehaviour
     public GameObject Spawn(UnitType unit, Player color)
     {
         // Randomly calcualte the spawn distance.
-        // TODO: ensure that spawn point is inside the map.
         float spawnDistance = Random.Range(minSpawnDistance, maxSpawnDistance);
 
         // Randomly calcualte a spawn angle.
@@ -65,8 +64,8 @@ public class UnitManager : MonoBehaviour
         // Get the castle coordinates for a player. Also get unit types.
         Vector3 castlePos = new Vector3(0, 0, 0);
 
-        GameObject soldier = RedSoldier;
-        GameObject gatherer = RedGatherer;
+        GameObject soldier;
+        GameObject gatherer;
 
         switch (color)
         {
@@ -88,6 +87,8 @@ public class UnitManager : MonoBehaviour
                 soldier = BlueSoldier;
                 gatherer = BlueGatherer;
                 break;
+            default:
+                return null;
         }
 
         // Calculate a point near a castle.
