@@ -69,10 +69,8 @@ MonoBehaviour:
       constraint=&quot;hasWood == true&quot;&gt;&lt;mecparam valueexpression=&quot;3&quot;
       repeatuntil=&quot;&quot; parametertype=&quot;float&quot; parametername=&quot;Speed&quot;
       name=&quot;Set Speed to Walk&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot;
-      /&gt;&lt;mecparam valueexpression=&quot;0&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
-      parametername=&quot;Speed&quot; name=&quot;Set Speed to Idle&quot; debugbreak=&quot;False&quot;
-      damptime=&quot;0&quot; /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot;
-      name=&quot;Move to castle&quot; movetarget=&quot;gameobject(&amp;quot;BlueCastle&amp;quot;)&quot;
+      /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot; name=&quot;Move
+      to castle&quot; movetarget=&quot;gameobject(&amp;quot;BlueCastle&amp;quot;)&quot;
       movespeed=&quot;3&quot; facetarget=&quot;&quot; debugbreak=&quot;False&quot;
       closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot; /&gt;&lt;action
       repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
