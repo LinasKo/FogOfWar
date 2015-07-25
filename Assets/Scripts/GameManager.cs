@@ -71,9 +71,9 @@ public class GameManager : MonoBehaviour
         
         // Initialize the UnitManager
         unitManager.Initialize();
-        //InvokeRepeating("SpawnSoldierRed", 0, 10);
-        //InvokeRepeating("SpawnSoldierBlue", 0, 10);
-        //InvokeRepeating("SpawnGathererRed", 0, 5);
+        InvokeRepeating("SpawnSoldierRed", 0, 10);
+        InvokeRepeating("SpawnSoldierBlue", 0, 10);
+        InvokeRepeating("SpawnGathererRed", 0, 5);
         InvokeRepeating("SpawnGathererBlue", 0, 5);
 
         // Initialize input settings

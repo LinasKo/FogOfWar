@@ -375,7 +375,7 @@ Prefab:
     - target: {fileID: 11423874, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
       propertyPath: BlueGatherer
       value: 
-      objectReference: {fileID: 117888, guid: d49d04807267d954fae870fd05433b7d, type: 2}
+      objectReference: {fileID: 151614, guid: c6f38e18d11912245a27e40270dc1ade, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
   m_IsPrefabParent: 0
