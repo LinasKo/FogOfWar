@@ -26,10 +26,18 @@ public abstract class Unit : MonoBehaviour
         if (fog.IsFoggy(transform.position))
         {
             rend.enabled = false;
+            foreach (SkinnedMeshRenderer skinRend in gameObject.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                skinRend.enabled = false;
+            }
         }
         else
         {
             rend.enabled = true;
+            foreach (SkinnedMeshRenderer skinRend in gameObject.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                skinRend.enabled = true;
+            }
         }
     }
 
