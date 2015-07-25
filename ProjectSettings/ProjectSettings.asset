@@ -95,9 +95,6 @@ PlayerSettings:
   APKExpansionFiles: 0
   preloadShaders: 0
   StripUnusedMeshComponents: 0
-  VertexChannelCompressionMask:
-    serializedVersion: 2
-    m_Bits: 238
   iPhoneSdkVersion: 988
   iPhoneTargetOSVersion: 22
   uIPrerenderedIcon: 0
