@@ -332,50 +332,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 11423874, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
-      propertyPath: RedSoldier
-      value: 
-      objectReference: {fileID: 117888, guid: f6f1b17b2f9dd244283a7c1447ae1d57, type: 2}
-    - target: {fileID: 11423874, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
-      propertyPath: RedGatherer
-      value: 
-      objectReference: {fileID: 151614, guid: 3751427cb79260f4ba6b9bc3ff102761, type: 2}
-    - target: {fileID: 11403792, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
-      propertyPath: treeCount
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
-      propertyPath: playerWood_red
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
-      propertyPath: playerExp_red
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
-      propertyPath: playerHealth_red
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
-      propertyPath: playerWood_blue
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
-      propertyPath: playerExp_blue
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 11463804, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
-      propertyPath: playerHealth_blue
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 11423874, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
-      propertyPath: BlueSoldier
-      value: 
-      objectReference: {fileID: 117888, guid: d49d04807267d954fae870fd05433b7d, type: 2}
-    - target: {fileID: 11423874, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
-      propertyPath: BlueGatherer
-      value: 
-      objectReference: {fileID: 151614, guid: c6f38e18d11912245a27e40270dc1ade, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
   m_IsPrefabParent: 0
@@ -807,10 +763,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 2379448, guid: 78ecf2071a9b8a044ae8d976c0a67535, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a88fda2cac83f33489c317d5ed1c6ef5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78ecf2071a9b8a044ae8d976c0a67535, type: 2}
   m_IsPrefabParent: 0

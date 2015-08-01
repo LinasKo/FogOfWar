@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     List<Vector3> fogPointList;
     private enum FogControlState { NONE, CLEARING, CREATING };
     private FogControlState fogCtrlState;
+    public LayerMask clickMask;
 
     // Fog manipulation restrictions
     private bool canManipulateFog = true;
@@ -95,7 +96,7 @@ public class GameManager : MonoBehaviour
     {
         RaycastHit rayHit = new RaycastHit();
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out rayHit, 1000))
+        if (Physics.Raycast(ray, out rayHit, 1000, clickMask))
         {
             return rayHit.point;
         }

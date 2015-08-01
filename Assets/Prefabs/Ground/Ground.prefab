@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3304110}
   - 64: {fileID: 6454058}
   - 23: {fileID: 2379448}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 955198b930b7e1f449b7863fac8fe879, type: 2}
+  - {fileID: 2100000, guid: a88fda2cac83f33489c317d5ed1c6ef5, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1

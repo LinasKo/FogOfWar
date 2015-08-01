@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 122344, guid: f01e299f97fe564459c79b06d29f936e, type: 2}
-  treeCount: 20
+  treeCount: 10
 --- !u!114 &11423874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -56,10 +56,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redBase: RedCastle
   blueBase: BlueCastle
-  RedSoldier: {fileID: 0}
-  BlueSoldier: {fileID: 146376, guid: 3488f255bf9aa3949b365682d95b207a, type: 2}
-  RedGatherer: {fileID: 0}
-  BlueGatherer: {fileID: 146376, guid: 3488f255bf9aa3949b365682d95b207a, type: 2}
+  RedSoldier: {fileID: 117888, guid: f6f1b17b2f9dd244283a7c1447ae1d57, type: 2}
+  BlueSoldier: {fileID: 117888, guid: d49d04807267d954fae870fd05433b7d, type: 2}
+  RedGatherer: {fileID: 151614, guid: 3751427cb79260f4ba6b9bc3ff102761, type: 2}
+  BlueGatherer: {fileID: 151614, guid: c6f38e18d11912245a27e40270dc1ade, type: 2}
   minSpawnDistance: 1
   maxSpawnDistance: 3
 --- !u!114 &11463804
@@ -76,9 +76,15 @@ MonoBehaviour:
   cameraSpeed: 12
   fogActionStrength: 1
   fogActionRange: 7.5
-  playerWood: 200
-  playerExp: 0
-  playerHealth: 1000
+  clickMask:
+    serializedVersion: 2
+    m_Bits: 256
+  playerWood_red: 500
+  playerExp_red: 100
+  playerHealth_red: 100
+  playerWood_blue: 500
+  playerExp_blue: 100
+  playerHealth_blue: 100
   menuBG1: {fileID: 2800000, guid: ebb359a332b219a4082b90e6e5436c74, type: 3}
 --- !u!1001 &100100000
 Prefab:
