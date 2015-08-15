@@ -1,10 +1,22 @@
 fileFormatVersion: 2
 guid: c15a4550c1f429a44aff6586425df199
-timeCreated: 1436295581
+timeCreated: 1439661899
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - death1: {fileID: 8300000, guid: f699b47f73ea534449887ee698a130cb, type: 3}
+  - death2: {fileID: 8300000, guid: 16a6938b2fad8ff4dac31b82abcb6ad1, type: 3}
+  - death3: {fileID: 8300000, guid: 0e44f4252ceef5d41a0eb6e7827c962a, type: 3}
+  - wood1: {fileID: 8300000, guid: acb2d3e157ea8db47bab5828f8ed11cd, type: 3}
+  - wood2: {fileID: 8300000, guid: 8b7a851fab754944582d4cd4cca19102, type: 3}
+  - wood3: {fileID: 8300000, guid: c11f7a1b83c09d44e90623af0e382fa7, type: 3}
+  - punch1: {fileID: 8300000, guid: bc65e3d6d13ac2f4e9fa5e62ec8c564f, type: 3}
+  - punch2: {fileID: 8300000, guid: 5cb7c1ff46fa728419f4883ef5ebae7b, type: 3}
+  - punch3: {fileID: 8300000, guid: 8bf7ec226c5763b4aaa58c82c8ef4257, type: 3}
+  - hit1: {fileID: 8300000, guid: 937a734e25120734a9ee52120f1debf6, type: 3}
+  - hit2: {fileID: 8300000, guid: 6ec486e64e8f14c49aa14d8684022c00, type: 3}
+  - hit3: {fileID: 8300000, guid: ab80dab244d739c4ca3090b2b81f7497, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

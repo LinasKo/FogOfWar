@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Tree
   - Building
+  - Soldier
+  - Gatherer
   layers:
   - Default
   - TransparentFX
