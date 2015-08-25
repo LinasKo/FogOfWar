@@ -47,7 +47,8 @@ public class Loiter : RAINAction
             dest = new Vector3(x, 0f, z);
             if (!fog.IsFoggy(dest))
             {
-                ai.WorkingMemory.SetItem<Vector3>("loiterTarget", dest);
+                ai.WorkingMemory.SetItem<bool>("loitering", true);
+                ai.WorkingMemory.SetItem<Vector3>("moveTarget", dest);
                 return ActionResult.SUCCESS;
             }
         }

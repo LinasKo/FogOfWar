@@ -105,6 +105,7 @@ GameObject:
   - 23: {fileID: 2323628}
   - 143: {fileID: 14308452}
   - 82: {fileID: 8222614}
+  - 114: {fileID: 11444200}
   m_Layer: 0
   m_Name: RedSoldier
   m_TagString: Soldier
@@ -1488,6 +1489,21 @@ MonoBehaviour:
     - {fileID: 117888}
     - {fileID: 11400000, guid: 92638c6d053da8c4093f242307ee5c1c, type: 2}
     _serializedCustomData: []
+--- !u!114 &11444200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9883c74c73d364d8869cae4f01a0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: []
+  PathType: 0
+  JS: 0
+  allegiance: 0
 --- !u!114 &11476160
 MonoBehaviour:
   m_ObjectHideFlags: 1

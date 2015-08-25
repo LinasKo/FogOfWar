@@ -18,6 +18,12 @@ using System.Collections.Generic;
 public class FogOfWar : MonoBehaviour
 {
     /*
+     * Pathfinder controls the A* grid that units use for pathfinding.
+     * In most cases, it must correspond with the fog.
+    */
+    public Pathfinder pathfinder;
+
+    /*
      * The CloudStrength property indicates how visible the clouds are
      * on the Fog of War plane by default, where the fog was not cleared.
      * Bear in mind that cloud visibility on cleared areas can be changed
@@ -207,6 +213,7 @@ public class FogOfWar : MonoBehaviour
         newViewport.Map = new Texture2D(Precision, Precision);
         newViewport.Map.SetPixels(colors);
         newViewport.Map.Apply();
+
         return newViewport;
     }
 
@@ -315,6 +322,8 @@ void Update()
                 mat.SetTexture("PreviousBeaconMap", oldViewport.Map);
             }
         }
+        // Redraw the pathfinder grid
+        pathfinder.RedrawMap();
     }
 
     // We have already scheduled a redraw. No need to do it again.

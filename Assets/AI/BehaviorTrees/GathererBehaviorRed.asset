@@ -22,21 +22,21 @@ MonoBehaviour:
       parametername=&quot;Speed&quot; name=&quot;Set Speed to Walk&quot; debugbreak=&quot;False&quot;
       damptime=&quot;0&quot; /&gt;&lt;mecparam valueexpression=&quot;false&quot; repeatuntil=&quot;&quot;
       parametertype=&quot;boolean&quot; parametername=&quot;Cutting&quot; name=&quot;Set
-      Cutting to false&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot; /&gt;&lt;move
-      turnspeed=&quot;&quot; repeatuntil=&quot;&quot; name=&quot;Move to castle&quot;
-      movetarget=&quot;gameobject(&amp;quot;RedCastle&amp;quot;)&quot; movespeed=&quot;3&quot;
-      facetarget=&quot;&quot; debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.6&quot;
-      closeenoughangle=&quot;&quot; /&gt;&lt;mecparam valueexpression=&quot;0&quot;
-      repeatuntil=&quot;&quot; parametertype=&quot;float&quot; parametername=&quot;Speed&quot;
-      name=&quot;Set Speed to Idle&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot;
-      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
-      namespace=&quot;(global)&quot; name=&quot;Deposit wood&quot; debugbreak=&quot;False&quot;
-      classname=&quot;DepositWood&quot; /&gt;&lt;/constraint&gt;&lt;sequencer usepriorities=&quot;False&quot;
-      repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;detect
-      sensor=&quot;&amp;quot;Cutting Range&amp;quot;&quot; repeatuntil=&quot;&quot;
-      priority=&quot;&quot; name=&quot;Detect near tree&quot; matchtype=&quot;best&quot;
-      entityobjectvariable=&quot;cuttableTree&quot; debugbreak=&quot;False&quot; consistent=&quot;True&quot;
-      aspectvariable=&quot;&quot; aspectobjectvariable=&quot;&quot; aspect=&quot;&amp;quot;Tree&amp;quot;&quot;
+      Cutting to false&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot; /&gt;&lt;action
+      repeatuntil=&quot;&quot; parametervalues=&quot;Z2FtZW9iamVjdCgiUmVkQ2FzdGxlIikAMg==&quot;
+      parameters=&quot;VGFyZ2V0AENsb3NlbmVzcw==&quot; namespace=&quot;&quot; name=&quot;Move
+      to castle&quot; debugbreak=&quot;False&quot; classname=&quot;MoveViapathfinding&quot;
+      /&gt;&lt;mecparam valueexpression=&quot;0&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
+      parametername=&quot;Speed&quot; name=&quot;Set Speed to Idle&quot; debugbreak=&quot;False&quot;
+      damptime=&quot;0&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;(global)&quot; name=&quot;Deposit wood&quot;
+      debugbreak=&quot;False&quot; classname=&quot;DepositWood&quot; /&gt;&lt;/constraint&gt;&lt;sequencer
+      usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
+      name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;detect sensor=&quot;&amp;quot;Cutting
+      Range&amp;quot;&quot; repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;Detect
+      near tree&quot; matchtype=&quot;best&quot; entityobjectvariable=&quot;cuttableTree&quot;
+      debugbreak=&quot;False&quot; consistent=&quot;True&quot; aspectvariable=&quot;&quot;
+      aspectobjectvariable=&quot;&quot; aspect=&quot;&amp;quot;Tree&amp;quot;&quot;
       /&gt;&lt;constraint repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;Tree
       in cuttable range?&quot; debugbreak=&quot;False&quot; constraint=&quot;cuttableTree
       != null&quot;&gt;&lt;mecparam valueexpression=&quot;true&quot; repeatuntil=&quot;&quot;
@@ -57,23 +57,21 @@ MonoBehaviour:
       parameters=&quot;UmFuZ2UAQWxsZWdpYW5jZQ==&quot; namespace=&quot;(global)&quot;
       name=&quot;Detect far tree&quot; debugbreak=&quot;False&quot; classname=&quot;DetectResource&quot;
       /&gt;&lt;constraint repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;Tree
-      sighted?&quot; debugbreak=&quot;False&quot; constraint=&quot;sightedTree !=
-      null&quot;&gt;&lt;mecparam valueexpression=&quot;5&quot; repeatuntil=&quot;&quot;
-      parametertype=&quot;float&quot; parametername=&quot;Speed&quot; name=&quot;Set
-      Speed to Run&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot; /&gt;&lt;move
-      turnspeed=&quot;&quot; repeatuntil=&quot;&quot; name=&quot;Move closer&quot;
-      movetarget=&quot;sightedTree&quot; movespeed=&quot;5&quot; facetarget=&quot;&quot;
-      debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot;
+      sighted?&quot; debugbreak=&quot;False&quot; constraint=&quot;sightedTree&quot;&gt;&lt;mecparam
+      valueexpression=&quot;5&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
+      parametername=&quot;Speed&quot; name=&quot;Set Speed to Run&quot; debugbreak=&quot;False&quot;
+      damptime=&quot;0&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;ADI=&quot;
+      parameters=&quot;VGFyZ2V0AENsb3NlbmVzcw==&quot; namespace=&quot;&quot; name=&quot;Move
+      to tree&quot; debugbreak=&quot;False&quot; classname=&quot;MoveViapathfinding&quot;
       /&gt;&lt;/constraint&gt;&lt;/sequencer&gt;&lt;constraint repeatuntil=&quot;&quot;
       priority=&quot;&quot; name=&quot;Has Wood?&quot; debugbreak=&quot;False&quot;
       constraint=&quot;hasWood == true&quot;&gt;&lt;mecparam valueexpression=&quot;3&quot;
       repeatuntil=&quot;&quot; parametertype=&quot;float&quot; parametername=&quot;Speed&quot;
       name=&quot;Set Speed to Walk&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot;
-      /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot; name=&quot;Move
-      to castle&quot; movetarget=&quot;gameobject(&amp;quot;RedCastle&amp;quot;)&quot;
-      movespeed=&quot;3&quot; facetarget=&quot;&quot; debugbreak=&quot;False&quot;
-      closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot; /&gt;&lt;action
-      repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;Z2FtZW9iamVjdCgiUmVkQ2FzdGxlIikAMg==&quot;
+      parameters=&quot;VGFyZ2V0AENsb3NlbmVzcw==&quot; namespace=&quot;&quot; name=&quot;Move
+      to castle&quot; debugbreak=&quot;False&quot; classname=&quot;MoveViapathfinding&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
       namespace=&quot;(global)&quot; name=&quot;Deposit wood&quot; debugbreak=&quot;False&quot;
       classname=&quot;DepositWood&quot; /&gt;&lt;/constraint&gt;&lt;sequencer usepriorities=&quot;False&quot;
       repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action
@@ -81,13 +79,12 @@ MonoBehaviour:
       parameters=&quot;QWxsZWdpYW5jZQBNYXBIZWlnaHQATWFwV2lkdGg=&quot; namespace=&quot;&quot;
       name=&quot;Loiter&quot; debugbreak=&quot;False&quot; classname=&quot;Loiter&quot;
       /&gt;&lt;constraint repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;Found
-      a place to loiter to?&quot; debugbreak=&quot;False&quot; constraint=&quot;loiterTarget
-      != null&quot;&gt;&lt;mecparam valueexpression=&quot;3&quot; repeatuntil=&quot;&quot;
-      parametertype=&quot;float&quot; parametername=&quot;Speed&quot; name=&quot;Set
-      Speed to Walk&quot; debugbreak=&quot;False&quot; damptime=&quot;0&quot; /&gt;&lt;move
-      turnspeed=&quot;&quot; repeatuntil=&quot;&quot; name=&quot;movo to loiter&quot;
-      movetarget=&quot;loiterTarget&quot; movespeed=&quot;3&quot; facetarget=&quot;&quot;
-      debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.6&quot; closeenoughangle=&quot;&quot;
+      a place to loiter to?&quot; debugbreak=&quot;False&quot; constraint=&quot;loitering&quot;&gt;&lt;mecparam
+      valueexpression=&quot;3&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
+      parametername=&quot;Speed&quot; name=&quot;Set Speed to Walk&quot; debugbreak=&quot;False&quot;
+      damptime=&quot;0&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;ADI=&quot;
+      parameters=&quot;VGFyZ2V0AENsb3NlbmVzcw==&quot; namespace=&quot;&quot; name=&quot;Move
+      to loiter&quot; debugbreak=&quot;False&quot; classname=&quot;MoveViapathfinding&quot;
       /&gt;&lt;mecparam valueexpression=&quot;0&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
       parametername=&quot;Speed&quot; name=&quot;Set Speed to Idle&quot; debugbreak=&quot;False&quot;
       damptime=&quot;0&quot; /&gt;&lt;timer waitforsec=&quot;1&quot; returnvalue=&quot;success&quot;

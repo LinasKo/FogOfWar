@@ -58,7 +58,8 @@ public class DetectEnemy : RAINAction
         }
         if (closest != Vector3.zero)
         {
-            ai.WorkingMemory.SetItem<Vector3>("sightedEnemy", closest);
+            ai.WorkingMemory.SetItem<bool>("sightedEnemy", true);
+            ai.WorkingMemory.SetItem<Vector3>("moveTarget", closest);
             return ActionResult.SUCCESS;
         }
         return ActionResult.FAILURE;

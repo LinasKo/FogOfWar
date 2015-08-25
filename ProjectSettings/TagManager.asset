@@ -8,6 +8,7 @@ TagManager:
   - Building
   - Soldier
   - Gatherer
+  - Fog
   layers:
   - Default
   - TransparentFX

@@ -105,6 +105,7 @@ GameObject:
   - 23: {fileID: 2323628}
   - 143: {fileID: 14308452}
   - 82: {fileID: 8204452}
+  - 114: {fileID: 11456900}
   m_Layer: 0
   m_Name: BlueSoldier
   m_TagString: Soldier
@@ -1488,6 +1489,21 @@ MonoBehaviour:
     - {fileID: 117888}
     - {fileID: 11400000, guid: 36161b269f72d8946845c63635ae9105, type: 2}
     _serializedCustomData: []
+--- !u!114 &11456900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f9883c74c73d364d8869cae4f01a0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: []
+  PathType: 0
+  JS: 0
+  allegiance: 1
 --- !u!114 &11476160
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -49,7 +49,8 @@ public class DetectResource : RAINAction
         }
         if (closest != Vector3.zero)
         {
-            ai.WorkingMemory.SetItem<Vector3>("sightedTree", closest);
+            ai.WorkingMemory.SetItem<bool>("sightedTree", true);
+            ai.WorkingMemory.SetItem<Vector3>("moveTarget", closest);
             return ActionResult.SUCCESS;
         }
         return ActionResult.FAILURE;
