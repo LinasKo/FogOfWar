@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     private string[] tagList = new string[] { "Tree", "Building" };
 
     // TODO find out why it's giving a warning
-    private Camera camera;
+    private Camera mainCamera;
 
     private float startTime;
 
@@ -48,15 +48,21 @@ public class GameManager : MonoBehaviour
     // Main player stats
     public int playerWood_red, playerExp_red, playerHealth_red;
     public int playerWood_blue, playerExp_blue, playerHealth_blue;
+    private Vector3 redCastlePos;
+    private Vector3 blueCastlePos;
 
     // GUI background
     public Texture menuBG1;
+
+    // Bot advantage modifiers
+    public float botClearRange = 3.3f;
+    public float botClearRate = 3;
 
     // Use this for initialization
     void Awake()
     {
         // Use the only active camera
-        camera = Camera.main;
+        mainCamera = Camera.main;
 
         // Find the managers
         mapManager = GetComponent<MapManager>();
@@ -67,15 +73,15 @@ public class GameManager : MonoBehaviour
         // Populate the map
         mapManager.MapSetup();
 
+        // Find the castles;
+        redCastlePos = GameObject.Find("RedCastle").transform.position;
+        blueCastlePos = GameObject.Find("BlueCastle").transform.position;
+
         // Initialize the timer
         startTime = Time.time;
         
         // Initialize the UnitManager
         unitManager.Initialize();
-
-        //SpawnSoldierRed();
-        //SpawnSoldierBlue();
-        //SpawnGathererRed();
 
         InvokeRepeating("SpawnSoldierRed", 0, 10);
         InvokeRepeating("SpawnSoldierBlue", 0, 10);
@@ -87,13 +93,16 @@ public class GameManager : MonoBehaviour
         fogPointList = new List<Vector3>();
 
         // Initialize fog; Remove fog from castles
-        fogPointList.Add(GameObject.Find("RedCastle").transform.position);
+        fogPointList.Add(redCastlePos);
         fog_red.ManipulateFog(fogPointList, fogActionStrength, fogActionRange * 2);
         fogPointList.Clear();
 
-        fogPointList.Add(GameObject.Find("BlueCastle").transform.position);
+        fogPointList.Add(blueCastlePos);
         fog_blue.ManipulateFog(fogPointList, fogActionStrength, fogActionRange * 2);
         fogPointList.Clear();
+
+        // Initialize some helpful actions for blue player.
+        InvokeRepeating("HelpBlue", 0, botClearRate);
     }
 
     // returns coordinates of current mouse position
@@ -131,28 +140,28 @@ public class GameManager : MonoBehaviour
         }
 
         // Move Camera with arrow keys
-        Vector3 forwardDirection = Vector3.ProjectOnPlane(camera.transform.up, Vector3.up).normalized * Input.GetAxis("Vertical") * cameraSpeed * Time.deltaTime;
-        camera.transform.Translate(new Vector3(Input.GetAxis("Horizontal") * cameraSpeed * Time.deltaTime, 0F, 0F));
-        camera.transform.Translate(forwardDirection, Space.World);
+        Vector3 forwardDirection = Vector3.ProjectOnPlane(mainCamera.transform.up, Vector3.up).normalized * Input.GetAxis("Vertical") * cameraSpeed * Time.deltaTime;
+        mainCamera.transform.Translate(new Vector3(Input.GetAxis("Horizontal") * cameraSpeed * Time.deltaTime, 0F, 0F));
+        mainCamera.transform.Translate(forwardDirection, Space.World);
 
 
         // Zoom in and out using the mouse scrollwheel
-        camera.transform.Translate(Vector3.up * Input.GetAxis("Mouse ScrollWheel") * cameraZoomSpeed * Time.deltaTime, Space.World);
+        mainCamera.transform.Translate(Vector3.up * Input.GetAxis("Mouse ScrollWheel") * cameraZoomSpeed * Time.deltaTime, Space.World);
         
         // Zoom in and out using the keypad +/-
-        camera.transform.Translate(Vector3.up * Input.GetAxis("Keypad Zoom") * cameraZoomSpeed * Time.deltaTime, Space.World);
+        mainCamera.transform.Translate(Vector3.up * Input.GetAxis("Keypad Zoom") * cameraZoomSpeed * Time.deltaTime, Space.World);
 
         // Do not put camera higher than maxZoomOut or lower than maxZoomIn tresholds.
-        if (camera.transform.position.y > maxZoomOut)
+        if (mainCamera.transform.position.y > maxZoomOut)
         {
-            Vector3 currPos = camera.transform.position;
-            camera.transform.position = new Vector3(currPos.x, maxZoomOut, currPos.z);
+            Vector3 currPos = mainCamera.transform.position;
+            mainCamera.transform.position = new Vector3(currPos.x, maxZoomOut, currPos.z);
         }
 
-        if (camera.transform.position.y < maxZoomIn)
+        if (mainCamera.transform.position.y < maxZoomIn)
         {
-            Vector3 currPos = camera.transform.position;
-            camera.transform.position = new Vector3(currPos.x, maxZoomIn, currPos.z);
+            Vector3 currPos = mainCamera.transform.position;
+            mainCamera.transform.position = new Vector3(currPos.x, maxZoomIn, currPos.z);
         }
 
 
@@ -251,6 +260,14 @@ public class GameManager : MonoBehaviour
             }
         }
         return objects;
+    }
+
+    private void HelpBlue()
+    {
+        // Clear fog arround Blue's castle every 'botClearRate' seconds, with an increasing range.
+        float botHelpFogRange = fogActionRange * 2;
+        fog_blue.ManipulateFog(new List<Vector3>() { blueCastlePos }, fogActionStrength, botHelpFogRange);
+        botHelpFogRange += botClearRate;
     }
 
     public string GetWood()

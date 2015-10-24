@@ -179,6 +179,7 @@ public class Pathfinder : MonoBehaviour
                     }
                     else if (true)
                     {
+                        // TODO: @@LK:LOOK AT DIS. DID I FORGET STUFF? OR IS THIS OK?
                         //Initially, we disallow all tiles
                         Map[j, i] = new Node(j, i, 0, ID, x, y, false); //Non walkable tile!
                         free = false;
