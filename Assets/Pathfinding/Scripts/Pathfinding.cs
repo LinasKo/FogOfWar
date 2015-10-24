@@ -14,6 +14,7 @@ public class Pathfinding : MonoBehaviour
     public PathfinderType PathType = PathfinderType.GridBased;
 	public bool JS = false;
     public Player allegiance;
+    public float movementSpeed;
 
     private Pathfinder pathfinder;
     private Vector3 target = Vector3.zero; 
@@ -87,7 +88,7 @@ public class Pathfinding : MonoBehaviour
     {
         if (Path.Count > 0)
         {  
-            transform.position = Vector3.MoveTowards(transform.position, Path[0], Time.deltaTime * 30F);
+            transform.position = Vector3.MoveTowards(transform.position, Path[0], Time.deltaTime * movementSpeed);
             if (Vector3.Distance(transform.position, Path[0]) < 0.4F)
             {
                 Path.RemoveAt(0);
