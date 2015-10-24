@@ -21,8 +21,15 @@ public class Attack : RAINAction
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
+        // Find enemy
         GameObject target = ai.WorkingMemory.GetItem<GameObject>("attackableEnemy");
+
+        // Turn to face enemy
+        ai.Body.transform.rotation = Quaternion.LookRotation(target.transform.position - ai.Body.transform.position);
+
+        // Deal damage to enemy
         target.GetComponent<DamageReceiver>().Damage(attackDamage);
+
         return ActionResult.SUCCESS;
     }
 
