@@ -302,7 +302,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!114 &244113693 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400000, guid: efdf155e29b063e48a1a315326175481,
@@ -348,6 +348,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11403792, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
+      propertyPath: tree
+      value: 
+      objectReference: {fileID: 122344, guid: f01e299f97fe564459c79b06d29f936e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc15f6ceef8f9b24e8d1b2106c49962e, type: 2}
   m_IsPrefabParent: 0
@@ -622,133 +626,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 259035698}
   m_Script: {fileID: 11500000, guid: 24805e252e1bfd84ca427ae09e3748e6, type: 3}
---- !u!1 &524616342
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 524616346}
-  - 114: {fileID: 524616345}
-  - 114: {fileID: 524616344}
-  - 114: {fileID: 524616343}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &524616343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 524616342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ForceModuleActive: 0
---- !u!114 &524616344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 524616342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: .5
-  m_ForceModuleActive: 0
---- !u!114 &524616345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 524616342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 5
---- !u!4 &524616346
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 524616342}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
---- !u!1 &596256429
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 596256431}
-  - 114: {fileID: 596256430}
-  m_Layer: 0
-  m_Name: Navigation Target
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!114 &596256430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 596256429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1728340906, guid: 9fa2ecd1ff2ad394281dd3bf72c5b76e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dataSerializer:
-    _serializedData: <component version="1.3" type="RAIN.Navigation.Targets.NavigationTargetRig"><fields><field
-      value="AlwaysOn" type="RAIN.Core.VisualModeEnum" id="_visualMode" /><field type="RAIN.Navigation.Targets.NavigationTarget"
-      reference="0" id="_target" /></fields><references><reference type="RAIN.Navigation.Targets.NavigationTarget"
-      refcount="1" id="0"><field value="Navigation Target" type="System.String" id="_targetName"
-      /><field value="0.6,0.6,0.6,1" type="UnityEngine.Color" id="_targetColor" /><field
-      value="-0.5" type="System.Single" id="_outlineColorOffset" /><field value="0.4"
-      type="System.Single" id="_selectionColorOffset" /><field type="UnityEngine.Transform"
-      id="_mountPoint" gameobject="0" /><field value="0,0,0" type="UnityEngine.Vector3"
-      id="_positionOffset" /><field value="0,0,0" type="UnityEngine.Vector3" id="_angleOffset"
-      /><field value="0.5" type="System.Single" id="_range" /></reference></references></component>
-    _serializedGameObjects:
-    - {fileID: 596256431}
-    _serializedCustomData: []
---- !u!4 &596256431
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 596256429}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.4099998, y: 0, z: -7.69999981}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
 --- !u!1001 &678793641
 Prefab:
   m_ObjectHideFlags: 0
@@ -1295,7 +1172,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 431942, guid: e4915396e73ea6945abb32c2740d9432, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4915396e73ea6945abb32c2740d9432, type: 2}
@@ -1404,7 +1281,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 471978, guid: 015e82ecc778c5d41928e447ab5d3f6c, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 015e82ecc778c5d41928e447ab5d3f6c, type: 2}
@@ -1500,7 +1377,7 @@ Transform:
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
 --- !u!1001 &1554557228
 Prefab:
   m_ObjectHideFlags: 0

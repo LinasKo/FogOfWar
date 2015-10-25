@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 438318}
   - 114: {fileID: 11489632}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Entity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,11 +26,9 @@ GameObject:
   - 4: {fileID: 478180}
   - 33: {fileID: 3389790}
   - 23: {fileID: 2310686}
-  - 111: {fileID: 11163676}
-  - 136: {fileID: 13630050}
-  - 114: {fileID: 11480952}
-  - 82: {fileID: 8252352}
-  m_Layer: 0
+  - 114: {fileID: 11412380}
+  - 82: {fileID: 8260114}
+  m_Layer: 9
   m_Name: Tree
   m_TagString: Tree
   m_Icon: {fileID: 0}
@@ -94,7 +92,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122344}
   m_Mesh: {fileID: 4300000, guid: 43202a31bd1113061100b7a844295342, type: 3}
---- !u!82 &8252352
+--- !u!82 &8260114
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -102,14 +100,14 @@ AudioSource:
   m_GameObject: {fileID: 122344}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300001, guid: 54d9cccbfbab9604aa2d98cffcf6718d,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -164,21 +162,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!111 &11163676
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122344}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!114 &11480952
+--- !u!114 &11412380
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -189,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15a4550c1f429a44aff6586425df199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
+  health: 150
   death1: {fileID: 8300000, guid: f699b47f73ea534449887ee698a130cb, type: 3}
   death2: {fileID: 8300000, guid: 16a6938b2fad8ff4dac31b82abcb6ad1, type: 3}
   death3: {fileID: 8300000, guid: 0e44f4252ceef5d41a0eb6e7827c962a, type: 3}
@@ -202,6 +186,8 @@ MonoBehaviour:
   hit1: {fileID: 8300000, guid: 937a734e25120734a9ee52120f1debf6, type: 3}
   hit2: {fileID: 8300000, guid: 6ec486e64e8f14c49aa14d8684022c00, type: 3}
   hit3: {fileID: 8300000, guid: ab80dab244d739c4ca3090b2b81f7497, type: 3}
+  remains: {fileID: 122344, guid: 5aff1b106e2235046887d2288f04bea4, type: 2}
+  audioEvent: {fileID: 170208, guid: 615f7a6e971a7e3489deb15107ec64e2, type: 2}
 --- !u!114 &11489632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,26 +222,41 @@ MonoBehaviour:
     - {fileID: 122344}
     - {fileID: 478180}
     _serializedCustomData: []
---- !u!136 &13630050
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122344}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 5.72630787
-  m_Height: 24.3649616
-  m_Direction: 1
-  m_Center: {x: .0299999993, y: 11.6999998, z: .0299999993}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: remains
+      value: 
+      objectReference: {fileID: 122344, guid: 5aff1b106e2235046887d2288f04bea4, type: 2}
+    - target: {fileID: 0}
+      propertyPath: audioEvent
+      value: 
+      objectReference: {fileID: 170208, guid: 615f7a6e971a7e3489deb15107ec64e2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: decayStart
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: decayEnd
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 150
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 122344}

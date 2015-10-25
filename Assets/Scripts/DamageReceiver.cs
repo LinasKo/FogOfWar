@@ -18,8 +18,17 @@ public class DamageReceiver : MonoBehaviour
     private AudioClip[] punchSfx = new AudioClip[3];
     private AudioClip[] hitSfx = new AudioClip[3];
 
+    private GameObject myObject;
+
+    // Corpse to leave after the object is dead.
+    public GameObject remains;
+
+    // Audio event is basically a GameObject that only has an audio source.
+    public GameObject audioEvent;
+
     void Awake ()
     {
+        myObject = this.gameObject;
         source = GetComponent<AudioSource>();
         
         deathSfx[0] = death1;
@@ -39,7 +48,7 @@ public class DamageReceiver : MonoBehaviour
         hitSfx[2] = hit3;
     }
 
-    public void Damage(int damage)
+    public void Damage(int damage, Vector3 locationOfAssailant)
     {
         int n = Random.Range(0, 2);
         float time = 0;
@@ -50,15 +59,31 @@ public class DamageReceiver : MonoBehaviour
         {
             if (gameObject.tag == "Tree")
             {
+                // Play sound of falling
                 time = (float) (woodSfx[n].length);
-                source.PlayOneShot(woodSfx[n], 1F);
-                Destroy(this.gameObject, time);
+                GameObject audioInstance = (GameObject)Instantiate(audioEvent, myObject.transform.position, Quaternion.identity);
+                audioInstance.GetComponent<AudioSource>().PlayOneShot(woodSfx[n], 1F);
+                Destroy(audioInstance, time);
+
+                // Spawn fallen tree
+                if (remains != null)
+                {
+                    myObject.GetComponent<MeshRenderer>().enabled = false;
+                    Vector3 fallDirection = locationOfAssailant / 10; // TODO - this still needs verification
+                    fallDirection.y = 0;
+                    Instantiate(remains, myObject.transform.position, Quaternion.Euler(fallDirection));
+                    myObject.SetActive(false);
+                }
+
+                // Destroy tree
+                Destroy(myObject, time);
+
             }
             else if (gameObject.tag == "Gatherer" || gameObject.tag == "Soldier")
             {
                 time = (float) (deathSfx[n].length);
                 source.PlayOneShot(deathSfx[n], 1F);
-                Destroy(this.gameObject, time);
+                Destroy(myObject, time);
             }   
         }
 

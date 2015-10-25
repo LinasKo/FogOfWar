@@ -22,7 +22,7 @@ public class Cut : RAINAction
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
         GameObject target = ai.WorkingMemory.GetItem<GameObject>("cuttableTree");
-        target.GetComponent<DamageReceiver>().Damage(attackDamage);
+        target.GetComponent<DamageReceiver>().Damage(attackDamage, ai.Body.transform.position);
         ai.Body.GetComponent<ResourceCarrier>().TakeWood(attackDamage);
         ai.WorkingMemory.SetItem<bool>("atCap", ai.Body.GetComponent<ResourceCarrier>().AtCap());
         ai.WorkingMemory.SetItem<bool>("hasWood", ai.Body.GetComponent<ResourceCarrier>().HasWood());

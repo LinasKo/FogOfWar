@@ -25,10 +25,14 @@ public class Attack : RAINAction
         GameObject target = ai.WorkingMemory.GetItem<GameObject>("attackableEnemy");
 
         // Turn to face enemy
-        ai.Body.transform.rotation = Quaternion.LookRotation(target.transform.position - ai.Body.transform.position);
+        Vector3 rotationVector = target.transform.position - ai.Body.transform.position;
+        if (rotationVector != Vector3.zero)
+        {
+            ai.Body.transform.rotation = Quaternion.LookRotation(rotationVector);
+        }
 
         // Deal damage to enemy
-        target.GetComponent<DamageReceiver>().Damage(attackDamage);
+        target.GetComponent<DamageReceiver>().Damage(attackDamage, ai.Body.transform.position);
 
         return ActionResult.SUCCESS;
     }

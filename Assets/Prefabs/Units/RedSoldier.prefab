@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 459950}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 RCalfTwist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,7 +23,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 497884}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 R Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 475124}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 CapeL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 401226}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 415890}
   - 114: {fileID: 11406182}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 425576}
   - 137: {fileID: 13755974}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: geoCloth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - 143: {fileID: 14308452}
   - 82: {fileID: 8222614}
   - 114: {fileID: 11444200}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RedSoldier
   m_TagString: Soldier
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 403868}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 LCalfTwist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 481290}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 R Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 463260}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 HeadNub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 436862}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 Cape2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 459758}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 R Toe0Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 410868}
   - 114: {fileID: 11492058}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Entity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 480168}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 R Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 429432}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 Cape1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 445618}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 L Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 440508}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 L Toe0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 416328}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 L Clavicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 429100}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 R ForeTwist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 445642}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 L Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 439908}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 Cape0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 455194}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 Pelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 412322}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 R Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 454710}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 R Clavicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 457762}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 L ForeTwist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 448576}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 L UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 444392}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 CapeR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 495736}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 492540}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 L Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +453,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 410546}
   - 137: {fileID: 13706408}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: geoGold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,7 +468,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 458978}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 Footsteps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +483,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 449720}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,7 +498,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 416536}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 Spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 487114}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -528,7 +528,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 493462}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 R Toe0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,7 +543,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 448484}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 R UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +558,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 415270}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 R Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +573,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 449104}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 L Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -589,7 +589,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 456164}
   - 137: {fileID: 13711746}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: geoSkin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -605,7 +605,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 470796}
   - 137: {fileID: 13747414}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: geoSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +621,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 494290}
   - 95: {fileID: 9586184}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpartanKing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +636,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 418878}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +652,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 408564}
   - 137: {fileID: 13733564}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: geoStandard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -668,7 +668,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 481004}
   - 137: {fileID: 13768428}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: geoDiaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,7 +683,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 497650}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 L Toe0Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -698,7 +698,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 415908}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bip01 L Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1433,8 +1433,8 @@ MonoBehaviour:
       id="_ai" /></fields><references><reference type="RAIN.Core.AI" refcount="1"
       id="0"><field value="True" type="System.Boolean" id="_isActive" /><field type="UnityEngine.GameObject"
       id="_body" gameobject="0" /><field type="RAIN.Memory.BasicMemory" reference="1"
-      id="_workingMemory" childrenvisible="True" /><field type="RAIN.Minds.BasicMind"
-      reference="7" id="_mind" childrenvisible="False" /><field type="RAIN.Motion.BasicMotor"
+      id="_workingMemory" childrenvisible="False" /><field type="RAIN.Minds.BasicMind"
+      reference="7" id="_mind" childrenvisible="True" /><field type="RAIN.Motion.BasicMotor"
       reference="8" id="_motor" childrenvisible="False" /><field type="RAIN.Animation.BasicAnimator"
       reference="9" id="_animator" childrenvisible="False" /><field type="RAIN.Navigation.BasicNavigator"
       reference="10" id="_navigator" childrenvisible="False" /><field type="RAIN.Perception.BasicSenses"
@@ -1575,6 +1575,7 @@ MonoBehaviour:
   hit1: {fileID: 8300000, guid: 937a734e25120734a9ee52120f1debf6, type: 3}
   hit2: {fileID: 8300000, guid: 6ec486e64e8f14c49aa14d8684022c00, type: 3}
   hit3: {fileID: 8300000, guid: ab80dab244d739c4ca3090b2b81f7497, type: 3}
+  remains: {fileID: 0}
 --- !u!137 &13706408
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1886,8 +1887,73 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
-      propertyPath: movementSpeed
-      value: 5
+      propertyPath: _dataSerializer._serializedData
+      value: <component version="1.3" type="RAIN.Core.AIRig"><fields><field value="OnWhenSelected"
+        type="RAIN.Core.VisualModeEnum" id="_visualMode" /><field value="True" type="System.Boolean"
+        id="_useUnityMessages" /><field value="False" type="System.Boolean" id="_useFixedUpdate"
+        /><field type="RAIN.Core.AI" reference="0" id="_ai" /></fields><references><reference
+        type="RAIN.Core.AI" refcount="1" id="0"><field value="True" type="System.Boolean"
+        id="_isActive" /><field type="UnityEngine.GameObject" id="_body" gameobject="0"
+        /><field type="RAIN.Memory.BasicMemory" reference="1" id="_workingMemory"
+        childrenvisible="False" /><field type="RAIN.Minds.BasicMind" reference="7"
+        id="_mind" childrenvisible="True" /><field type="RAIN.Motion.BasicMotor" reference="8"
+        id="_motor" childrenvisible="False" /><field type="RAIN.Animation.BasicAnimator"
+        reference="9" id="_animator" childrenvisible="False" /><field type="RAIN.Navigation.BasicNavigator"
+        reference="10" id="_navigator" childrenvisible="False" /><field type="RAIN.Perception.BasicSenses"
+        reference="11" id="_senses" childrenvisible="False" /><field type="System.Collections.Generic.List"
+        id="_customElements" elementtype="RAIN.Core.CustomAIElement" /></reference><reference
+        type="RAIN.Memory.BasicMemory" refcount="1" id="1"><field type="System.Collections.Generic.List"
+        id="_memoryItems" elementtype="RAIN.Memory.BasicMemory+MemoryItem"><field
+        type="RAIN.Memory.BasicMemory+MemoryItem" reference="3" id="element0" /><field
+        type="RAIN.Memory.BasicMemory+MemoryItem" reference="4" id="element1" /></field></reference><reference
+        type="RAIN.Memory.BasicMemory+MemoryItem" refcount="0" id="2" /><reference
+        type="RAIN.Memory.BasicMemory+MemoryItem" refcount="1" id="3"><field value="attackDamage"
+        type="System.String" id="Key" /><field value="System.Int32" type="System.Type"
+        id="ValueType" /><field value="25" type="System.Int32" id="Value" /></reference><reference
+        type="RAIN.Memory.BasicMemory+MemoryItem" refcount="1" id="4"><field value="attackSpeed"
+        type="System.String" id="Key" /><field value="System.Single" type="System.Type"
+        id="ValueType" /><field value="1.25" type="System.Single" id="Value" /></reference><reference
+        type="RAIN.Memory.BasicMemory+MemoryItem" refcount="0" id="5" /><reference
+        type="RAIN.Memory.BasicMemory+MemoryItem" refcount="0" id="6" /><reference
+        type="RAIN.Minds.BasicMind" refcount="1" id="7"><field type="RAIN.BehaviorTrees.BTAsset"
+        id="_behaviorTreeAsset" gameobject="1" /><field type="System.Collections.Generic.List"
+        id="_behaviorTreeBindings" elementtype="RAIN.BehaviorTrees.BTAssetBinding"
+        /></reference><reference type="RAIN.Motion.BasicMotor" refcount="1" id="8"><field
+        value="5" type="System.Single" id="_speed" /><field value="360" type="System.Single"
+        id="_rotationSpeed" /><field value="0.1" type="System.Single" id="_closeEnoughDistance"
+        /><field value="0.1" type="System.Single" id="_closeEnoughAngle" /><field
+        value="360" type="System.Single" id="_faceBeforeMoveAngle" /><field value="1"
+        type="System.Single" id="_maxHeightOffset" /><field value="False" type="System.Boolean"
+        id="_allow3DMovement" /><field value="False" type="System.Boolean" id="_allow3DRotation"
+        /><field value="True" type="System.Boolean" id="_allowOffGraphMovement" /></reference><reference
+        type="RAIN.Animation.BasicAnimator" refcount="1" id="9"><field type="System.Collections.Generic.List"
+        id="_animationStates" elementtype="RAIN.Animation.BasicAnimator+BasicAnimatorState"
+        /></reference><reference type="RAIN.Navigation.BasicNavigator" refcount="1"
+        id="10"><field value="False" type="System.Boolean" id="_drawPaths" /><field
+        value="0,1,0,1" type="UnityEngine.Color" id="_pathColor" /><field value="-0.5"
+        type="System.Single" id="_outlineColorOffset" /><field value="100" type="System.Int32"
+        id="_maxPathfindingSteps" /><field value="0" type="System.Single" id="_maxPathLength"
+        /><field type="System.Collections.Generic.List" id="_graphTags" elementtype="System.String"
+        /></reference><reference type="RAIN.Perception.BasicSenses" refcount="1" id="11"><field
+        type="System.Collections.Generic.List" id="_sensors" elementtype="RAIN.Perception.Sensors.RAINSensor"><field
+        type="RAIN.Perception.Sensors.VisualSensor" reference="12" id="element0" /></field></reference><reference
+        type="RAIN.Perception.Sensors.VisualSensor" refcount="1" id="12"><field value="True"
+        type="System.Boolean" id="_showVisual" /><field value="Attack Range" type="System.String"
+        id="_sensorName" /><field value="True" type="System.Boolean" id="_isActive"
+        /><field value="0.6,0.6,0.6,1" type="UnityEngine.Color" id="_sensorColor"
+        /><field type="UnityEngine.Transform" id="_mountPoint" gameobject="-1" /><field
+        value="0,0,0" type="UnityEngine.Vector3" id="_positionOffset" /><field value="0,0,0"
+        type="UnityEngine.Vector3" id="_angleOffset" /><field type="System.Collections.Generic.List"
+        id="_filters" elementtype="RAIN.Perception.Sensors.Filters.RAINSensorFilter"
+        /><field value="1.5" type="System.Single" id="_range" /><field value="False"
+        type="System.Boolean" id="_canDetectSelf" /><field value="360" type="System.Single"
+        id="_horizontalAngle" /><field value="180" type="System.Single" id="_verticalAngle"
+        /><field value="False" type="System.Boolean" id="_lineOfSight" /><field value="-5"
+        type="UnityEngine.LayerMask" id="_lineOfSightMask" /></reference></references></component>
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -42,20 +42,20 @@ MonoBehaviour:
       parameters=&quot;UmFuZ2UAQWxsZWdpYW5jZQ==&quot; namespace=&quot;(global)&quot;
       name=&quot;Detect far enemy&quot; debugbreak=&quot;False&quot; classname=&quot;DetectEnemy&quot;
       /&gt;&lt;constraint repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;Sighted
-      enemy?&quot; debugbreak=&quot;False&quot; constraint=&quot;sightedEnemy != null&quot;&gt;&lt;mecparam
+      enemy?&quot; debugbreak=&quot;False&quot; constraint=&quot;sightedEnemy&quot;&gt;&lt;mecparam
       valueexpression=&quot;5&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
       parametername=&quot;Speed&quot; name=&quot;Set Speed to Run&quot; debugbreak=&quot;False&quot;
-      damptime=&quot;0&quot; /&gt;&lt;move turnspeed=&quot;&quot; repeatuntil=&quot;&quot;
-      name=&quot;Move to melee&quot; movetarget=&quot;sightedEnemy&quot; movespeed=&quot;10&quot;
-      facetarget=&quot;&quot; debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.6&quot;
-      closeenoughangle=&quot;&quot; /&gt;&lt;/constraint&gt;&lt;/sequencer&gt;&lt;sequencer
-      usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
-      name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action repeatuntil=&quot;&quot;
-      priority=&quot;&quot; parametervalues=&quot;IkJsdWUiADUANQ==&quot; parameters=&quot;QWxsZWdpYW5jZQBNYXBIZWlnaHQATWFwV2lkdGg=&quot;
-      namespace=&quot;&quot; name=&quot;Loiter&quot; debugbreak=&quot;False&quot;
-      classname=&quot;Loiter&quot; /&gt;&lt;constraint repeatuntil=&quot;&quot; priority=&quot;&quot;
-      name=&quot;Found a place to loiter?&quot; debugbreak=&quot;False&quot; constraint=&quot;loitering&quot;&gt;&lt;mecparam
-      valueexpression=&quot;2&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
+      damptime=&quot;0&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;ADI=&quot;
+      parameters=&quot;VGFyZ2V0AENsb3NlbmVzcw==&quot; namespace=&quot;&quot; name=&quot;Move
+      to melee&quot; debugbreak=&quot;False&quot; classname=&quot;MoveViapathfinding&quot;
+      /&gt;&lt;/constraint&gt;&lt;/sequencer&gt;&lt;sequencer usepriorities=&quot;False&quot;
+      repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;sequencer&quot; debugbreak=&quot;False&quot;&gt;&lt;action
+      repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;IkJsdWUiADUANQ==&quot;
+      parameters=&quot;QWxsZWdpYW5jZQBNYXBIZWlnaHQATWFwV2lkdGg=&quot; namespace=&quot;&quot;
+      name=&quot;Loiter&quot; debugbreak=&quot;False&quot; classname=&quot;Loiter&quot;
+      /&gt;&lt;constraint repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;Found
+      a place to loiter?&quot; debugbreak=&quot;False&quot; constraint=&quot;loitering&quot;&gt;&lt;mecparam
+      valueexpression=&quot;3&quot; repeatuntil=&quot;&quot; parametertype=&quot;float&quot;
       parametername=&quot;Speed&quot; name=&quot;Set Speed to Walk&quot; debugbreak=&quot;False&quot;
       damptime=&quot;0&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;ADI=&quot;
       parameters=&quot;VGFyZ2V0AENsb3NlbmVzcw==&quot; namespace=&quot;&quot; name=&quot;Move
