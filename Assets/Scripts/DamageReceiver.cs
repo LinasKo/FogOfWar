@@ -70,13 +70,12 @@ public class DamageReceiver : MonoBehaviour
                 // Spawn fallen tree
                 if (remains != null)
                 {
-                    gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<Renderer>().enabled = false;
                     Vector3 fallDirection = locationOfAssailant / 10; // TODO - this still needs verification
                     fallDirection.y = 0;
                     Instantiate(remains, gameObject.transform.position, Quaternion.Euler(fallDirection));
                     gameObject.SetActive(false);
                 }
-
                 // Destroy tree
                 Destroy(gameObject, time);
 
@@ -84,7 +83,15 @@ public class DamageReceiver : MonoBehaviour
             else if (gameObject.tag == "Gatherer" || gameObject.tag == "Soldier")
             {
                 time = (float) (deathSfx[n].length);
-                PlaySound(deathSfx[n], 1.0f, 0.0f, false);
+                PlaySound(deathSfx[n], 1.0f, time, true);
+
+                // Spawn corpse
+                if (remains != null)
+                {
+                    gameObject.GetComponent<Renderer>().enabled = false;
+                    Instantiate(remains, gameObject.transform.position, gameObject.transform.rotation);
+                    gameObject.SetActive(false);
+                }
                 Destroy(gameObject, time);
             }   
         }

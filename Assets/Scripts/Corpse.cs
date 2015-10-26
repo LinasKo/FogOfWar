@@ -13,9 +13,10 @@ public class Corpse : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        // manage unit rendering for red player.
+        // Manage corpse rendering for red player.
         fog = FogOfWar.FindExisting(Player.RED);
         rend = GetComponent<Renderer>();
+
         StartCoroutine(StartDecay(decayStart));
         Destroy(this.gameObject, decayEnd);
     }
@@ -36,6 +37,8 @@ public class Corpse : MonoBehaviour {
     {
         yield return new WaitForSeconds(time);
         this.GetComponent<Rigidbody>().drag = decaySlowness;
-        this.GetComponent<Collider>().enabled = false;
+        this.GetComponent<Rigidbody>().useGravity = true;
+        Collider coll = this.GetComponent<Collider>();
+        if (coll != null) coll.enabled = false;
     }
 }
