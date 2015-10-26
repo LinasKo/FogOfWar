@@ -2254,6 +2254,7 @@ MonoBehaviour:
   hit2: {fileID: 8300000, guid: 6ec486e64e8f14c49aa14d8684022c00, type: 3}
   hit3: {fileID: 8300000, guid: ab80dab244d739c4ca3090b2b81f7497, type: 3}
   remains: {fileID: 0}
+  audioEvent: {fileID: 0}
 --- !u!114 &11449170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2522,6 +2523,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxDistance
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

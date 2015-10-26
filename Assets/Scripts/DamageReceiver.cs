@@ -10,15 +10,15 @@ public class DamageReceiver : MonoBehaviour
     public AudioClip hit1, hit2, hit3;
 
     private AudioSource source;
-    private float volLowRange = .5f;
-    private float volHighRange = 1.0f;
+    //private float volLowRange = .5f;
+    //private float volHighRange = 1.0f;
 
     private AudioClip[] deathSfx = new AudioClip[3];
     private AudioClip[] woodSfx = new AudioClip[3];
     private AudioClip[] punchSfx = new AudioClip[3];
     private AudioClip[] hitSfx = new AudioClip[3];
 
-    private GameObject myObject;
+    private FogOfWar fog;
 
     // Corpse to leave after the object is dead.
     public GameObject remains;
@@ -28,7 +28,6 @@ public class DamageReceiver : MonoBehaviour
 
     void Awake ()
     {
-        myObject = this.gameObject;
         source = GetComponent<AudioSource>();
         
         deathSfx[0] = death1;
@@ -48,6 +47,11 @@ public class DamageReceiver : MonoBehaviour
         hitSfx[2] = hit3;
     }
 
+    public void Start()
+    {
+        fog = FogOfWar.FindExisting(Player.RED);
+    }
+
     public void Damage(int damage, Vector3 locationOfAssailant)
     {
         int n = Random.Range(0, 2);
@@ -59,41 +63,57 @@ public class DamageReceiver : MonoBehaviour
         {
             if (gameObject.tag == "Tree")
             {
-                // Play sound of falling
-                time = (float) (woodSfx[n].length);
-                GameObject audioInstance = (GameObject)Instantiate(audioEvent, myObject.transform.position, Quaternion.identity);
-                audioInstance.GetComponent<AudioSource>().PlayOneShot(woodSfx[n], 1F);
-                Destroy(audioInstance, time);
+                // Play sound of tree falling
+                time = (float)(woodSfx[n].length);
+                PlaySound(woodSfx[n], 1.0F, time, true);
 
                 // Spawn fallen tree
                 if (remains != null)
                 {
-                    myObject.GetComponent<MeshRenderer>().enabled = false;
+                    gameObject.GetComponent<MeshRenderer>().enabled = false;
                     Vector3 fallDirection = locationOfAssailant / 10; // TODO - this still needs verification
                     fallDirection.y = 0;
-                    Instantiate(remains, myObject.transform.position, Quaternion.Euler(fallDirection));
-                    myObject.SetActive(false);
+                    Instantiate(remains, gameObject.transform.position, Quaternion.Euler(fallDirection));
+                    gameObject.SetActive(false);
                 }
 
                 // Destroy tree
-                Destroy(myObject, time);
+                Destroy(gameObject, time);
 
             }
             else if (gameObject.tag == "Gatherer" || gameObject.tag == "Soldier")
             {
                 time = (float) (deathSfx[n].length);
-                source.PlayOneShot(deathSfx[n], 1F);
-                Destroy(myObject, time);
+                PlaySound(deathSfx[n], 1.0f, 0.0f, false);
+                Destroy(gameObject, time);
             }   
         }
 
         else
         {
             if (gameObject.tag == "Tree")
-                source.PlayOneShot(punchSfx[n], 1F);
+                PlaySound(punchSfx[n], 1.0f, 0.0f, false);
 
             else if (gameObject.tag == "Gatherer" || gameObject.tag == "Soldier")
-                source.PlayOneShot(hitSfx[n], 1F);
+                PlaySound(hitSfx[n], 1.0f, 0.0f, false);
+        }
+    }
+
+    public void PlaySound(AudioClip sound, float volume, float time, bool separateSource)
+    {
+        if (!fog.IsFoggy(gameObject.transform.position))
+        {
+            // Create a separate sound source at object location and play the sound.
+            if (separateSource)
+            {
+                GameObject audioInstance = (GameObject)Instantiate(audioEvent, gameObject.transform.position, Quaternion.identity);
+                audioInstance.GetComponent<AudioSource>().PlayOneShot(sound, volume);
+                Destroy(audioInstance, time);
+            }
+            else
+            {
+                source.PlayOneShot(sound, volume);
+            }
         }
     }
 }

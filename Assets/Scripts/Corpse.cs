@@ -8,10 +8,28 @@ public class Corpse : MonoBehaviour {
     public float decayEnd;
     public int decaySlowness;
 
+    private Renderer rend;
+    private FogOfWar fog;
+
     // Use this for initialization
     void Start () {
+        // manage unit rendering for red player.
+        fog = FogOfWar.FindExisting(Player.RED);
+        rend = GetComponent<Renderer>();
         StartCoroutine(StartDecay(decayStart));
         Destroy(this.gameObject, decayEnd);
+    }
+
+    void Update ()
+    {
+        if (fog.IsFoggy(transform.position))
+        {
+            rend.enabled = false;
+        }
+        else
+        {
+            rend.enabled = true;
+        }
     }
 
     private IEnumerator StartDecay(float time)

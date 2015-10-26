@@ -643,7 +643,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: efdf155e29b063e48a1a315326175481, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -.200000003
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: efdf155e29b063e48a1a315326175481, type: 2}
       propertyPath: m_LocalPosition.y
@@ -671,7 +671,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: efdf155e29b063e48a1a315326175481, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: efdf155e29b063e48a1a315326175481, type: 2}
       propertyPath: Tilesize

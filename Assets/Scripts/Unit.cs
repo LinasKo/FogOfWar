@@ -17,7 +17,6 @@ public abstract class Unit : MonoBehaviour
     public void Start()
     {
         rend = GetComponent<Renderer>();
-        // manage unit rendering for red player.
         fog = FogOfWar.FindExisting(Player.RED);
     }
 
