@@ -58,6 +58,11 @@ public class GameManager : MonoBehaviour
     public float botClearRange = 3.3f;
     public float botClearRate = 3;
 
+    // Custom cursor options
+    public Texture2D cursorTexture;
+    private CursorMode cursorMode = CursorMode.ForceSoftware;
+    private Vector2 hotSpot = Vector2.zero;
+
     // Use this for initialization
     void Awake()
     {
@@ -103,6 +108,8 @@ public class GameManager : MonoBehaviour
 
         // Initialize some helpful actions for blue player.
         InvokeRepeating("HelpBlue", 0, botClearRate);
+
+        
     }
 
     // returns coordinates of current mouse position
@@ -190,10 +197,12 @@ public class GameManager : MonoBehaviour
                 fogPointList = new List<Vector3>();
                 if (fog_red.IsFoggy(mousePosition)) {
                     fogCtrlState = FogControlState.CREATING;
+                    Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
                 }
                 else
                 {
                     fogCtrlState = FogControlState.CLEARING;
+                    Cursor.SetCursor(null, hotSpot, CursorMode.Auto);
                 }
             }
         }
@@ -215,6 +224,18 @@ public class GameManager : MonoBehaviour
                     playerWood_red -= 25;
                     playerExp_red += 10;
                 }
+            }
+        }
+        // Set cursor color
+        if (fogCtrlState == FogControlState.NONE)
+        {
+            if (fog_red.IsFoggy(MousePosition()))
+            {
+                Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+            }
+            else
+            {
+                Cursor.SetCursor(null, hotSpot, CursorMode.Auto);
             }
         }
     }
